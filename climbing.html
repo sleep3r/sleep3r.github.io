@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Самодиагностика скалолаза — 30 вопросов</title>
+<meta name="theme-color" content="#0f1320">
+<style>
+  :root{
+    --bg:#0f1320; --panel:#171b2a; --ink:#eaf0ff; --muted:#a8b7d6;
+    --accent:#71c3ff; --accent2:#00d8b4; --line:#2a3453; --good:#87e887; --warn:#ff9a88;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.5}
+  body{font-size:17px;-webkit-text-size-adjust:100%}
+  a{color:var(--accent)}
+  .wrap{max-width:980px;margin:0 auto;padding:16px; padding-bottom:calc(112px + env(safe-area-inset-bottom));}
+  header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f1320 75%,#0f132000);padding:10px 0 6px}
+  .hbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .title{font-weight:800;font-size:20px;margin:0}
+  .btn{
+    border:1px solid var(--line);background:linear-gradient(180deg,#1b2338,#151a2b);color:var(--ink);
+    padding:10px 12px;border-radius:12px;font-weight:600;cursor:pointer
+  }
+  .btn:active{transform:scale(0.98)}
+  .btn-ghost{background:#0f1430}
+  .btn-ok{background:linear-gradient(180deg,#1a3e36,#112824);border-color:#1e6f5a}
+  .note{background:#121833;border:1px solid var(--line);border-radius:12px;padding:10px;color:#d6e5ff}
+  .card{background:#141a31;border:1px solid var(--line);border-radius:14px;padding:12px}
+  .legend{font-size:14px;color:var(--muted)}
+  .progress-wrap{width:100%;height:8px;background:#0e1428;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:8px}
+  .progress{height:100%;width:0%;background:linear-gradient(90deg,#51b5ff,#00d8b4)}
+  .grid{display:grid;grid-template-columns:1fr;gap:12px}
+  @media (min-width:880px){ .grid{grid-template-columns:1.2fr 1fr} }
+  .q{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed #2a3352;padding-top:12px;margin-top:12px;scroll-margin-top:84px}
+  .q-num{min-width:28px;min-height:28px;border-radius:9px;background:#0f1428;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:#71c3ff}
+  .q-body{flex:1}
+  .q-text{font-size:16.5px}
+  .cats{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
+  .cat{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:#0e1430;color:#cfe3ff}
+  .seg{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
+  .seg input{position:absolute;opacity:0;pointer-events:none}
+  .seg label{
+    -webkit-tap-highlight-color:transparent;
+    display:flex;align-items:center;justify-content:center;
+    height:44px;border-radius:12px;border:1px solid var(--line);
+    background:#0f1430;color:#dbe6ff;font-weight:700;font-size:16px;cursor:pointer;
+    user-select:none
+  }
+  .seg input:checked + label{
+    border-color:#2a88ff;background:linear-gradient(180deg,#193659,#122642);color:#eaf3ff;box-shadow:0 0 0 1px #2a88ff inset
+  }
+  .hint{font-size:12.5px;color:var(--muted);margin-top:6px}
+  .meter{height:10px;background:#0f1430;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .meter > div{height:100%;background:linear-gradient(90deg,#4fb2ff,#00d8b4);width:0%}
+  .bar{display:flex;flex-direction:column;gap:6px}
+  .bar .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+  .adv ul{margin:0 0 0 18px;padding:0}
+  .adv li{margin:6px 0}
+  .dock{
+    position:fixed;left:0;right:0;bottom:0;z-index:6;
+    background:rgba(18,24,51,0.96);backdrop-filter:saturate(160%) blur(8px);
+    border-top:1px solid var(--line);
+    padding:8px 12px calc(8px + env(safe-area-inset-bottom));
+  }
+  .dock-row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  .dock .mini{font-size:12.5px;color:var(--muted)}
+  .pill{border:1px solid var(--line);background:#0f1430;color:#d6e5ff;border-radius:999px;padding:6px 10px}
+  .legend-strip{
+    margin-top:6px;border:1px solid var(--line);background:#0f1430;border-radius:10px;padding:6px 10px;
+    font-size:12.5px;color:#cfe3ff;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch
+  }
+  .legend-strip::-webkit-scrollbar{display:none}
+  @media print{
+    header,.dock{display:none}
+    .wrap{padding:0}
+    body{background:#fff;color:#000}
+    .card,.note{border-color:#ccc}
+  }
+</style>
+</head>
+<body>
+  <header class="wrap">
+    <div class="hbar">
+      <h1 class="title">Самодиагностика скалолаза (30 вопросов)</h1>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn btn-ghost" id="printBtn">Печать / PDF</button>
+        <button class="btn" id="exportBtn">Экспорт</button>
+        <button class="btn" id="importBtn">Импорт</button>
+      </div>
+    </div>
+    <div class="progress-wrap"><div class="progress" id="topProgress"></div></div>
+  </header>
+
+  <div class="wrap">
+    <div class="card legend">
+      Шкала: 0 — почти всегда, 1 — часто, 2 — примерно в половине случаев, 3 — периодически, 4 — редко, 5 — никогда.
+    </div>
+
+    <div class="grid">
+      <div class="card" id="questionsCard">
+        <div class="note">Отвечайте, опираясь на свежий опыт. После выбора оценка сохранится и список прокрутится к следующему незаполненному.</div>
+        <div id="questions"></div>
+      </div>
+
+      <div class="card" id="resultsCard">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <strong>Итоги и интерпретация</strong>
+          <div class="pill"><span id="progressInfo">Прогресс: 0/30</span></div>
+        </div>
+
+        <div class="note" style="margin-top:8px">
+          <div>Итоговый балл (среднее 0–5): <strong id="overallScore">—</strong></div>
+          <div>Проблемный индекс (0–100): <strong id="problemIndex">—</strong> <span class="legend">0 = много препятствий, 100 = почти нет</span></div>
+        </div>
+
+        <div class="bar" style="margin-top:10px">
+          <div class="lbl">
+            <span>Техника и тактика</span>
+            <span id="score-tech">—</span>
+          </div>
+          <div class="meter"><div id="meter-tech"></div></div>
+          <div class="legend">Показывается сумма по 10 вопросам (0–50) и среднее (0–5).</div>
+        </div>
+        <div class="bar" style="margin-top:10px">
+          <div class="lbl">
+            <span>Физические навыки</span>
+            <span id="score-phys">—</span>
+          </div>
+          <div class="meter"><div id="meter-phys"></div></div>
+        </div>
+        <div class="bar" style="margin-top:10px">
+          <div class="lbl">
+            <span>Психологические навыки</span>
+            <span id="score-ment">—</span>
+          </div>
+          <div class="meter"><div id="meter-ment"></div></div>
+        </div>
+        <div class="bar" style="margin-top:10px">
+          <div class="lbl"><span>Баланс направлений</span><span id="balance">—</span></div>
+          <div class="meter"><div id="meter-balance"></div></div>
+          <div class="legend">Разброс средних по трём направлениям ≤ 0.5 — хороший баланс.</div>
+        </div>
+
+        <div class="adv" style="margin-top:12px">
+          <h3 style="margin:0 0 6px 0;font-size:16px">Авто‑советы</h3>
+          <div id="advice"></div>
+        </div>
+
+        <div id="ioArea" style="display:none;margin-top:10px">
+          <textarea id="ioText" placeholder="Вставьте сюда JSON для импорта или скопируйте для экспорта"></textarea>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+            <button class="btn btn-ok" id="applyImport">Применить импорт</button>
+            <button class="btn" id="cancelImport">Отмена</button>
+          </div>
+          <div class="legend" style="margin-top:6px">Экспорт включает ответы. Категории жёстко заданы по таблице 2.1.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="dock">
+    <div class="dock-row">
+      <div class="mini">Следующий незаполненный: <span id="nextHint">Q1</span></div>
+      <div style="flex:1"></div>
+      <button class="btn btn-ok" id="nextBtn">К следующему</button>
+      <button class="btn" id="toTopBtn">Наверх</button>
+    </div>
+    <div class="legend-strip" aria-label="Легенда шкалы 0–5">
+      0 — почти всегда • 1 — часто • 2 — примерно в половине случаев • 3 — периодически • 4 — редко • 5 — никогда
+    </div>
+  </div>
+
+<script>
+/* Версия v6 — строгая привязка номеров к единственной категории (табл. 2.1) и суммы по категориям */
+const storageKey = "climb_selfdiag_v6";
+
+/* Вопросы (тексты из книги). Категории больше не читаются из данных, а вычисляются по номеру. */
+const questionsData = [
+  {id:1,  text:"По мере прохождения самой тяжёлой части маршрута я всё хуже работаю ногами (ставлю хуже)."},
+  {id:2,  text:"Мои предплечья забиваются, а мой хват начинает ослабевать даже на простых для меня маршрутах."},
+  {id:3,  text:"На сложных раскладах я с трудом использую нужные зацепки под ноги."},
+  {id:4,  text:"Я начинаю нервничать и ощущаю скованность, приступая к ключевым перехватам."},
+  {id:5,  text:"Мои бицепсы (верхняя половина рук) забиваются раньше предплечий."},
+  {id:6,  text:"Мне сложно брать необходимые для прохождения мизера."},
+  {id:7,  text:"Я срываюсь на раскладах, которые сам придумал и знаю наизусть."},
+  {id:8,  text:"Я застреваю в начале ключевых участков. В итоге мне приходится висеть на верёвке и отдыхать перед тем, как я смогу решиться на попытку."},
+  {id:9,  text:"Я лазаю по три–четыре дня подряд."},
+  {id:10, text:"У меня непроизвольно вздрагивает нога («нога Элвиса»)."},
+  {id:11, text:"У меня забиваются мышцы на нависающих трассах, несмотря на удобные зацепки."},
+  {id:12, text:"Во время лазания у меня сбивается дыхание."},
+  {id:13, text:"Я нахожу оправдания тому, почему я могу облажаться на трассе ещё до того, как начинаю лезть."},
+  {id:14, text:"Я упускаю неочевидные зацепки на маршрутах."},
+  {id:15, text:"Мне сложно висеть на пассивных зацепках, карманах и/или щипках."},
+  {id:16, text:"Если мне грозит срыв на сложном движении, в котором я не уверен, я начинаю хвататься за оттяжку, верёвку или любое другое снаряжение."},
+  {id:17, text:"На обычных маршрутах я чувствую, что большая часть моего веса приходится на руки."},
+  {id:18, text:"После дня лазания по скалам у меня всё болит."},
+  {id:19, text:"Мне сложно визуализировать успешный подъём до того, как я отрываюсь от земли."},
+  {id:20, text:"Я не могу добраться до ключевых зацепок на сложных маршрутах."},
+  {id:21, text:"На нависающих маршрутах и потолках у меня то и дело соскальзывают и срываются ноги."},
+  {id:22, text:"Во время скалолазания меня отвлекает то, что происходит на земле, и/или я думаю о том, наблюдает ли за мной страхующий."},
+  {id:23, text:"Мне сложно считывать расклады."},
+  {id:24, text:"У меня быстро забиваются мышцы при первом же подъёме."},
+  {id:25, text:"Мне сложнее лезть, когда на меня смотрят."},
+  {id:26, text:"Мои ноги неожиданно срываются с зацепок."},
+  {id:27, text:"У меня начинают болеть локти и плечи, когда я регулярно тренируюсь или лазаю."},
+  {id:28, text:"Когда я лезу с нижней страховкой безопасный маршрут, мне всё равно сложно выложиться по полной."},
+  {id:29, text:"Мне сложно найти на маршруте места для отдыха или возможность встряхнуть руками."},
+  {id:30, text:"На сложных маршрутах моя первая попытка обычно оказывается успешнее, чем вторая или третья попытка за день."}
+];
+
+/* Категория по номеру (таблица 2.1): 1,4,7,... — психика; 2,5,8,... — техника; 3,6,9,... — физика. */
+function catOf(id){
+  const mod = id % 3;
+  if(mod === 1) return "ment";
+  if(mod === 2) return "tech";
+  return "phys";
+}
+const catNames = { tech:"Техника и тактика", phys:"Физические навыки", ment:"Психологические навыки" };
+
+const scaleLabels = [
+  "0 — почти всегда","1 — часто","2 — примерно в половине случаев","3 — периодически","4 — редко","5 — никогда"
+];
+
+/* Советы */
+const adviceByCat = {
+  tech: [
+    "Тихое лазание: следите, чтобы постановки ног были бесшумными.",
+    "Правило 3-х точек: переставляйтесь, сохраняя три опоры.",
+    "Чтение маршрута: проговорите последовательность и места отдыха до старта.",
+    "Поиск отдыхов: тренируйте позиции прямых рук и работу ног.",
+    "Дозируйте хват: держите зацепы ровно настолько, сколько нужно."
+  ],
+  phys: [
+    "ARC: 20–40 минут лёгкого непрерывного лазания 2–3 раза в неделю.",
+    "Интервалы на силу‑выносливость: 4×4 или блоки по 30–60 сек с отдыхом 1:1–1:2.",
+    "Фингерборд: прогрессивные висы (7/3, макс. 10–15 сек) с постепенной нагрузкой.",
+    "Антагонисты/профилактика: ротаторы плеча, разгибатели пальцев, эксцентрика для локтей.",
+    "Восстановление: сон 7.5–9 ч, разгрузочные дни, лёгкое ОФП."
+  ],
+  ment: [
+    "Градуированные падения: от мини‑срывов на верхней до контролируемых на нижней.",
+    "Визуализация: 1–2 минуты «прогона» секций (позы, дыхание, клипы).",
+    "Дыхание: выдох на усилие; для успокоения — 4 сек вдох, 6 сек выдох × 1–2 мин.",
+    "Фокус на процессе: следующий перехват и постановка ног вместо оценки исхода.",
+    "Дневник попыток: фиксируйте мысли/ошибки и формулируйте один фокус на следующую попытку."
+  ]
+};
+
+const spotAdvice = {
+  6:"Мизера: качайте открытый хват/пинч на крупных безопасных зацепах, постепенно уменьшайте размер.",
+  7:"Снимите темп, проговорите триггеры и темп, сфокусируйтесь на точности ног.",
+  8:"Разбейте старт на микро‑секции, репетируйте с отдыхом и счётом дыхания.",
+  10:"Контролируйте дыхание и перенос веса на ноги; снижайте «перехват силы».",
+  11:"Нависы: таз ближе к стене, прямые руки, активные крючья пяткой/носком.",
+  12:"Тренируйте ритм дыхания на лёгких трассах: вдох на перемещение, выдох на усилие.",
+  13:"Меняйте оправдания на план из 1–2 контрольных мыслей перед стартом.",
+  14:"Скан рельефа: ищите альтернативы, тени и фактуру перед движением.",
+  15:"Пассивные зацепы: постепенно развивайте открытый хват/щипцы и «прикручивание» ног.",
+  16:"Десенситизация падений и правило «не хвататься за железо» на лёгких.",
+  17:"Больше веса на ноги: колени внутрь/наружу по ситуации, руки прямее.",
+  18:"Снизьте объём/интенсивность на 20–30%, добавьте восстановительные сессии.",
+  19:"Два «прогона» до старта: по зацепам и по ритму дыхания/клипов.",
+  20:"Шлифуйте ключ по 1–2 движения, затем соединяйте; больше отдыха.",
+  21:"Смотрите на носок до и после контакта, активная пятка/носок, микрошаги.",
+  22:"Согласуйте сигналы со страхующим и возвращайте фокус на следующий перехват.",
+  24:"Увеличьте разминку, снизьте темп первой попытки, добавьте лёгкий ARC.",
+  25:"Несколько попыток «на публике» на 1–2 градации ниже РП для десенситизации.",
+  26:"Удерживайте взгляд на точке контакта ещё пол‑секунды, затем переносите вес.",
+  27:"Сократите силовой объём, укрепляйте ротаторы/лопаточную стабильность.",
+  28:"Постепенно расширяйте «коридор» безопасных падений.",
+  29:"Тренируйте поиск позиций прямых рук; встряхивание по одному пальцу.",
+  30:"Увеличьте отдых между подходами (болдер 5–10 мин, верёвка 20–40 мин), планируйте ключ заранее."
+};
+
+// Хранилище
+function loadState(){
+  try{ const raw = localStorage.getItem(storageKey); return raw ? JSON.parse(raw) : null; }
+  catch(e){ return null; }
+}
+function saveState(){ localStorage.setItem(storageKey, JSON.stringify(state)); }
+
+// Состояние
+let state = loadState() || { answers:{}, questions:questionsData };
+
+// Ссылки UI
+const qWrap = document.getElementById("questions");
+const progressEl = document.getElementById("topProgress");
+const exportBtn = document.getElementById("exportBtn");
+const importBtn = document.getElementById("importBtn");
+const ioArea = document.getElementById("ioArea");
+const ioText = document.getElementById("ioText");
+const nextHint = document.getElementById("nextHint");
+const nextBtn = document.getElementById("nextBtn");
+const toTopBtn = document.getElementById("toTopBtn");
+document.getElementById("printBtn").addEventListener("click", ()=>window.print());
+
+// Результаты
+const refs = {
+  progressInfo: document.getElementById("progressInfo"),
+  overallScore: document.getElementById("overallScore"),
+  problemIndex: document.getElementById("problemIndex"),
+  sTech: document.getElementById("score-tech"),
+  sPhys: document.getElementById("score-phys"),
+  sMent: document.getElementById("score-ment"),
+  mTech: document.getElementById("meter-tech"),
+  mPhys: document.getElementById("meter-phys"),
+  mMent: document.getElementById("meter-ment"),
+  balance: document.getElementById("balance"),
+  mBalance: document.getElementById("meter-balance"),
+  advice: document.getElementById("advice")
+};
+
+// Рендер вопросов (категория выводится строго по номеру)
+function renderQuestions(){
+  qWrap.innerHTML = "";
+  state.questions.forEach(q=>{
+    const box = document.createElement("div"); box.className = "q"; box.id = "q"+q.id;
+
+    const num = document.createElement("div"); num.className = "q-num"; num.textContent = q.id;
+    const body = document.createElement("div"); body.className = "q-body";
+    const txt = document.createElement("div"); txt.className = "q-text"; txt.textContent = q.text;
+
+    const cat = catOf(q.id);
+    const cats = document.createElement("div"); cats.className = "cats";
+    const tag=document.createElement("span"); tag.className="cat"; tag.textContent = catNames[cat]; cats.appendChild(tag);
+
+    const seg = document.createElement("div"); seg.className = "seg"; seg.setAttribute("role","radiogroup"); seg.setAttribute("aria-label", "Вопрос "+q.id);
+    for(let v=0; v<=5; v++){
+      const inp = document.createElement("input"); const id = `q${q.id}-${v}`;
+      inp.type = "radio"; inp.name = "q"+q.id; inp.id = id; inp.value = String(v);
+      if(state.answers[q.id] === v) inp.checked = true;
+      const lab = document.createElement("label"); lab.setAttribute("for", id); lab.textContent = v; lab.title = scaleLabels[v];
+      inp.addEventListener("change", ()=>{
+        state.answers[q.id] = v; saveState();
+        renderResults();
+        autoNext(q.id);
+      });
+      seg.append(inp, lab);
+    }
+
+    const hint = document.createElement("div"); hint.className = "hint";
+    hint.textContent = state.answers[q.id] == null ? "Выберите значение 0–5" : `Вы выбрали: ${scaleLabels[state.answers[q.id]]}`;
+
+    body.append(txt,cats,seg,hint);
+    box.append(num, body);
+    qWrap.appendChild(box);
+  });
+}
+renderQuestions();
+
+// Навигация
+function firstUnanswered(afterId=null){
+  const ids = state.questions.map(q=>q.id);
+  const startIdx = afterId ? ids.indexOf(afterId)+1 : 0;
+  for(let i=startIdx;i<ids.length;i++){ if(state.answers[ids[i]]==null) return ids[i]; }
+  for(let i=0;i<startIdx;i++){ if(state.answers[ids[i]]==null) return ids[i]; }
+  return null;
+}
+function autoNext(currentId){
+  const nxt = firstUnanswered(currentId);
+  if(!nxt) { updateNextHint(); return; }
+  updateNextHint();
+  const el = document.getElementById("q"+nxt);
+  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+}
+function updateNextHint(){
+  const nxt = firstUnanswered();
+  nextHint.textContent = nxt ? "Q"+nxt : "всё отмечено";
+}
+nextBtn.addEventListener("click", ()=>{
+  const nxt = firstUnanswered();
+  const el = nxt ? document.getElementById("q"+nxt) : document.body;
+  el.scrollIntoView({behavior:"smooth", block:"start"});
+});
+toTopBtn.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
+
+// Подсчёты
+function mean(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0)/arr.length : null; }
+function sum(arr){ return arr.length ? arr.reduce((a,b)=>a+b,0) : 0; }
+function round2(x){ return Math.round(x*100)/100; }
+
+function renderResults(){
+  const qs = state.questions;
+  const ans = state.answers;
+  const filled = qs.filter(q => ans[q.id] !== undefined);
+  const completion = filled.length/qs.length;
+
+  progressEl.style.width = `${completion*100}%`;
+  refs.progressInfo.textContent = `Прогресс: ${filled.length}/${qs.length}`;
+
+  if(!filled.length){ refs.overallScore.textContent = "—"; refs.problemIndex.textContent = "—"; }
+  else{
+    const overall = mean(filled.map(q=>ans[q.id]));
+    refs.overallScore.textContent = round2(overall).toFixed(2);
+    refs.problemIndex.textContent = Math.round((overall/5)*100);
+  }
+
+  // Суммы и средние строго по таблице 2.1 (каждый вопрос — в одной категории)
+  const catVals = {tech:[], phys:[], ment:[]};
+  qs.forEach(q=>{
+    if(ans[q.id]==null) return;
+    catVals[catOf(q.id)].push(ans[q.id]);
+  });
+
+  const scores = {};
+  ["tech","phys","ment"].forEach(cat=>{
+    const arr = catVals[cat];
+    const s = sum(arr); // 0..50
+    const m = arr.length ? s/10 : null; // среднее по 10 вопросам (0..5), даже если не все заполнены — показываем по заполненным? В книге — по 10; здесь отображаем прогресс по заполненным, а шкалу метра нормируем к 50 по заполненным.
+    scores[cat] = {sum:s, mean: arr.length ? mean(arr) : null, count: arr.length};
+  });
+
+  // Обновляем UI: показываем «сумма / 50 (ср. X/5)»
+  function upd(cat, elScore, elMeter){
+    const sc = scores[cat];
+    if(sc.count===0){
+      elScore.textContent = "—";
+      elMeter.style.width = "0%";
+      return;
+    }
+    const sum50 = sc.sum; // из заполненных; если заполнено <10, сумма меньше максимума
+    const maxPossible = sc.count*5;
+    const pctWidth = Math.round((sum50 / maxPossible) * 100); // чтобы метер не падал при незаполненных
+    elMeter.style.width = pctWidth + "%";
+    const mean5 = round2(sc.mean).toFixed(2);
+    elScore.textContent = `${sum50} / ${sc.count*5} (ср. ${mean5} / 5)`;
+  }
+  upd("tech", refs.sTech, refs.mTech);
+  upd("phys", refs.sPhys, refs.mPhys);
+  upd("ment", refs.sMent, refs.mMent);
+
+  // Баланс по средним
+  const means = ["tech","phys","ment"].map(c=>scores[c].mean).filter(v=>v!=null);
+  if(means.length===3){
+    const diff = Math.max(...means)-Math.min(...means);
+    refs.balance.textContent = `${round2(diff).toFixed(2)} (разброс)`;
+    refs.mBalance.style.width = `${Math.max(0,100-(diff/5)*100)}%`;
+  } else { refs.balance.textContent = "—"; refs.mBalance.style.width = "0%"; }
+
+  renderAdvice({ tech:scores.tech.mean, phys:scores.phys.mean, ment:scores.ment.mean });
+
+  // Обновим подписи под вопросами
+  document.querySelectorAll(".hint").forEach((h,i)=>{
+    const qid = qs[i].id;
+    if(ans[qid] != null) h.textContent = `Вы выбрали: ${scaleLabels[ans[qid]]}`;
+  });
+}
+function renderAdvice(catMeans){
+  const box = refs.advice; box.innerHTML = "";
+  const blocks = [];
+  Object.entries(catMeans).forEach(([cat,score])=>{
+    if(score!=null && score<3.0) blocks.push({title:`Направление «${catNames[cat]}» (средний балл: ${round2(score).toFixed(2)}):`, items: adviceByCat[cat]});
+  });
+  const low = state.questions.filter(q=> state.answers[q.id] != null && state.answers[q.id] <= 2);
+  const list = low.filter(q=> spotAdvice[q.id]).map(q=> `Q${q.id}. ${q.text}\n— ${spotAdvice[q.id]}`);
+  if(list.length) blocks.unshift({title:"Точечные рекомендации по вашим «узким местам»", items:list});
+  if(!blocks.length){ const ok=document.createElement("div"); ok.textContent="Отлично! Явных провалов не видно. Поддерживайте баланс и прогрессию."; ok.style.color="var(--good)"; box.appendChild(ok); return; }
+  blocks.forEach(b=>{
+    const h=document.createElement("div"); h.style.fontWeight="700"; h.style.marginTop="6px"; h.textContent=b.title; box.appendChild(h);
+    const ul=document.createElement("ul"); b.items.forEach(t=>{ const li=document.createElement("li"); li.textContent=t; ul.appendChild(li); }); box.appendChild(ul);
+  });
+}
+renderResults();
+
+// Экспорт / импорт
+exportBtn.addEventListener("click", ()=>{
+  const payload = {version:6, when:new Date().toISOString(), data:state};
+  ioText.value = JSON.stringify(payload, null, 2);
+  ioArea.style.display = "block";
+  ioArea.scrollIntoView({behavior:"smooth", block:"start"});
+});
+importBtn.addEventListener("click", ()=>{
+  ioText.value = "";
+  ioArea.style.display = "block";
+  ioArea.scrollIntoView({behavior:"smooth", block:"start"});
+});
+document.getElementById("cancelImport").addEventListener("click", ()=> ioArea.style.display="none");
+document.getElementById("applyImport").addEventListener("click", ()=>{
+  try{
+    const obj = JSON.parse(ioText.value);
+    if(!obj || !obj.data) throw new Error("Неверный формат");
+    state = obj.data; saveState();
+    renderQuestions(); renderResults();
+    alert("Импорт выполнен.");
+    ioArea.style.display = "none";
+  }catch(e){ alert("Ошибка импорта: "+e.message); }
+});
+</script>
+</body>
+</html>

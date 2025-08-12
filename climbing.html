@@ -14,7 +14,8 @@
   html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.5}
   body{font-size:17px;-webkit-text-size-adjust:100%}
   a{color:var(--accent)}
-  .wrap{max-width:980px;margin:0 auto;padding:16px; padding-bottom:calc(112px + env(safe-area-inset-bottom));}
+  /* место под нижнюю панель навигации */
+  .wrap{max-width:980px;margin:0 auto;padding:16px; padding-bottom:calc(84px + env(safe-area-inset-bottom));}
   header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f1320 75%,#0f132000);padding:10px 0 6px}
   .hbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .title{font-weight:800;font-size:20px;margin:0}
@@ -57,6 +58,7 @@
   .bar .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
   .adv ul{margin:0 0 0 18px;padding:0}
   .adv li{margin:6px 0}
+  /* Нижняя панель навигации (без легенды) */
   .dock{
     position:fixed;left:0;right:0;bottom:0;z-index:6;
     background:rgba(18,24,51,0.96);backdrop-filter:saturate(160%) blur(8px);
@@ -66,11 +68,6 @@
   .dock-row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .dock .mini{font-size:12.5px;color:var(--muted)}
   .pill{border:1px solid var(--line);background:#0f1430;color:#d6e5ff;border-radius:999px;padding:6px 10px}
-  .legend-strip{
-    margin-top:6px;border:1px solid var(--line);background:#0f1430;border-radius:10px;padding:6px 10px;
-    font-size:12.5px;color:#cfe3ff;white-space:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch
-  }
-  .legend-strip::-webkit-scrollbar{display:none}
   @media print{
     header,.dock{display:none}
     .wrap{padding:0}
@@ -99,7 +96,7 @@
 
     <div class="grid">
       <div class="card" id="questionsCard">
-        <div class="note">Отвечайте, опираясь на свежий опыт. После выбора оценка сохранится и список прокрутится к следующему незаполненному.</div>
+        <div class="note">Отвечайте, опираясь на свежий опыт. Можно снять оценку повторным нажатием на выбранное число. После выбора список прокрутится аккуратно к следующему незаполненному.</div>
         <div id="questions"></div>
       </div>
 
@@ -115,25 +112,16 @@
         </div>
 
         <div class="bar" style="margin-top:10px">
-          <div class="lbl">
-            <span>Техника и тактика</span>
-            <span id="score-tech">—</span>
-          </div>
+          <div class="lbl"><span>Техника и тактика</span><span id="score-tech">—</span></div>
           <div class="meter"><div id="meter-tech"></div></div>
           <div class="legend">Показывается сумма по 10 вопросам (0–50) и среднее (0–5).</div>
         </div>
         <div class="bar" style="margin-top:10px">
-          <div class="lbl">
-            <span>Физические навыки</span>
-            <span id="score-phys">—</span>
-          </div>
+          <div class="lbl"><span>Физические навыки</span><span id="score-phys">—</span></div>
           <div class="meter"><div id="meter-phys"></div></div>
         </div>
         <div class="bar" style="margin-top:10px">
-          <div class="lbl">
-            <span>Психологические навыки</span>
-            <span id="score-ment">—</span>
-          </div>
+          <div class="lbl"><span>Психологические навыки</span><span id="score-ment">—</span></div>
           <div class="meter"><div id="meter-ment"></div></div>
         </div>
         <div class="bar" style="margin-top:10px">
@@ -159,6 +147,7 @@
     </div>
   </div>
 
+  <!-- Нижняя панель навигации -->
   <div class="dock">
     <div class="dock-row">
       <div class="mini">Следующий незаполненный: <span id="nextHint">Q1</span></div>
@@ -166,16 +155,13 @@
       <button class="btn btn-ok" id="nextBtn">К следующему</button>
       <button class="btn" id="toTopBtn">Наверх</button>
     </div>
-    <div class="legend-strip" aria-label="Легенда шкалы 0–5">
-      0 — почти всегда • 1 — часто • 2 — примерно в половине случаев • 3 — периодически • 4 — редко • 5 — никогда
-    </div>
   </div>
 
 <script>
-/* Версия v6 — строгая привязка номеров к единственной категории (табл. 2.1) и суммы по категориям */
-const storageKey = "climb_selfdiag_v6";
+/* Версия v7 — аккуратный автоскролл, снятие оценки повторным нажатием, без нижней легенды */
+const storageKey = "climb_selfdiag_v7";
 
-/* Вопросы (тексты из книги). Категории больше не читаются из данных, а вычисляются по номеру. */
+/* Тексты вопросов (категория вычисляется по номеру, см. табл. 2.1) */
 const questionsData = [
   {id:1,  text:"По мере прохождения самой тяжёлой части маршрута я всё хуже работаю ногами (ставлю хуже)."},
   {id:2,  text:"Мои предплечья забиваются, а мой хват начинает ослабевать даже на простых для меня маршрутах."},
@@ -209,20 +195,18 @@ const questionsData = [
   {id:30, text:"На сложных маршрутах моя первая попытка обычно оказывается успешнее, чем вторая или третья попытка за день."}
 ];
 
-/* Категория по номеру (таблица 2.1): 1,4,7,... — психика; 2,5,8,... — техника; 3,6,9,... — физика. */
+/* Таблица 2.1: номер -> категория */
 function catOf(id){
   const mod = id % 3;
-  if(mod === 1) return "ment";
-  if(mod === 2) return "tech";
-  return "phys";
+  if(mod === 1) return "ment"; // 1,4,7,10,13,16,19,22,25,28
+  if(mod === 2) return "tech"; // 2,5,8,11,14,17,20,23,26,29
+  return "phys";               // 3,6,9,12,15,18,21,24,27,30
 }
 const catNames = { tech:"Техника и тактика", phys:"Физические навыки", ment:"Психологические навыки" };
-
 const scaleLabels = [
   "0 — почти всегда","1 — часто","2 — примерно в половине случаев","3 — периодически","4 — редко","5 — никогда"
 ];
 
-/* Советы */
 const adviceByCat = {
   tech: [
     "Тихое лазание: следите, чтобы постановки ног были бесшумными.",
@@ -311,7 +295,7 @@ const refs = {
   advice: document.getElementById("advice")
 };
 
-// Рендер вопросов (категория выводится строго по номеру)
+// Рендер вопросов с «раз‑выбором»
 function renderQuestions(){
   qWrap.innerHTML = "";
   state.questions.forEach(q=>{
@@ -321,21 +305,35 @@ function renderQuestions(){
     const body = document.createElement("div"); body.className = "q-body";
     const txt = document.createElement("div"); txt.className = "q-text"; txt.textContent = q.text;
 
-    const cat = catOf(q.id);
     const cats = document.createElement("div"); cats.className = "cats";
-    const tag=document.createElement("span"); tag.className="cat"; tag.textContent = catNames[cat]; cats.appendChild(tag);
+    const tag=document.createElement("span"); tag.className="cat"; tag.textContent = catNames[catOf(q.id)]; cats.appendChild(tag);
 
     const seg = document.createElement("div"); seg.className = "seg"; seg.setAttribute("role","radiogroup"); seg.setAttribute("aria-label", "Вопрос "+q.id);
     for(let v=0; v<=5; v++){
       const inp = document.createElement("input"); const id = `q${q.id}-${v}`;
       inp.type = "radio"; inp.name = "q"+q.id; inp.id = id; inp.value = String(v);
       if(state.answers[q.id] === v) inp.checked = true;
+
       const lab = document.createElement("label"); lab.setAttribute("for", id); lab.textContent = v; lab.title = scaleLabels[v];
-      inp.addEventListener("change", ()=>{
-        state.answers[q.id] = v; saveState();
-        renderResults();
-        autoNext(q.id);
+
+      // Обработчик по label: повторное нажатие снимает выбор
+      lab.addEventListener("click", (e)=>{
+        e.preventDefault(); // сами управляем состоянием
+        const cur = state.answers[q.id];
+        if(cur === v){
+          delete state.answers[q.id]; // снять ответ
+          document.querySelectorAll(`input[name="q${q.id}"]`).forEach(r=> r.checked = false);
+          saveState(); renderResults(); updateHint(q.id);
+          // Возврат к текущему вопросу без автоперехода
+          smoothScrollToQuestion(q.id);
+        } else {
+          state.answers[q.id] = v;
+          document.getElementById(id).checked = true;
+          saveState(); renderResults(); updateHint(q.id);
+          autoNext(q.id);
+        }
       });
+
       seg.append(inp, lab);
     }
 
@@ -349,7 +347,26 @@ function renderQuestions(){
 }
 renderQuestions();
 
-// Навигация
+function updateHint(qid){
+  const el = document.querySelector(`#q${qid} .hint`);
+  if(!el) return;
+  const val = state.answers[qid];
+  el.textContent = (val==null) ? "Выберите значение 0–5" : `Вы выбрали: ${scaleLabels[val]}`;
+}
+
+// Навигация и аккуратный скролл
+function headerOffset(){
+  const h = document.querySelector("header");
+  return h ? h.getBoundingClientRect().height : 0;
+}
+function smoothScrollToQuestion(qid){
+  const el = document.getElementById("q"+qid);
+  if(!el) return;
+  const top = el.getBoundingClientRect().top + window.scrollY;
+  const target = Math.max(0, top - headerOffset() - 8); // чтобы текст вопроса был виден
+  window.scrollTo({ top: target, behavior: "smooth" });
+}
+
 function firstUnanswered(afterId=null){
   const ids = state.questions.map(q=>q.id);
   const startIdx = afterId ? ids.indexOf(afterId)+1 : 0;
@@ -359,10 +376,9 @@ function firstUnanswered(afterId=null){
 }
 function autoNext(currentId){
   const nxt = firstUnanswered(currentId);
-  if(!nxt) { updateNextHint(); return; }
+  if(!nxt){ updateNextHint(); return; }
   updateNextHint();
-  const el = document.getElementById("q"+nxt);
-  if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+  smoothScrollToQuestion(nxt);
 }
 function updateNextHint(){
   const nxt = firstUnanswered();
@@ -370,8 +386,7 @@ function updateNextHint(){
 }
 nextBtn.addEventListener("click", ()=>{
   const nxt = firstUnanswered();
-  const el = nxt ? document.getElementById("q"+nxt) : document.body;
-  el.scrollIntoView({behavior:"smooth", block:"start"});
+  smoothScrollToQuestion(nxt ?? 1);
 });
 toTopBtn.addEventListener("click", ()=>window.scrollTo({top:0, behavior:"smooth"}));
 
@@ -386,7 +401,7 @@ function renderResults(){
   const filled = qs.filter(q => ans[q.id] !== undefined);
   const completion = filled.length/qs.length;
 
-  progressEl.style.width = `${completion*100}%`;
+  document.getElementById("topProgress").style.width = `${Math.round(completion*100)}%`;
   refs.progressInfo.textContent = `Прогресс: ${filled.length}/${qs.length}`;
 
   if(!filled.length){ refs.overallScore.textContent = "—"; refs.problemIndex.textContent = "—"; }
@@ -396,7 +411,6 @@ function renderResults(){
     refs.problemIndex.textContent = Math.round((overall/5)*100);
   }
 
-  // Суммы и средние строго по таблице 2.1 (каждый вопрос — в одной категории)
   const catVals = {tech:[], phys:[], ment:[]};
   qs.forEach(q=>{
     if(ans[q.id]==null) return;
@@ -406,31 +420,20 @@ function renderResults(){
   const scores = {};
   ["tech","phys","ment"].forEach(cat=>{
     const arr = catVals[cat];
-    const s = sum(arr); // 0..50
-    const m = arr.length ? s/10 : null; // среднее по 10 вопросам (0..5), даже если не все заполнены — показываем по заполненным? В книге — по 10; здесь отображаем прогресс по заполненным, а шкалу метра нормируем к 50 по заполненным.
-    scores[cat] = {sum:s, mean: arr.length ? mean(arr) : null, count: arr.length};
+    scores[cat] = {sum: sum(arr), mean: arr.length ? mean(arr) : null, count: arr.length};
   });
 
-  // Обновляем UI: показываем «сумма / 50 (ср. X/5)»
   function upd(cat, elScore, elMeter){
     const sc = scores[cat];
-    if(sc.count===0){
-      elScore.textContent = "—";
-      elMeter.style.width = "0%";
-      return;
-    }
-    const sum50 = sc.sum; // из заполненных; если заполнено <10, сумма меньше максимума
-    const maxPossible = sc.count*5;
-    const pctWidth = Math.round((sum50 / maxPossible) * 100); // чтобы метер не падал при незаполненных
-    elMeter.style.width = pctWidth + "%";
-    const mean5 = round2(sc.mean).toFixed(2);
-    elScore.textContent = `${sum50} / ${sc.count*5} (ср. ${mean5} / 5)`;
+    if(sc.count===0){ elScore.textContent="—"; elMeter.style.width="0%"; return; }
+    const max = sc.count*5;
+    elMeter.style.width = `${Math.round((sc.sum/max)*100)}%`;
+    elScore.textContent = `${sc.sum} / ${max} (ср. ${round2(sc.mean).toFixed(2)} / 5)`;
   }
   upd("tech", refs.sTech, refs.mTech);
   upd("phys", refs.sPhys, refs.mPhys);
   upd("ment", refs.sMent, refs.mMent);
 
-  // Баланс по средним
   const means = ["tech","phys","ment"].map(c=>scores[c].mean).filter(v=>v!=null);
   if(means.length===3){
     const diff = Math.max(...means)-Math.min(...means);
@@ -438,13 +441,9 @@ function renderResults(){
     refs.mBalance.style.width = `${Math.max(0,100-(diff/5)*100)}%`;
   } else { refs.balance.textContent = "—"; refs.mBalance.style.width = "0%"; }
 
-  renderAdvice({ tech:scores.tech.mean, phys:scores.phys.mean, ment:scores.ment.mean });
-
-  // Обновим подписи под вопросами
-  document.querySelectorAll(".hint").forEach((h,i)=>{
-    const qid = qs[i].id;
-    if(ans[qid] != null) h.textContent = `Вы выбрали: ${scaleLabels[ans[qid]]}`;
-  });
+  renderAdvice({tech:scores.tech.mean, phys:scores.phys.mean, ment:scores.ment.mean});
+  // обновить подсказки
+  qs.forEach(q=> updateHint(q.id));
 }
 function renderAdvice(catMeans){
   const box = refs.advice; box.innerHTML = "";
@@ -465,7 +464,7 @@ renderResults();
 
 // Экспорт / импорт
 exportBtn.addEventListener("click", ()=>{
-  const payload = {version:6, when:new Date().toISOString(), data:state};
+  const payload = {version:7, when:new Date().toISOString(), data:state};
   ioText.value = JSON.stringify(payload, null, 2);
   ioArea.style.display = "block";
   ioArea.scrollIntoView({behavior:"smooth", block:"start"});

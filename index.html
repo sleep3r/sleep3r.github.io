@@ -61,6 +61,9 @@ a{color:inherit;text-decoration:none}
 .tilt{transform-style:preserve-3d}
 .tilt > *{transform:translateZ(24px)}
 .confetti{position:absolute;inset:0;pointer-events:none;z-index:5}
+.mad{position:absolute;top:10px;right:10px;z-index:20;border:1px solid rgba(113,195,255,0.5);background:linear-gradient(180deg, rgba(20,26,49,0.85), rgba(16,22,42,0.85));color:#eaf0ff;border-radius:12px;padding:8px 10px;cursor:pointer;box-shadow:0 6px 18px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(113,195,255,0.1);transition:transform 0.15s ease, box-shadow 0.15s ease}
+.mad:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,0.45)}
+.mad[aria-pressed="true"]{border-color:rgba(255,95,173,0.6)}
 </style>
 </head>
 <body>
@@ -74,8 +77,6 @@ a{color:inherit;text-decoration:none}
 <div class="orb o6"></div>
 <div class="orb o7"></div>
 <canvas class="confetti" id="confetti"></canvas>
-<div class="card tilt" id="card">
-<div class="row">
 </div>
 <div class="links" id="links">
 <a class="btn" id="tgBtn" href="#" target="_blank" rel="noopener">
@@ -109,9 +110,12 @@ const card = document.getElementById("card");
 const stage = document.getElementById("stage");
 const confetti = document.getElementById("confetti");
 const ctx = confetti.getContext("2d");
+const madBtn = document.getElementById("madBtn");
 tgBtn.href = `https://t.me/${tg}`;
 ghBtn.href = `https://github.com/${gh}`;
 liBtn.href = `https://www.linkedin.com/${li}`;
+const tgLabel = document.getElementById("tgLabel");
+if(tgLabel){ tgLabel.textContent = `@${tg}` }
 const provided = ["tg","gh","li"].reduce((a,k)=>{ if(qs.get(k)) a[k]=qs.get(k); return a },{});
 if(Object.keys(provided).length){ localStorage.setItem(storeKey, JSON.stringify({...cfg, ...provided})) }
 let rx=0, ry=0; let rafId=0;
@@ -125,8 +129,8 @@ if(!rafId){ rafId=requestAnimationFrame(tick) }
 stage.addEventListener("pointerleave", ()=>{ rx = 0; ry = 0; if(!rafId){ rafId=requestAnimationFrame(tick) } });
 function tick(){ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; rafId=0 }
 let hue=0, loopId=null;
-// permanent chaos
-loopId = setInterval(()=>{ hue=(hue+5)%360; document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(1.5) brightness(1.2)`; card.style.animation = `shake 0.2s`; setTimeout(()=> card.style.animation = "", 200); splash(); }, 80);
+function startChaos(){ if(loopId) return; madBtn.setAttribute('aria-pressed','true'); loopId = setInterval(()=>{ hue=(hue+5)%360; document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(1.5) brightness(1.2)`; card.style.animation = `shake 0.2s`; setTimeout(()=> card.style.animation = "", 200); splash(); }, 100) }
+function stopChaos(){ if(!loopId) return; madBtn.setAttribute('aria-pressed','false'); clearInterval(loopId); loopId=null; document.documentElement.style.filter = ''; }
 const style = document.createElement('style');
 style.textContent = `@keyframes shake{0%{transform:translateX(0) rotate(0)}25%{transform:translateX(4px) rotate(0.5deg)}50%{transform:translateX(-4px) rotate(-0.5deg)}75%{transform:translateX(2px) rotate(0.3deg)}100%{transform:translateX(0) rotate(0)}}`;
 document.head.appendChild(style);
@@ -135,7 +139,8 @@ const ro = new ResizeObserver(resize); ro.observe(stage); resize();
 function splash(){ const n=120; for(let i=0;i<n;i++){ parts.push({x:Math.random()*confetti.width,y:Math.random()*confetti.height,vx:(Math.random()-0.5)*2,vy:Math.random()*2+1,w:8+Math.random()*12,h:3+Math.random()*4,rot:Math.random()*Math.PI,col:["#71c3ff","#a86bff","#00e4a8","#ff5fad"][i%4]}) } }
 function step(){ ctx.clearRect(0,0,confetti.width,confetti.height); parts.forEach(p=>{ p.vy+=0.12; p.x+=p.vx; p.y+=p.vy; p.rot+=0.15; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.col; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore() }); parts = parts.filter(p=> p.y < confetti.height+20); requestAnimationFrame(step) }
 step();
-// splash is now in permanent chaos loop
+madBtn.addEventListener('click', ()=>{ if(loopId){ stopChaos() } else { startChaos() } })
+startChaos();
 })();
 </script>
 </body>

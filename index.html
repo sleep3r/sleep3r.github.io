@@ -3,25 +3,42 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>sleep3r — визитка</title>
+<title>sleep3r</title>
 <meta name="theme-color" content="#0b0f1a">
 <style>
-:root{--bg:#0b0f1a; --ink:#e8f0ff; --muted:#9fb0d4; --a1:#6ae2ff; --a2:#a86bff; --a3:#00e4a8; --a4:#ff5fad; --glass:rgba(16,20,38,0.56)}
+ :root{--bg:#0b0f1a; --ink:#e8f0ff; --muted:#9fb0d4; --a1:#6ae2ff; --a2:#a86bff; --a3:#00e4a8; --a4:#ff5fad; --glass:rgba(16,20,38,0.56)}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.45}
 body{overflow:hidden}
 a{color:inherit;text-decoration:none}
 .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}
-.noise{position:absolute;inset:-20%;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.06"/></svg>');opacity:0.5;mix-blend-mode:overlay;animation: drift 40s linear infinite}
+.noise{position:absolute;inset:-20%;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="1.5" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)" opacity="0.18"/></svg>');opacity:0.8;mix-blend-mode:overlay;animation: drift 12s linear infinite, flicker 0.15s infinite alternate}
 @keyframes drift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(10%,10%,0)}}
-.orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:0.7;mix-blend-mode:screen}
-.o1{width:44vmax;height:44vmax;background:radial-gradient(closest-side, var(--a1), transparent 70%);left:-10vmax;top:-8vmax;animation: float1 18s ease-in-out infinite alternate}
-.o2{width:36vmax;height:36vmax;background:radial-gradient(closest-side, var(--a2), transparent 70%);right:-8vmax;bottom:-10vmax;animation: float2 22s ease-in-out infinite alternate}
-.o3{width:28vmax;height:28vmax;background:radial-gradient(closest-side, var(--a3), transparent 70%);left:50%;top:60%;transform:translate(-50%,-50%);animation: float3 26s ease-in-out infinite alternate}
+@keyframes flicker{0%{opacity:0.8}100%{opacity:0.6}}
+@keyframes colorShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
+.orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:0.8;mix-blend-mode:screen;animation: colorShift 20s linear infinite}
+.o1{width:44vmax;height:44vmax;background:radial-gradient(closest-side, var(--a1), transparent 70%);left:-10vmax;top:-8vmax;animation: float1 12s ease-in-out infinite alternate, pulse1 8s ease-in-out infinite}
+.o2{width:36vmax;height:36vmax;background:radial-gradient(closest-side, var(--a2), transparent 70%);right:-8vmax;bottom:-10vmax;animation: float2 15s ease-in-out infinite alternate, pulse2 6s ease-in-out infinite}
+.o3{width:28vmax;height:28vmax;background:radial-gradient(closest-side, var(--a3), transparent 70%);left:50%;top:60%;transform:translate(-50%,-50%);animation: float3 20s ease-in-out infinite alternate, pulse3 10s ease-in-out infinite}
+.o4{width:32vmax;height:32vmax;background:radial-gradient(closest-side, var(--a4), transparent 70%);left:20%;top:-12vmax;animation: float4 16s ease-in-out infinite alternate, pulse4 7s ease-in-out infinite}
+.o5{width:40vmax;height:40vmax;background:radial-gradient(closest-side, var(--a1), transparent 70%);right:15%;top:80%;animation: float5 22s ease-in-out infinite alternate, pulse5 9s ease-in-out infinite}
+.o6{width:35vmax;height:35vmax;background:radial-gradient(closest-side, var(--a3), transparent 70%);left:-5%;top:30%;animation: float6 18s ease-in-out infinite alternate, pulse6 11s ease-in-out infinite}
+.o7{width:25vmax;height:25vmax;background:radial-gradient(closest-side, var(--a4), transparent 70%);right:-10%;top:20%;animation: float7 25s ease-in-out infinite alternate, pulse7 8s ease-in-out infinite}
 @keyframes float1{to{transform:translate3d(4vmax,3vmax,0)}}
 @keyframes float2{to{transform:translate3d(-3vmax,-4vmax,0)}}
 @keyframes float3{to{transform:translate(-55%,-45%)}}
-.card{position:relative;z-index:2;background:linear-gradient(180deg, rgba(18,24,46,0.75), rgba(12,16,30,0.75));border:1px solid rgba(89,116,196,0.35);border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,0.45), inset 0 0 80px rgba(106,226,255,0.06);backdrop-filter:saturate(160%) blur(10px);max-width:720px;margin:20px}
+@keyframes float4{to{transform:translate3d(6vmax,-2vmax,0)}}
+@keyframes float5{to{transform:translate3d(-5vmax,4vmax,0)}}
+@keyframes float6{to{transform:translate3d(8vmax,-3vmax,0)}}
+@keyframes float7{to{transform:translate3d(-4vmax,6vmax,0)}}
+@keyframes pulse1{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
+@keyframes pulse3{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+@keyframes pulse4{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
+@keyframes pulse5{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
+@keyframes pulse6{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
+@keyframes pulse7{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
+.card{position:relative;z-index:10;background:linear-gradient(180deg, rgba(18,24,46,0.75), rgba(12,16,30,0.75));border:1px solid rgba(89,116,196,0.35);border-radius:22px;padding:22px;box-shadow:0 20px 60px rgba(0,0,0,0.45), inset 0 0 80px rgba(106,226,255,0.06);backdrop-filter:saturate(160%) blur(10px);max-width:720px;margin:20px}
 .row{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .pfp{width:72px;height:72px;border-radius:18px;background:linear-gradient(135deg, #1d2746, #0f142b);border:1px solid rgba(120,160,255,0.28);display:grid;place-items:center;font-weight:800;color:#9fb7ff;letter-spacing:1px}
 .glitch{font-size:26px;font-weight:900;letter-spacing:0.5px;position:relative;text-transform:uppercase}
@@ -33,20 +50,17 @@ a{color:inherit;text-decoration:none}
 @keyframes gl2{0%,92%{transform:translate(0,0)}93%{transform:translate(1px,0)}100%{transform:translate(0,0)}}
 .tag{font-size:13px;color:var(--muted)}
 .bio{margin-top:8px;color:#dbe6ff;opacity:0.9}
-.links{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.links{display:flex;gap:12px;flex-direction:column;margin-top:16px}
 .btn{--c:#71c3ff;display:inline-flex;align-items:center;gap:10px;padding:12px 14px;border-radius:14px;border:1px solid rgba(113,195,255,0.5);background:linear-gradient(180deg, rgba(20,26,49,0.85), rgba(16,22,42,0.85));color:#eaf0ff;font-weight:700;cursor:pointer;transition:transform 0.15s ease, box-shadow 0.15s ease, border-color 0.2s ease;box-shadow:0 8px 24px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(113,195,255,0.1)}
 .btn:hover{transform:translateY(-1px);box-shadow:0 12px 30px rgba(0,0,0,0.45), 0 0 24px rgba(113,195,255,0.25)}
 .btn:active{transform:translateY(0)}
 .btn .ico{width:18px;height:18px;display:inline-block}
 .btn-ghost{background:linear-gradient(180deg, rgba(18,24,46,0.6), rgba(10,14,26,0.6));border-color:rgba(168,107,255,0.5)}
 .foot{margin-top:14px;font-size:12.5px;color:var(--muted);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.switch{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(89,116,196,0.35);padding:6px 10px;border-radius:999px;background:rgba(16,22,42,0.6)}
-.switch input{appearance:none;width:34px;height:20px;border-radius:999px;background:#283054;position:relative;outline:none;cursor:pointer}
-.switch input::after{content:"";position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:#a0b7ff;transition:left 0.2s ease}
-.switch input:checked::after{left:16px;background:#67ffd6}
+
 .tilt{transform-style:preserve-3d}
 .tilt > *{transform:translateZ(24px)}
-.confetti{position:absolute;inset:0;pointer-events:none}
+.confetti{position:absolute;inset:0;pointer-events:none;z-index:5}
 </style>
 </head>
 <body>
@@ -55,18 +69,17 @@ a{color:inherit;text-decoration:none}
 <div class="orb o1"></div>
 <div class="orb o2"></div>
 <div class="orb o3"></div>
+<div class="orb o4"></div>
+<div class="orb o5"></div>
+<div class="orb o6"></div>
+<div class="orb o7"></div>
+<canvas class="confetti" id="confetti"></canvas>
 <div class="card tilt" id="card">
 <div class="row">
-<div class="pfp" aria-hidden="true">S3</div>
-<div>
-<div class="glitch" id="title" data-text="sleep3r — builds neat stuff"><span>sleep3r — builds neat stuff</span></div>
-<div class="tag" id="aka">aka Aleksandr Kalashnikov</div>
-<div class="bio">Frontend/Full‑stack • Creative coding • Performance • DX • Tiny UIs that slap</div>
-</div>
 </div>
 <div class="links" id="links">
 <a class="btn" id="tgBtn" href="#" target="_blank" rel="noopener">
-<svg class="ico" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg"><path fill="#71c3ff" d="M120 0a120 120 0 1 0 0 240 120 120 0 0 0 0-240Zm51 77c-2 0-4 1-6 2l-97 37c-7 3-7 8-1 10l24 7 10 32c1 4 3 5 6 3l14-12 24 18c3 2 6 1 7-3l18-88c1-5-1-8-5-8Zm-15 17-45 58-3 20-10-28 58-50Z"/></svg>
+<svg class="ico" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path fill="#71c3ff" d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.161c-.18.717-2.689 10.936-3.89 15.806-.645 2.636-2.091 3.24-3.344 2.669-.524-.239-1.022-.514-1.495-.825-1.687-1.113-2.97-1.807-4.65-2.92-2.355-1.559-.842-2.418.518-3.04.358-.158 6.627-6.02 6.858-6.559.052-.121.12-.54-.182-.54-.12 0-2.04.484-6.32 4.147-.12.08-.24.16-.36.24-.36.24-.72.48-1.08.24-.72-.48-.36-1.44.24-1.68 2.52-1.2 4.8-2.4 7.08-3.6 1.2-.6 2.28-.24 2.64.72z"/></svg>
 <span id="tgLabel">Telegram</span>
 </a>
 <a class="btn btn-ghost" id="ghBtn" href="#" target="_blank" rel="noopener">
@@ -78,11 +91,6 @@ a{color:inherit;text-decoration:none}
 <span>LinkedIn</span>
 </a>
 </div>
-<div class="foot">
-<label class="switch"><input type="checkbox" id="chaosToggle" /> хаос</label>
-<div>Подставь ники через URL: <code>?tg=yourname&gh=user&li=id</code></div>
-</div>
-<canvas class="confetti" id="confetti"></canvas>
 </div>
 </div>
 <script>
@@ -97,13 +105,11 @@ const li = pick("li", "in/aleksandr-kalashnikov");
 const tgBtn = document.getElementById("tgBtn");
 const ghBtn = document.getElementById("ghBtn");
 const liBtn = document.getElementById("liBtn");
-const chaos = document.getElementById("chaosToggle");
 const card = document.getElementById("card");
 const stage = document.getElementById("stage");
 const confetti = document.getElementById("confetti");
 const ctx = confetti.getContext("2d");
 tgBtn.href = `https://t.me/${tg}`;
-document.getElementById("tgLabel").textContent = `@${tg}`;
 ghBtn.href = `https://github.com/${gh}`;
 liBtn.href = `https://www.linkedin.com/${li}`;
 const provided = ["tg","gh","li"].reduce((a,k)=>{ if(qs.get(k)) a[k]=qs.get(k); return a },{});
@@ -118,19 +124,18 @@ if(!rafId){ rafId=requestAnimationFrame(tick) }
 });
 stage.addEventListener("pointerleave", ()=>{ rx = 0; ry = 0; if(!rafId){ rafId=requestAnimationFrame(tick) } });
 function tick(){ card.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`; rafId=0 }
-let chaosOn = false, hue=0, loopId=null;
-chaos.addEventListener("change", ()=>{ chaosOn = chaos.checked; if(chaosOn) startChaos(); else stopChaos() });
-function startChaos(){ if(loopId) return; loopId = setInterval(()=>{ hue=(hue+3)%360; document.documentElement.style.filter = `hue-rotate(${hue}deg)`; card.style.animation = `shake 0.3s`; setTimeout(()=> card.style.animation = "", 280) }, 120); splash() }
-function stopChaos(){ clearInterval(loopId); loopId=null; document.documentElement.style.filter = "none" }
+let hue=0, loopId=null;
+// permanent chaos
+loopId = setInterval(()=>{ hue=(hue+5)%360; document.documentElement.style.filter = `hue-rotate(${hue}deg) saturate(1.5) brightness(1.2)`; card.style.animation = `shake 0.2s`; setTimeout(()=> card.style.animation = "", 200); splash(); }, 80);
 const style = document.createElement('style');
-style.textContent = `@keyframes shake{0%{transform:translateX(0) rotate(0)}25%{transform:translateX(2px) rotate(0.2deg)}50%{transform:translateX(-2px) rotate(-0.2deg)}75%{transform:translateX(1px) rotate(0.1deg)}100%{transform:translateX(0) rotate(0)}}`;
+style.textContent = `@keyframes shake{0%{transform:translateX(0) rotate(0)}25%{transform:translateX(4px) rotate(0.5deg)}50%{transform:translateX(-4px) rotate(-0.5deg)}75%{transform:translateX(2px) rotate(0.3deg)}100%{transform:translateX(0) rotate(0)}}`;
 document.head.appendChild(style);
-let parts=[]; function resize(){ confetti.width = card.clientWidth; confetti.height = card.clientHeight }
-const ro = new ResizeObserver(resize); ro.observe(card); resize();
-function splash(){ const n=48; for(let i=0;i<n;i++){ parts.push({x:Math.random()*confetti.width,y:confetti.height-10,vx:(Math.random()-0.5)*2,vy:-3-Math.random()*3,w:6+Math.random()*8,h:2+Math.random()*3,rot:Math.random()*Math.PI,col:["#71c3ff","#a86bff","#00e4a8","#ff5fad"][i%4]}) } }
-function step(){ ctx.clearRect(0,0,confetti.width,confetti.height); parts.forEach(p=>{ p.vy+=0.08; p.x+=p.vx; p.y+=p.vy; p.rot+=0.1; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.col; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore() }); parts = parts.filter(p=> p.y < confetti.height+12); requestAnimationFrame(step) }
+let parts=[]; function resize(){ confetti.width = stage.clientWidth; confetti.height = stage.clientHeight }
+const ro = new ResizeObserver(resize); ro.observe(stage); resize();
+function splash(){ const n=120; for(let i=0;i<n;i++){ parts.push({x:Math.random()*confetti.width,y:Math.random()*confetti.height,vx:(Math.random()-0.5)*2,vy:Math.random()*2+1,w:8+Math.random()*12,h:3+Math.random()*4,rot:Math.random()*Math.PI,col:["#71c3ff","#a86bff","#00e4a8","#ff5fad"][i%4]}) } }
+function step(){ ctx.clearRect(0,0,confetti.width,confetti.height); parts.forEach(p=>{ p.vy+=0.12; p.x+=p.vx; p.y+=p.vy; p.rot+=0.15; ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot); ctx.fillStyle=p.col; ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h); ctx.restore() }); parts = parts.filter(p=> p.y < confetti.height+20); requestAnimationFrame(step) }
 step();
-setTimeout(splash, 400);
+// splash is now in permanent chaos loop
 })();
 </script>
 </body>

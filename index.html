@@ -178,6 +178,7 @@ function cmd_help(){
     ['links', 'list social links'],
     ['open &lt;tg|gh|li|climbing&gt;', 'open link in a new tab'],
     ['tg | gh | li', 'shortcut to open socials'],
+    ['baneks', 'open random joke (category b)'],
     ['projects', 'list projects'],
     ['sl', 'steam locomotive easter egg'],
     ['ls', 'list entries'],
@@ -227,6 +228,28 @@ function cmd_open(args){
   };
   const url = map[what] || (what.startsWith('http')? what : null);
   if(url){ line(`Opening ${link(url)}`); openUrl(url) } else { line(`<span class="err">Unknown target:</span> ${escapeHtml(what)}`) }
+}
+
+function cmd_baneks(){
+  const src = 'https://baneks.site/random';
+  const proxied = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(src + (src.includes('?')?'&':'?') + '_ts=' + Date.now());
+  line('Fetching baneks…','muted');
+  return fetch(proxied, { mode: 'cors', cache: 'no-store' })
+    .then(r => { if(!r.ok) throw new Error('HTTP '+r.status); return r.text() })
+    .then(html => {
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const art = doc.querySelector('article');
+      if(!art) throw new Error('article not found');
+      const content = (art.textContent||'').replace(/\n\s+/g,'\n').trim();
+      if(!content) throw new Error('empty article');
+      // label removed per request
+      content.split(/\n{2,}/).forEach(chunk => text(chunk.trim()));
+    })
+    .catch(err => {
+      line(`<span class="warn">Failed to parse:</span> ${escapeHtml(String(err))}`);
+      line(`Opening ${link(src, 'baneks: random b')}`);
+      openUrl(src);
+    });
 }
 
 function cmd_sl(){
@@ -346,6 +369,7 @@ Object.assign(commands, {
   uname: cmd_uname,
   whoami: cmd_whoami,
   open: cmd_open,
+  baneks: cmd_baneks,
   sl: cmd_sl,
   tg: ()=>cmd_open(['tg']),
   gh: ()=>cmd_open(['gh']),
@@ -358,9 +382,8 @@ function run(raw){
   const parts = inputText.split(/\s+/);
   const cmd = parts.shift().toLowerCase();
   history.push(raw); historyIndex = history.length;
-  line(`<span class="muted">${username}@${hostname} ${cwd} %</span> ${escapeHtml(raw)}`);
   const fn = commands[cmd];
-  if(fn){ try{ fn(parts) } catch(err){ line(`<span class=\"err\">Error:</span> ${escapeHtml(String(err))}`) } }
+  if(fn){ try{ return fn(parts) } catch(err){ line(`<span class=\"err\">Error:</span> ${escapeHtml(String(err))}`) } }
   else { line(`<span class="err">Command not found:</span> ${escapeHtml(cmd)}. Try ${cmdLink('help')}`) }
 }
 
@@ -380,8 +403,14 @@ document.addEventListener('keydown', (e)=>{
   if(e.key === 'Enter'){
     const v = inputEl.textContent || '';
     inputEl.removeAttribute('contenteditable');
-    run(v);
-    createInputLine('');
+    inputLocked = true;
+    const done = ()=>{ if(!slRunning){ inputLocked = false; createInputLine(''); } };
+    const res = run(v);
+    if(res && typeof res.then === 'function'){
+      res.then(done).catch(err=>{ line(`<span class=\"err\">Error:</span> ${escapeHtml(String(err))}`); done(); });
+    } else {
+      done();
+    }
     e.preventDefault(); return;
   }
   if(e.key === 'ArrowUp'){

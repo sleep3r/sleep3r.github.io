@@ -247,8 +247,6 @@ function cmd_baneks(){
     })
     .catch(err => {
       line(`<span class="warn">Failed to parse:</span> ${escapeHtml(String(err))}`);
-      line(`Opening ${link(src, 'baneks: random b')}`);
-      openUrl(src);
     });
 }
 

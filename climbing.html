@@ -4,11 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Самодиагностика скалолаза — 30 вопросов</title>
-<meta name="theme-color" content="#0f1320">
+<meta name="theme-color" content="#272822">
 <style>
   :root{
-    --bg:#0f1320; --panel:#171b2a; --ink:#eaf0ff; --muted:#a8b7d6;
-    --accent:#71c3ff; --accent2:#00d8b4; --line:#2a3453; --good:#87e887; --warn:#ff9a88;
+    --bg:#272822; --panel:#3e3d32; --ink:#f8f8f2; --muted:#75715e;
+    --accent:#66d9ef; --accent2:#a6e22e; --line:#49483e; --good:#a6e22e; --warn:#fd971f;
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.5}
@@ -16,44 +16,44 @@
   a{color:var(--accent)}
   /* место под нижнюю панель навигации */
   .wrap{max-width:980px;margin:0 auto;padding:16px; padding-bottom:calc(84px + env(safe-area-inset-bottom));}
-  header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,#0f1320 75%,#0f132000);padding:10px 0 6px}
+  header{position:sticky;top:0;z-index:5;background:linear-gradient(180deg,var(--bg) 75%,#27282200);padding:10px 0 6px}
   .hbar{display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .title{font-weight:800;font-size:20px;margin:0}
   .btn{
-    border:1px solid var(--line);background:linear-gradient(180deg,#1b2338,#151a2b);color:var(--ink);
+    border:1px solid var(--line);background:linear-gradient(180deg,var(--panel),#2f2e2a);color:var(--ink);
     padding:10px 12px;border-radius:12px;font-weight:600;cursor:pointer
   }
   .btn:active{transform:scale(0.98)}
-  .btn-ghost{background:#0f1430}
-  .btn-ok{background:linear-gradient(180deg,#1a3e36,#112824);border-color:#1e6f5a}
-  .note{background:#121833;border:1px solid var(--line);border-radius:12px;padding:10px;color:#d6e5ff}
-  .card{background:#141a31;border:1px solid var(--line);border-radius:14px;padding:12px}
+  .btn-ghost{background:var(--panel)}
+  .btn-ok{background:linear-gradient(180deg,#1c2b1f,#152417);border-color:var(--accent2)}
+  .note{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px;color:var(--ink)}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}
   .legend{font-size:14px;color:var(--muted)}
-  .progress-wrap{width:100%;height:8px;background:#0e1428;border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:8px}
-  .progress{height:100%;width:0%;background:linear-gradient(90deg,#51b5ff,#00d8b4)}
+  .progress-wrap{width:100%;height:8px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden;margin-top:8px}
+  .progress{height:100%;width:0%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
   .grid{display:grid;grid-template-columns:1fr;gap:12px}
   @media (min-width:880px){ .grid{grid-template-columns:1.2fr 1fr} }
-  .q{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed #2a3352;padding-top:12px;margin-top:12px;scroll-margin-top:84px}
-  .q-num{min-width:28px;min-height:28px;border-radius:9px;background:#0f1428;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:#71c3ff}
+  .q{display:flex;gap:10px;align-items:flex-start;border-top:1px dashed var(--line);padding-top:12px;margin-top:12px;scroll-margin-top:84px}
+  .q-num{min-width:28px;min-height:28px;border-radius:9px;background:var(--panel);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-weight:800;color:var(--accent)}
   .q-body{flex:1}
   .q-text{font-size:16.5px}
   .cats{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 4px}
-  .cat{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:#0e1430;color:#cfe3ff}
+  .cat{font-size:11px;padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
   .seg{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-top:10px}
   .seg input{position:absolute;opacity:0;pointer-events:none}
   .seg label{
     -webkit-tap-highlight-color:transparent;
     display:flex;align-items:center;justify-content:center;
     height:44px;border-radius:12px;border:1px solid var(--line);
-    background:#0f1430;color:#dbe6ff;font-weight:700;font-size:16px;cursor:pointer;
+    background:var(--bg);color:var(--ink);font-weight:700;font-size:16px;cursor:pointer;
     user-select:none
   }
   .seg input:checked + label{
-    border-color:#2a88ff;background:linear-gradient(180deg,#193659,#122642);color:#eaf3ff;box-shadow:0 0 0 1px #2a88ff inset
+    border-color:var(--accent);background:linear-gradient(180deg,#34352b,#2a2b23);color:var(--ink);box-shadow:0 0 0 1px var(--accent) inset
   }
   .hint{font-size:12.5px;color:var(--muted);margin-top:6px}
-  .meter{height:10px;background:#0f1430;border:1px solid var(--line);border-radius:999px;overflow:hidden}
-  .meter > div{height:100%;background:linear-gradient(90deg,#4fb2ff,#00d8b4);width:0%}
+  .meter{height:10px;background:var(--bg);border:1px solid var(--line);border-radius:999px;overflow:hidden}
+  .meter > div{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%}
   .bar{display:flex;flex-direction:column;gap:6px}
   .bar .lbl{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
   .adv ul{margin:0 0 0 18px;padding:0}
@@ -61,13 +61,13 @@
   /* Нижняя панель навигации (без легенды) */
   .dock{
     position:fixed;left:0;right:0;bottom:0;z-index:6;
-    background:rgba(18,24,51,0.96);backdrop-filter:saturate(160%) blur(8px);
+    background:rgba(62,61,50,0.96);backdrop-filter:saturate(160%) blur(8px);
     border-top:1px solid var(--line);
     padding:8px 12px calc(8px + env(safe-area-inset-bottom));
   }
   .dock-row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   .dock .mini{font-size:12.5px;color:var(--muted)}
-  .pill{border:1px solid var(--line);background:#0f1430;color:#d6e5ff;border-radius:999px;padding:6px 10px}
+  .pill{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:6px 10px}
   @media print{
     header,.dock{display:none}
     .wrap{padding:0}

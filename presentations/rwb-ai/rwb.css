@@ -1402,5 +1402,28 @@
 	line-height: 1.3 !important;
 }
 
+/* ============================================
+   COMPONENT: QR CODE CONTAINER
+   Container for QR code display
+   ============================================ */
+.qr-container {
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+	padding: var(--space-md) !important;
+	background: var(--rwb-white) !important;
+	border-radius: var(--radius-md) !important;
+	border: 2px solid var(--rwb-border) !important;
+	margin: var(--space-sm) 0 !important;
+}
+
+.qr-container img,
+.qr-container canvas {
+	display: block !important;
+	max-width: 100% !important;
+	height: auto !important;
+	width: 200px !important;
+}
+
 /* Note: .callout and .callout-primary are defined above in COMPONENT section */
 /* Note: .slide-bottom-note is defined above in COMPONENT section */

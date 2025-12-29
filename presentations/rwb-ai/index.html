@@ -598,9 +598,9 @@
     </div>
 
     <div class="merged-grid cols-2">
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>🌍 Полевые условия</h3>
-            <ul>
+            <ul class="list-compact">
                 <li>Смена</li>
                 <li>Склад</li>
                 <li>Сезонность</li>
@@ -608,33 +608,29 @@
                 <li>Ассортимент</li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>🔄 Контур реакции</h3>
             <p class="text-secondary" style="margin-bottom: 0;">Модель ≠ результат. Нужен полный контур:</p>
         </div>
     </div>
 
-    <!-- Reaction Loop Visualization -->
-    <div class="reaction-loop">
-        <div class="reaction-step">
-            <div class="reaction-step-number">1</div>
-            <div class="reaction-step-title">Детекция</div>
-            <div class="reaction-step-desc">Модель обнаруживает нарушение</div>
+    <!-- Reaction Loop Visualization (Tiled) -->
+    <div class="step-timeline">
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">1</div>
+            <div class="step-timeline-desc"><strong>Детекция</strong><br>Модель обнаруживает нарушение</div>
         </div>
-        <div class="reaction-step">
-            <div class="reaction-step-number">2</div>
-            <div class="reaction-step-title">Алерт</div>
-            <div class="reaction-step-desc">Сигнал оператору</div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">2</div>
+            <div class="step-timeline-desc"><strong>Алерт</strong><br>Сигнал оператору</div>
         </div>
-        <div class="reaction-step">
-            <div class="reaction-step-number">3</div>
-            <div class="reaction-step-title">Действие</div>
-            <div class="reaction-step-desc">Оператор исправляет</div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">3</div>
+            <div class="step-timeline-desc"><strong>Действие</strong><br>Оператор исправляет</div>
         </div>
-        <div class="reaction-step">
-            <div class="reaction-step-number">4</div>
-            <div class="reaction-step-title">Контроль</div>
-            <div class="reaction-step-desc">Проверка исполнения</div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">4</div>
+            <div class="step-timeline-desc"><strong>Контроль</strong><br>Проверка исполнения</div>
         </div>
     </div>
 </div>
@@ -650,25 +646,25 @@
 <div class="slide-body">
     <h2>Метрики (три уровня)</h2>
     <div class="merged-grid cols-3">
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>📊 Tech</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>Precision/Recall</strong> по событиям</li>
                 <li><strong>Устойчивость</strong> по складам</li>
                 <li><strong>Latency</strong> (задержка)</li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>🔄 Proxy</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>% нарушений</strong> регламента</li>
                 <li><strong>Время реакции</strong>, % проверок</li>
                 <li><strong>FP/hour</strong> <span class="pill" style="background: var(--rwb-primary); color: var(--rwb-white); font-size: 0.75em; padding: 2px 8px;">критично!</span><br><span class="text-secondary">Иначе операторов "зальёт" ложными сигналами</span></li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>💰 Business</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>Потери (₽)</strong></li>
                 <li><strong>Damage rate</strong> по хрупким SKU</li>
                 <li><strong>Стоимость возвратов</strong></li>
@@ -689,18 +685,18 @@
     <h2>Модель эффекта: потери как функция нарушения</h2>
     
     <!-- Logic Flow -->
-    <div class="merged-grid cols-3 mb-lg">
-        <div class="merged-item">
+    <div class="merged-grid cols-3">
+        <div class="merged-item compact">
             <h3>1️⃣ Нарушение</h3>
             <p><strong>Нарушение упаковки</strong></p>
             <p class="text-secondary">Несоблюдение регламента</p>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>2️⃣ Риск</h3>
             <p><strong>Вероятность повреждения</strong></p>
             <p class="text-secondary">\(p_{damage|bad} > p_{damage|good}\)</p>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>3️⃣ Эффект</h3>
             <p><strong>Система снижает нарушения</strong></p>
             <p class="text-secondary">→ Падают потери</p>
@@ -713,18 +709,18 @@
     </div>
 
     <!-- Input Variables -->
-    <div class="merged-grid cols-2 mt-lg">
-        <div class="merged-item">
+    <div class="merged-grid cols-2">
+        <div class="merged-item compact">
             <h3>Входные данные</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>\(N\)</strong> — объём операций упаковки</li>
                 <li><strong>\(p_{damage|bad}\)</strong> — вероятность повреждения при нарушении</li>
                 <li><strong>\(p_{damage|good}\)</strong> — вероятность повреждения при соблюдении</li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>Измеряем</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>\(\Delta p_{bad}\)</strong> — изменение доли нарушений (до/после)</li>
                 <li><strong>\(Cost_{damage}\)</strong> — стоимость одного повреждения (₽)</li>
             </ul>
@@ -743,8 +739,8 @@
 <div class="slide-body">
     <h2>A/B тестирование в "поле": сложности и решения</h2>
     
-    <div class="merged-grid cols-2" style="margin-bottom: var(--space-sm);">
-        <div class="merged-item">
+    <div class="merged-grid cols-2">
+        <div class="merged-item compact">
             <h3>⛔️ Почему простой A/B не работает?</h3>
             <ul class="list-compact">
                 <li><strong>Внешние факторы:</strong> Погода, акции, смена бригад влияют сильнее, чем модель.</li>
@@ -752,7 +748,7 @@
                 <li><strong>Разные базы:</strong> Склад А всегда лучше Склада Б (разное оборудование).</li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>✅ Решение: Дизайн эксперимента</h3>
             <ul class="list-compact">
                 <li><strong>Switch-back:</strong> Переключаем модель вкл/выкл по часам или дням (для одного склада).</li>
@@ -835,17 +831,17 @@
     </div>
 
     <div class="merged-grid cols-2">
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>🔒 Приватность</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>Ограничение доступа</strong> к видео</li>
                 <li><strong>Минимальная ретенция</strong> данных</li>
                 <li><strong>Анонимизация/маскирование</strong> чувствительных зон где возможно</li>
             </ul>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>⚖️ Справедливость</h3>
-            <ul>
+            <ul class="list-compact">
                 <li><strong>Никаких авто-наказаний</strong> без подтверждения человеком</li>
                 <li><strong>Политики использования</strong> и прозрачность</li>
                 <li><strong>Репутационные риски</strong> могут доминировать выгоду</li>

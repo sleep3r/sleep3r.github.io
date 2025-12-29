@@ -48,24 +48,27 @@
 <div class="slide-body">
 	<h2>Для кого и что заберёте</h2>
 	<div class="merged-grid cols-3">
-		<div class="merged-item compact">
+		<div class="merged-item compact outcome-card">
 			<div class="number">01</div>
 			<h3>Tech → Business</h3>
 			<p><strong>Метрики в деньги:</strong> связь технического качества с бизнес-результатами (₽, SLA)</p>
 		</div>
-		<div class="merged-item compact">
+		<div class="merged-item compact outcome-card">
 			<div class="number">02</div>
 			<h3>Net Value</h3>
 			<p><strong>Экономика:</strong> расчет ценности за вычетом TCO и рисков</p>
 		</div>
-		<div class="merged-item compact">
+		<div class="merged-item compact outcome-card">
 			<div class="number">03</div>
 			<h3>Измерение</h3>
 			<p><strong>Метод:</strong> когда достаточно калькулятора, а когда нужен DiD или A/B тест</p>
 		</div>
 	</div>
 	<div class="footer-note">
-		🎯 <strong>Цель:</strong> научиться оценивать AI-инициативы как инвестиционные проекты с понятными рисками
+		<div class="footer-note-icon">🎯</div>
+		<div class="footer-note-content">
+			<strong>Цель:</strong> научиться оценивать AI-инициативы как инвестиционные проекты с понятными рисками
+		</div>
 	</div>
 </div>
 </section>
@@ -275,14 +278,26 @@
     <div class="merged-grid cols-2">
         <div class="merged-item compact">
             <h3>Поток (AS IS)</h3>
-            <div class="process-flow centered mt-lg">
-                <div class="process-step">📄 Документы</div>
+            <div class="process-flow vertical centered mt-lg">
+                <div class="process-node">
+                    <div class="process-icon">📄</div>
+                    <div class="process-text">Документы</div>
+                </div>
                 <span class="process-arrow">↓</span>
-                <div class="process-step">⌨️ Ручной ввод</div>
+                <div class="process-node">
+                    <div class="process-icon">⌨️</div>
+                    <div class="process-text">Ручной ввод</div>
+                </div>
                 <span class="process-arrow">↓</span>
-                <div class="process-step">👀 Сверка</div>
+                <div class="process-node">
+                    <div class="process-icon">👀</div>
+                    <div class="process-text">Сверка</div>
+                </div>
                 <span class="process-arrow">↓</span>
-                <div class="process-step">✅ Оформление</div>
+                <div class="process-node">
+                    <div class="process-icon">✅</div>
+                    <div class="process-text">Оформление</div>
+                </div>
             </div>
         </div>
         <div class="merged-item compact">
@@ -536,23 +551,26 @@
     <h2>Процесс и "золотой исход"</h2>
     
     <!-- Process Flow -->
-    <div class="merged-grid cols-4">
-        <div class="merged-item compact centered">
+    <div class="process-flow horizontal mt-lg">
+        <div class="process-node">
             <div class="process-icon">📦</div>
             <div class="process-text">Доупаковка</div>
             <p class="text-meta">Сборка заказа</p>
         </div>
-        <div class="merged-item compact centered">
+        <span class="process-arrow">→</span>
+        <div class="process-node">
             <div class="process-icon">🍱</div>
             <div class="process-text">Материалы</div>
             <p class="text-meta">Выбор тары</p>
         </div>
-        <div class="merged-item compact centered">
+        <span class="process-arrow">→</span>
+        <div class="process-node">
             <div class="process-icon">🔍</div>
             <div class="process-text">Проверка</div>
             <p class="text-meta">Контроль AI</p>
         </div>
-        <div class="merged-item compact centered">
+        <span class="process-arrow">→</span>
+        <div class="process-node">
             <div class="process-icon">🚚</div>
             <div class="process-text">Отгрузка</div>
             <p class="text-meta">Уход в доставку</p>
@@ -564,19 +582,22 @@
 
     <!-- Golden Outcome -->
     <div class="golden-outcome">
-        <div class="golden-outcome-title">Золотой исход: снижение потерь</div>
+        <div class="golden-outcome-title">💎 Золотой исход: снижение потерь</div>
         <div class="golden-outcome-desc">
             Все остальные метрики — прокси, которые должны вести именно к снижению потерь
         </div>
         <div class="golden-outcome-items">
             <div class="golden-outcome-item">
-                <strong>Брак/повреждения</strong>
+                <div class="outcome-icon">📦❌</div>
+                <strong>Брак / повреждения</strong>
             </div>
             <div class="golden-outcome-item">
-                <strong>Возвраты/претензии</strong>
+                <div class="outcome-icon">↩️</div>
+                <strong>Возвраты / претензии</strong>
             </div>
             <div class="golden-outcome-item">
-                <strong>Пересборка/переупаковка</strong>
+                <div class="outcome-icon">🔄</div>
+                <strong>Пересборка / упаковка</strong>
             </div>
         </div>
     </div>
@@ -600,7 +621,7 @@
     <div class="merged-grid cols-2">
         <div class="merged-item compact">
             <h3>🌍 Полевые условия</h3>
-            <ul class="list-compact">
+            <ul>
                 <li>Смена</li>
                 <li>Склад</li>
                 <li>Сезонность</li>
@@ -704,8 +725,8 @@
     </div>
 
     <!-- Formula Template -->
-    <div class="callout-primary">
-        <strong>Формула расчёта:</strong> Эффект = \(N \times \Delta p_{bad} \times (p_{damage|bad} - p_{damage|good}) \times Cost_{damage}\)
+    <div class="formula-box">
+        <div class="formula">\[ \text{Эффект} = N \times \Delta p_{\text{bad}} \times (p_{\text{damage}|\text{bad}} - p_{\text{damage}|\text{good}}) \times \text{Cost}_{\text{damage}} \]</div>
     </div>
 
     <!-- Input Variables -->

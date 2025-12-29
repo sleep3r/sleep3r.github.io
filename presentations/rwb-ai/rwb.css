@@ -285,6 +285,25 @@
 	margin-bottom: 6px !important;
 }
 
+/* Enhanced compact for outcome cards */
+.merged-item.compact.outcome-card {
+	padding: var(--space-md) !important;
+	min-height: 180px !important;
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: flex-start !important;
+}
+
+.merged-item.compact.outcome-card h3 {
+	margin-bottom: var(--space-xs) !important;
+	font-size: 22px !important;
+}
+
+.merged-item.compact.outcome-card p {
+	margin-top: auto !important;
+	line-height: 1.5 !important;
+}
+
 .merged-item ul {
 	margin-left: 1.2em !important;
 	margin-top: 0.5rem !important;
@@ -370,6 +389,16 @@
 	color: var(--rwb-primary);
 	line-height: 1;
 	margin-bottom: var(--space-md);
+	opacity: 0.85;
+}
+
+/* Enhanced number styling for outcome cards */
+.outcome-card .number {
+	font-size: 64px !important;
+	font-weight: 200 !important;
+	opacity: 0.9 !important;
+	letter-spacing: -2px !important;
+	margin-bottom: var(--space-sm) !important;
 }
 
 /* ============================================
@@ -970,6 +999,62 @@
 }
 
 /* ============================================
+   COMPONENT: FOOTER NOTE
+   Enhanced footer note with icon and styling
+   ============================================ */
+.footer-note {
+	display: flex !important;
+	align-items: center !important;
+	gap: var(--space-sm) !important;
+	margin-top: var(--space-lg) !important;
+	padding: var(--space-md) var(--space-lg) !important;
+	background: linear-gradient(135deg, rgba(107, 66, 251, 0.08) 0%, rgba(239, 213, 255, 0.3) 100%) !important;
+	border-radius: var(--radius-md) !important;
+	border-left: 4px solid var(--rwb-primary) !important;
+	box-shadow: 0 2px 8px rgba(107, 66, 251, 0.1) !important;
+}
+
+.footer-note-icon {
+	font-size: 1.5rem !important;
+	line-height: 1 !important;
+	flex-shrink: 0 !important;
+}
+
+.footer-note-content {
+	font-size: 0.95em !important;
+	line-height: 1.5 !important;
+	color: var(--rwb-dark) !important;
+}
+
+.footer-note-content strong {
+	color: var(--rwb-primary) !important;
+	font-weight: 700 !important;
+}
+
+/* ============================================
+   COMPONENT: OUTCOME CARD
+   Enhanced styling for outcome cards
+   ============================================ */
+.outcome-card {
+	position: relative !important;
+	transition: transform 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+.outcome-card:hover {
+	transform: translateY(-2px) !important;
+	box-shadow: 0 4px 12px rgba(107, 66, 251, 0.15) !important;
+}
+
+.outcome-card .number {
+	opacity: 0.9 !important;
+	transition: opacity 0.2s ease !important;
+}
+
+.outcome-card:hover .number {
+	opacity: 1 !important;
+}
+
+/* ============================================
    COMPONENT: PROCESS FLOW
    Visual flow for processes with arrows
    ============================================ */
@@ -981,6 +1066,15 @@
 	margin: var(--space-md) 0 !important;
 }
 
+.process-flow.vertical {
+	flex-direction: column !important;
+}
+
+.process-flow.horizontal {
+	flex-direction: row !important;
+	justify-content: space-between !important;
+}
+
 .process-step {
 	background: var(--rwb-white) !important;
 	padding: var(--space-sm) var(--space-md) !important;
@@ -989,12 +1083,65 @@
 	font-size: 0.9em !important;
 	font-weight: 500 !important;
 	box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	text-align: center !important;
+}
+
+/* Node variant with icon and meta */
+.process-node {
+	flex: 1 !important;
+	background: var(--rwb-white) !important;
+	padding: var(--space-md) var(--space-sm) !important;
+	border-radius: var(--radius-md) !important;
+	border: 1px solid var(--rwb-border) !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	text-align: center !important;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+	min-width: 0 !important;
+}
+
+.process-flow.vertical .process-node {
+	width: 160px !important;
+	padding: var(--space-sm) !important;
+}
+
+.process-node .process-icon {
+	font-size: 1.8rem !important;
+	margin-bottom: 6px !important;
+	line-height: 1 !important;
+}
+
+.process-node .process-text {
+	font-family: 'Montserrat', sans-serif !important;
+	font-weight: 600 !important;
+	font-size: 0.85rem !important;
+	color: var(--rwb-dark) !important;
+	margin-bottom: 0 !important;
+	line-height: 1.2 !important;
+}
+
+.process-node .text-meta {
+	font-size: 0.75em !important;
+	color: var(--rwb-text-muted) !important;
+	margin: 0 !important;
+	line-height: 1.2 !important;
 }
 
 .process-arrow {
 	color: var(--rwb-primary) !important;
 	font-size: 1.2rem !important;
 	font-weight: bold !important;
+	opacity: 0.6 !important;
+	margin: 2px 0 !important;
+}
+
+.process-flow.horizontal .process-arrow {
+	font-size: 1.5rem !important;
+	margin: 0 !important;
 }
 
 /* ============================================
@@ -1088,32 +1235,28 @@
 
 /* ============================================
    COMPONENT: GOLDEN OUTCOME
-   Highlight for key business outcomes
+   Simple outcome/goal block - reuses callout styling
    ============================================ */
 .golden-outcome {
 	background: var(--level-2) !important;
-	border-radius: var(--radius-lg) !important;
+	border-radius: var(--radius-md) !important;
 	padding: var(--space-md) !important;
-	border: 2px solid var(--rwb-primary) !important;
+	border-left: 4px solid var(--rwb-primary) !important;
 	text-align: center !important;
 	margin: var(--space-sm) 0 !important;
 }
 
-.golden-outcome-icon {
-	font-size: 2rem !important;
-	margin-bottom: var(--space-xs) !important;
-}
-
 .golden-outcome-title {
-	font-size: 1.3rem !important;
+	font-size: 1.2rem !important;
 	font-weight: 700 !important;
 	color: var(--rwb-primary) !important;
 	margin-bottom: var(--space-xs) !important;
+	font-family: 'Montserrat', sans-serif !important;
 }
 
 .golden-outcome-desc {
 	font-size: 0.9em !important;
-	color: var(--rwb-dark) !important;
+	color: var(--rwb-text-muted) !important;
 	line-height: 1.4 !important;
 	margin-bottom: var(--space-sm) !important;
 }
@@ -1127,10 +1270,26 @@
 
 .golden-outcome-item {
 	background: var(--rwb-white) !important;
-	padding: var(--space-sm) !important;
-	border-radius: var(--radius-md) !important;
+	padding: var(--space-sm) var(--space-xs) !important;
+	border-radius: var(--radius-sm) !important;
 	text-align: center !important;
 	border: 1px solid var(--rwb-border) !important;
+	display: flex !important;
+	flex-direction: column !important;
+	align-items: center !important;
+	gap: 6px !important;
+}
+
+.golden-outcome-item .outcome-icon {
+	font-size: 1.3rem !important;
+	line-height: 1 !important;
+}
+
+.golden-outcome-item strong {
+	color: var(--rwb-dark) !important;
+	font-size: 0.8em !important;
+	line-height: 1.3 !important;
+	font-weight: 600 !important;
 }
 
 /* ============================================

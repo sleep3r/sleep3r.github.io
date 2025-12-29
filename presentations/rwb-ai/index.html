@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Университет RWB - Оценка эффекта AI</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reset.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/theme/white.css">
+	<link rel="stylesheet" href="rwb.css">
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+
+<section class="slide-title" data-background-image="assets/bg-waves-1.jpg">
+<div class="header">
+	<img src="assets/logo-white.png" alt="Logo">
+	<span>Университет RWB</span>
+</div>
+<div class="content">
+	<h1>Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</h1>
+</div>
+</section>
+
+<section class="slide-disclaimer">
+<div class="disclaimer-content">
+	<p>ЭТА ЛЕКЦИЯ ПОСВЯЩЕНА ИСКЛЮЧИТЕЛЬНО ТОМУ, КАК ОЦЕНИВАТЬ ЭФФЕКТ ИНИЦИАТИВ С ИСКУССТВЕННЫМ ИНТЕЛЛЕКТОМ ДЛЯ РЕШЕНИЯ
+		ПРОБЛЕМ CORE‑БИЗНЕСА: БИЗНЕС-КЕЙС, ЭКОНОМИЧЕСКАЯ МОДЕЛЬ, РИСКИ И КОМПЛАЕНС.</p>
+	<p>МЫ СОЗНАТЕЛЬНО НЕ ОБСУЖДАЕМ ИННОВАЦИОННЫЕ, ИМИДЖЕВЫЕ, БРЕНДОВЫЕ И ИНВЕСТИЦИОННЫЕ ПРИЧИНЫ ВНЕДРЕНИЯ ИИ, КАК И
+		ПРОЕКТЫ, ГДЕ ГЛАВНАЯ ЦЕЛЬ — «СДЕЛАТЬ ЧТО-ТО С AI», А НЕ РЕШАТЬ КОНКРЕТНУЮ ПРОБЛЕМУ БИЗНЕСА.</p>
+	<p>ВСЕ ПРИМЕРЫ, ЦИФРЫ И СЦЕНАРИИ НОСЯТ ИЛЛЮСТРАТИВНЫЙ ХАРАКТЕР И НЕ ЯВЛЯЮТСЯ ИНВЕСТИЦИОННОЙ РЕКОМЕНДАЦИЕЙ, ЮРИДИЧЕСКИМ
+		ЗАКЛЮЧЕНИЕМ ИЛИ КАКИМ-ЛИБО ОФФЕРОМ.</p>
+	<p>НЕ РЕКОМЕНДОВАНО К ПРОСЛУШИВАНИЮ НИКОМУ.</p>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+	<span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+	<img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+	<h2>Для кого и что заберёте</h2>
+	<div class="merged-grid cols-3">
+		<div class="merged-item">
+			<h3>Tech → Proxy → Business</h3>
+			<p>Как переводить метрики из технических в бизнесовые</p>
+		</div>
+		<div class="merged-item">
+			<h3>Net Value</h3>
+			<p>Как считать Net Value = Effect − TCO − Risk</p>
+		</div>
+		<div class="merged-item">
+			<h3>Метод измерения</h3>
+			<p>Как выбирать: калькуляция / эксперимент / оффлайн‑оценка</p>
+		</div>
+	</div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>История героя (путешествие DS Lead)</h2>
+    <div class="steps-split-layout">
+        <div class="steps-left">
+            <h2>Путь к<br>бизнес-ценности</h2>
+        </div>
+        <div class="steps-right">
+            <div class="step-card level-1">
+                <div class="step-text">Мир: «хотим AI везде»</div>
+            </div>
+            <div class="step-card level-2">
+                <div class="step-text">Вызов: «покажите эффект»</div>
+            </div>
+            <div class="step-card level-3">
+                <div class="step-text">Испытания: 3 кейса, растёт неопределённость</div>
+            </div>
+            <div class="step-card level-4">
+                <div class="step-text">Возвращение: “конвейер” принятия решений</div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Вечная проблема: бизнес хочет “всё сразу”</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Чего хотят</h3>
+            <ul>
+                <li>Ускорить процесс</li>
+                <li>Уменьшить ошибки</li>
+                <li>Снизить стоимость</li>
+                <li>Повысить контроль/качество</li>
+            </ul>
+        </div>
+        <div class="merged-item">
+            <h3>Сроки</h3>
+            <p style="font-size: 2rem; font-weight: bold; margin-top: 2rem;">И желательно вчера</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Правило DS Lead: разнести цели и метрики</h2>
+    <div class="text-block">
+        <h3>Одна инициатива ≠ одна метрика</h3>
+        <p>Разделяем и фиксируем приоритет (что “must”, что “nice to have”):</p>
+        <ul>
+            <li>Метрики <strong>скорости</strong></li>
+            <li>Метрики <strong>качества/ошибок</strong></li>
+            <li>Метрики <strong>рисков/комплаенса</strong></li>
+        </ul>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Универсальная схема (+ Guardrails)</h2>
+    <div class="merged-grid cols-4">
+        <div class="merged-item">
+            <h3>Tech</h3>
+            <p>accuracy, F1, latency, calibration</p>
+        </div>
+        <div class="merged-item">
+            <h3>Proxy</h3>
+            <p>straight-through rate, rework rate, FP/hour, time-to-decision</p>
+        </div>
+        <div class="merged-item">
+            <h3>Business</h3>
+            <p>₽ потери/экономия, SLA, конверсия, скорость найма</p>
+        </div>
+        <div class="merged-item">
+            <h3>Guardrails</h3>
+            <p>PII, видео, аудит, человек-в-контуре, kill‑switch</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+    <div class="slide-header">
+        <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+        <img src="assets/logo-blue.png" alt="Logo" class="logo">
+    </div>
+    <div class="slide-body">
+        <h2>Экономика решения: Net Value</h2>
+        <div style="font-size: 2.5rem; text-align: center; margin: 2rem 0; font-family: monospace; background: #f0f4f8; padding: 1rem; border-radius: 8px;">
+            NetValue = &Delta;Business - TCO - RiskCost
+        </div>
+        <div class="merged-grid cols-2">
+            <div class="merged-item">
+                <h3>TCO</h3>
+                <p>CAPEX (разработка/данные) + OPEX (инференс/поддержка)</p>
+            </div>
+            <div class="merged-item">
+                <h3>RiskCost</h3>
+                <p>ожидаемый ущерб &times; вероятность + стоимость комплаенс‑трения</p>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        Проговорить: «комплаенс — не “тормоз”, это часть стоимости и дизайна».
+    </aside>
+</section>
+
+<section class="slide-title" data-background-image="assets/bg-waves-2.jpg">
+    <div class="header">
+		<img src="assets/logo-white.png" alt="Logo">
+		<span>Университет RWB</span>
+	</div>
+    <div class="content">
+        <h1>Кейс 1: Распознавание документов в найме</h1>
+    </div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Процесс и боль</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Поток</h3>
+            <p>Паспорт РФ + ВУ &rarr; внесение данных &rarr; проверка &rarr; оформление</p>
+        </div>
+        <div class="merged-item">
+            <h3>Боль</h3>
+            <ul>
+                <li>Ручной ввод и сверка</li>
+                <li>Ошибки в полях (ФИО/серия/номер/даты)</li>
+                <li>Скорость найма страдает, но ошибки — дорого</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Конфликт целей</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Бизнес хочет одновременно</h3>
+            <ul>
+                <li><strong>Ускорить</strong> (минимум ручных касаний)</li>
+                <li><strong>Уменьшить ошибки</strong> (минимум неправильных данных)</li>
+            </ul>
+        </div>
+        <div class="merged-item">
+            <h3>Реальность (Trade-offs)</h3>
+            <ul>
+                <li>Ниже порог уверенности &rarr; быстрее, но больше ошибок</li>
+                <li>Выше порог &rarr; меньше ошибок, но больше ручной проверки</li>
+            </ul>
+        </div>
+    </div>
+    <p style="margin-top: 2rem; text-align: center; font-weight: bold; font-size: 1.5rem;">Нельзя максимизировать всё
+        одним движком</p>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Стратегия: “вертикально” вместо “горизонтально”</h2>
+    <div class="steps-split-layout">
+        <div class="steps-left">
+            <h2>Вертикальный MVP</h2>
+        </div>
+        <div class="steps-right">
+            <div class="step-card level-1">
+                <div class="step-number">1</div>
+                <div class="step-text">1 документ &rarr; 10–15 ключевых полей &rarr; понятная проверка</div>
+            </div>
+            <div class="step-card level-2">
+                <div class="step-number">2</div>
+                <div class="step-text">Паспорт (основные поля) &rarr; Паспорт (прописка/коды)</div>
+            </div>
+            <div class="step-card level-3">
+                <div class="step-number">3</div>
+                <div class="step-text">Водительское (категории/сроки)</div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Метрики (разделяем скорость и качество)</h2>
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <h3>Tech</h3>
+            <p>field-level accuracy</p>
+            <p>doc-type accuracy</p>
+            <p>confidence calibration</p>
+            <p>latency</p>
+        </div>
+        <div class="merged-item">
+            <h3>Proxy (Скорость)</h3>
+            <p>Straight-through rate (% без ручной правки)</p>
+            <p>Time-to-verify (P50/P90)</p>
+        </div>
+        <div class="merged-item">
+            <h3>Proxy (Качество)</h3>
+            <p>Rework rate</p>
+            <p>Critical field error rate (ошибки в “дорогих” полях)</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Как считать эффект (без “магии”)</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Базовая модель</h3>
+            <p><strong>Экономия времени</strong> = объем &times; (время до &minus; время после) &times; ставка</p>
+            <div class="divider"></div>
+            <p><strong>Стоимость ошибок</strong> = кол-во ошибок &times; цена ошибки</p>
+            <div class="divider"></div>
+            <p><strong>Итог</strong> = экономия &minus; ошибки &minus; TCO</p>
+        </div>
+        <div class="merged-item">
+            <h3>Шаблон данных</h3>
+            <ul>
+                <li>\(N\) документов/мес</li>
+                <li>\(t_{manual}\), \(t_{assist}\)</li>
+                <li>\(c_{ops}\) (ставка)</li>
+                <li>\(err_{crit}\), \(Cost_{crit}\)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Контуры комплаенса (PII)</h2>
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <h3>Данные</h3>
+            <p>Минимизация данных и ретенция</p>
+            <p>Шифрование хранения и передачи</p>
+        </div>
+        <div class="merged-item">
+            <h3>Процесс</h3>
+            <p>Роли/доступы, аудит</p>
+            <p>Kill-switch на ручной режим</p>
+        </div>
+        <div class="merged-item">
+            <h3>Контроль</h3>
+            <p>Human-in-the-loop по low confidence</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-title" data-background-image="assets/bg-waves-mirror.jpg">
+<div class="header">
+    <img src="assets/logo-white.png" alt="Logo">
+    <span>Университет RWB</span>
+</div>
+<div class="content">
+    <h1>Кейс 2: Видеоаналитика контроля качества упаковки на складе</h1>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Процесс и “золотой исход”</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Процесс</h3>
+            <p>Доупаковка/переупаковка &rarr; материалы &rarr; проверка товара &rarr; отгрузка</p>
+        </div>
+        <div class="merged-item">
+            <h3>Золотой исход: снижение потерь</h3>
+            <ul>
+                <li>Брак/повреждения</li>
+                <li>Возвраты/претензии</li>
+                <li>Пересборка/переупаковка</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Почему это сложнее кейса 1</h2>
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <h3>Полевые условия</h3>
+            <p>Эффект не “внутри системы”, а <strong>в поле</strong></p>
+        </div>
+        <div class="merged-item">
+            <h3>Факторы</h3>
+            <p>Смена, склад, сезонность, регламенты, ассортимент</p>
+        </div>
+        <div class="merged-item">
+            <h3>Контур реакции</h3>
+            <p>Модель ≠ результат: нужен контур реакции (алерт → действие)</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Метрики (три уровня)</h2>
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <h3>Tech</h3>
+            <p>precision/recall по событиям</p>
+            <p>устойчивость по складам</p>
+            <p>latency</p>
+        </div>
+        <div class="merged-item">
+            <h3>Proxy</h3>
+            <p>% нарушений регламента</p>
+            <p>% проверок, время реакции</p>
+            <p>FP/hour (критично!)</p>
+        </div>
+        <div class="merged-item">
+            <h3>Business</h3>
+            <p>Потери (₽)</p>
+            <p>Damage rate по хрупким SKU</p>
+            <p>Стоимость возвратов</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Модель эффекта: потери как функция нарушения</h2>
+    <div class="text-block">
+        <h3>Простая логика</h3>
+        <p>1) Нарушение упаковки &rarr; растёт вероятность повреждения</p>
+        <p>2) Система снижает нарушения &rarr; падают потери</p>
+    </div>
+    <div class="merged-grid cols-2" style="margin-top: 2rem;">
+        <div class="merged-item">
+            <h3>Шаблон</h3>
+            <p>\(N\) операций упаковки</p>
+            <p>\(p_{damage|bad}\), \(p_{damage|good}\)</p>
+        </div>
+        <div class="merged-item">
+            <h3>&nbsp;</h3>
+            <p>Доля “bad” до/после</p>
+            <p>Cost_damage (₽)</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Как измерять в проде (без самообмана)</h2>
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <h3>Stepped-wedge</h3>
+            <p>Поэтапное включение по складам/линиям</p>
+        </div>
+        <div class="merged-item">
+            <h3>Контроль</h3>
+            <p>Учет сезонности и пиков нагрузки</p>
+        </div>
+        <div class="merged-item">
+            <h3>DiD</h3>
+            <p>Сравнение изменений “до/после” относительно контрольных групп</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Кейс 2: Video</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Видео и люди: комплаенс и этика</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Приватность</h3>
+            <p>Ограничение доступа к видео, ретенция</p>
+            <p>Анонимизация/маскирование где возможно</p>
+        </div>
+        <div class="merged-item">
+            <h3>Справедливость</h3>
+            <p><strong>Никаких авто-наказаний</strong> без подтверждения человеком</p>
+            <p>Политики использования и прозрачность</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-title" data-background-image="assets/bg-waves-1.jpg">
+<div class="header">
+    <img src="assets/logo-white.png" alt="Logo">
+    <span>Университет RWB</span>
+</div>
+<div class="content">
+    <h1>Кейс 3: LLM-Агент: помощник по юридически сложным вопросам видеонаблюдения</h1>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Почему “агенты” — хайп, но и реальная ценность</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Польза</h3>
+            <ul>
+                <li>Процесс сложный и “документный”</li>
+                <li>Много правил/исключений</li>
+                <li>Людям нужен <strong>быстрый разбор</strong> и ссылки на основания</li>
+            </ul>
+        </div>
+        <div class="merged-item">
+            <h3>Риски</h3>
+            <ul>
+                <li>Галлюцинации</li>
+                <li>Неверная интерпретация норм</li>
+                <li>Утечки/PII</li>
+            </ul>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Архитектура безопасного юридического агента</h2>
+    <div class="steps-split-layout">
+        <div class="steps-left">
+            <h2>RAG +<br>Rules</h2>
+        </div>
+        <div class="steps-right">
+            <div class="step-card level-1">
+                <div class="step-text">RAG по разрешённым источникам (политики + нормативка)</div>
+            </div>
+            <div class="step-card level-2">
+                <div class="step-text">Жёсткие policy‑правила вне LLM</div>
+            </div>
+            <div class="step-card level-3">
+                <div class="step-text">
+                    Ответ всегда с:
+                    <ul>
+                        <li>ссылками/основаниями</li>
+                        <li>уровнем уверенности</li>
+                        <li>“когда эскалировать юристу”</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Метрики агента: качество + безопасность</h2>
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
+            <h3>Качество</h3>
+            <p>% корректных рекомендаций по чеклисту</p>
+            <div class="divider"></div>
+            <p>% ответов с валидными ссылками на источник</p>
+            <div class="divider"></div>
+            <p>Время до решения / deflection (сколько сняли вопросов)</p>
+        </div>
+        <div class="merged-item">
+            <h3>Безопасность/риск</h3>
+            <p>Policy compliance rate</p>
+            <div class="divider"></div>
+            <p>Hallucination rate (по выборочной проверке)</p>
+            <div class="divider"></div>
+            <p>Escalation correctness (когда надо — отправил)</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Risk-adjusted ROI: когда агент окупается</h2>
+    <div class="text-block">
+        <p><strong>Экономия времени</strong> &minus; <strong>Инфраструктура</strong> &minus;
+            <strong>Цена ошибки</strong></p>
+        <p>Цена ошибки в юридических темах может быть доминирующей.</p>
+    </div>
+    <div class="merged-grid cols-3" style="margin-top: 1rem;">
+        <div class="merged-item">
+            <h3>Ограничиваем</h3>
+            <p>Ограничиваем домен</p>
+        </div>
+        <div class="merged-item">
+            <h3>Эскалируем</h3>
+            <p>Вводим обязательную эскалацию для опасных тем</p>
+        </div>
+        <div class="merged-item">
+            <h3>Ассистируем</h3>
+            <p>Начинаем с “черновика” для человека</p>
+        </div>
+    </div>
+</div>
+</section>
+
+<section class="slide-standard">
+    <div class="slide-header">
+        <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+        <img src="assets/logo-blue.png" alt="Logo" class="logo">
+    </div>
+    <div class="slide-body">
+        <h2>One‑pager DS Lead (шаблон принятия решения)</h2>
+        <div class="merged-grid cols-2">
+            <div class="merged-item">
+                <ol>
+                    <li>Problem + baseline</li>
+                    <li>Tech &rarr; Proxy &rarr; Business</li>
+                    <li>Как измеряем эффект (calc/эксперимент/оффлайн)</li>
+                    <li>TCO</li>
+                </ol>
+            </div>
+             <div class="merged-item">
+                <ol start="5">
+                    <li>Risk/Compliance controls</li>
+                    <li>Go/No-Go критерии</li>
+                    <li>Мониторинг + kill‑switch</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <aside class="notes">
+        “Если этого нет на одной странице — вы не готовы в прод”.
+    </aside>
+</section>
+
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.2.1/plugin/search/search.js"></script>
+<script>
+	Reveal.initialize({
+		width: 1200,
+		height: 700,
+		margin: 0,
+		center: false,
+		controls: false,
+		progress: false,
+		slideNumber: 'c/t',
+		hash: true,
+		history: true,
+		transition: 'none',
+		transitionSpeed: 'default',
+		// Base path для работы в подпапке
+		basePath: './',
+		plugins: [RevealNotes, RevealZoom, RevealSearch]
+	});
+</script>
+</body>
+</html>

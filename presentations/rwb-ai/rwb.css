@@ -1415,6 +1415,7 @@
 	border-radius: var(--radius-md) !important;
 	border: 2px solid var(--rwb-border) !important;
 	margin: var(--space-sm) 0 !important;
+	transition: transform 0.3s ease !important;
 }
 
 .qr-container img,
@@ -1422,7 +1423,7 @@
 	display: block !important;
 	max-width: 100% !important;
 	height: auto !important;
-	width: 200px !important;
+	width: 180px !important;
 }
 
 /* Note: .callout and .callout-primary are defined above in COMPONENT section */

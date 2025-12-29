@@ -48,23 +48,23 @@
 <div class="slide-body">
 	<h2>Для кого и что заберёте</h2>
 	<div class="merged-grid cols-3">
-		<div class="merged-item">
+		<div class="merged-item compact">
 			<div class="number">01</div>
-			<h3>Tech → Proxy → Business</h3>
-			<p><strong>Метрики в деньги:</strong> как связывать техническое качество (F1, Accuracy) с бизнес-результатами (₽, SLA, время процесса)</p>
+			<h3>Tech → Business</h3>
+			<p><strong>Метрики в деньги:</strong> связь технического качества с бизнес-результатами (₽, SLA)</p>
 		</div>
-		<div class="merged-item">
+		<div class="merged-item compact">
 			<div class="number">02</div>
 			<h3>Net Value</h3>
-			<p><strong>Экономика владения:</strong> полный расчет ценности за вычетом стоимости разработки (CAPEX), поддержки (OPEX) и потенциальных рисков</p>
+			<p><strong>Экономика:</strong> расчет ценности за вычетом TCO и рисков</p>
 		</div>
-		<div class="merged-item">
+		<div class="merged-item compact">
 			<div class="number">03</div>
-			<h3>Метод измерения</h3>
-			<p><strong>Методология оценки:</strong> когда достаточно калькулятора, а когда нужны DiD-анализ или классический A/B эксперимент</p>
+			<h3>Измерение</h3>
+			<p><strong>Метод:</strong> когда достаточно калькулятора, а когда нужен DiD или A/B тест</p>
 		</div>
 	</div>
-	<div style="margin-top: 1.5rem; padding: 1rem; border-top: 1px solid var(--rwb-border); color: var(--rwb-text-muted); font-size: 0.85em;">
+	<div class="footer-note">
 		🎯 <strong>Цель:</strong> научиться оценивать AI-инициативы как инвестиционные проекты с понятными рисками
 	</div>
 </div>
@@ -111,25 +111,23 @@
 <div class="slide-body">
     <h2>Вечная проблема: бизнес хочет «всё сразу»</h2>
     <div class="merged-grid cols-2">
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>Wishlist (хотелки)</h3>
-            <ul style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.7rem;">
+            <ul class="list-compact">
                 <li>🚀 <strong>Ускорить</strong> процесс в разы</li>
                 <li>🎯 <strong>Убрать</strong> ошибки (Zero-error)</li>
                 <li>📉 <strong>Снизить</strong> стоимость владения</li>
                 <li>🛡️ <strong>Повысить</strong> контроль и прозрачность</li>
             </ul>
         </div>
-        <div class="merged-item" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
-            <div style="font-size: 1.2rem; color: var(--rwb-text-muted); text-transform: uppercase; letter-spacing: 2px;">Сроки реализации</div>
-            <div style="font-size: 5rem; font-weight: 800; color: var(--rwb-primary); margin: 1rem 0; line-height: 1;">ВЧЕРА</div>
-            <div style="font-size: 1rem; font-style: italic; color: var(--rwb-text-muted);">...или даже позавчера</div>
+        <div class="merged-item compact centered">
+            <div class="text-uppercase-subtitle">Сроки реализации</div>
+            <div class="text-large">ВЧЕРА</div>
+            <div class="text-italic">...или даже позавчера</div>
         </div>
     </div>
-    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 23, 83, 0.05); border-radius: 8px; border-left: 4px solid var(--rwb-primary);">
-        <p style="margin: 0; font-size: 0.9em; line-height: 1.5;">
-            <strong>Главный вызов:</strong> без четких приоритетов команда начинает пытаться оптимизировать всё одновременно и не достигает ни одной цели.
-        </p>
+    <div class="callout">
+        <strong>Главный вызов:</strong> без четких приоритетов команда начинает пытаться оптимизировать всё одновременно и не достигает ни одной цели.
     </div>
 </section>
 <!-- #endregion -->
@@ -142,34 +140,28 @@
 </div>
 <div class="slide-body">
     <h2>Цели vs Метрики: Баланс DS Lead</h2>
-    <p style="margin-bottom: 1.5rem;">Бизнес ставит <strong>бизнес-цель</strong>, но DS Lead декомпозирует её в систему метрик, фиксируя приоритеты:</p>
+    <p class="text-meta">Бизнес ставит <strong>бизнес-цель</strong>, но DS Lead декомпозирует её в систему метрик:</p>
 
     <div class="merged-grid cols-3">
-        <div class="merged-item">
-            <div class="number">01</div>
-            <h3>🚀 Скорость (SLA)</h3>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">🚀 Скорость (SLA)</h3>
             <p><strong>Цель:</strong> Ускорить процесс, убрать бутылочное горлышко.</p>
-            <div class="divider"></div>
-            <p><strong>Метрики:</strong> % авто-принятия (STR), Latency, Time-to-decision.</p>
+            <p class="text-secondary"><strong>Метрики:</strong> STR, Latency, Time-to-decision.</p>
         </div>
-        <div class="merged-item">
-            <div class="number">02</div>
-            <h3>🎯 Качество (Trust)</h3>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">🎯 Качество (Trust)</h3>
             <p><strong>Цель:</strong> Снизить потери от ошибок, повысить доверие.</p>
-            <div class="divider"></div>
-            <p><strong>Метрики:</strong> Precision/Recall, Error rate в критичных полях, Rework rate.</p>
+            <p class="text-secondary"><strong>Метрики:</strong> Precision/Recall, Error rate, Rework rate.</p>
         </div>
-        <div class="merged-item">
-            <div class="number">03</div>
-            <h3>🛡️ Риски (Safety)</h3>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">🛡️ Риски (Safety)</h3>
             <p><strong>Цель:</strong> Не навредить бизнесу и соблюсти комплаенс.</p>
-            <div class="divider"></div>
-            <p><strong>Метрики:</strong> Compliance score, Hallucination rate, Kill-switch activation.</p>
+            <p class="text-secondary"><strong>Метрики:</strong> Compliance score, Hallucination rate, Kill-switch.</p>
         </div>
     </div>
 
-    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(107, 66, 251, 0.05); border-radius: 12px; border-left: 4px solid var(--rwb-primary); font-size: 0.9em;">
-        <strong>Принцип:</strong> Метрики часто конфликтуют (например, Скорость vs Качество). Задача Lead — явно зафиксировать <em>trade-off</em> до начала разработки.
+    <div class="callout">
+        <strong>Принцип:</strong> Метрики часто конфликтуют. Задача Lead — явно зафиксировать <em>trade-off</em> до начала разработки.
     </div>
 </div>
 </section>
@@ -183,22 +175,47 @@
 </div>
 <div class="slide-body">
     <h2>Универсальная схема (+ Guardrails)</h2>
-    <div class="merged-grid cols-4">
-        <div class="merged-item">
-            <h3>Tech</h3>
-            <p>accuracy, F1, latency, calibration</p>
+    
+    <div class="merged-grid cols-3">
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">1. Tech</h3>
+            <p class="text-meta">Качество и скорость модели</p>
+            <ul>
+                <li class="text-small">Accuracy / F1</li>
+                <li class="text-small">Latency</li>
+                <li class="text-small">Calibration</li>
+            </ul>
         </div>
-        <div class="merged-item">
-            <h3>Proxy</h3>
-            <p>straight-through rate, rework rate, FP/hour, time-to-decision</p>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">2. Proxy</h3>
+            <p class="text-meta">Показатели процесса</p>
+             <ul>
+                <li class="text-small">STR</li>
+                <li class="text-small">Rework rate</li>
+                <li class="text-small">Time-to-decision</li>
+            </ul>
         </div>
-        <div class="merged-item">
-            <h3>Business</h3>
-            <p>₽ потери/экономия, SLA, конверсия, скорость найма</p>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">3. Business</h3>
+            <p class="text-meta">Деньги и результат</p>
+             <ul>
+                <li class="text-small">₽ (Потери / Экономия)</li>
+                <li class="text-small">SLA процесса</li>
+                <li class="text-small">Итоговая конверсия</li>
+            </ul>
         </div>
-        <div class="merged-item">
-            <h3>Guardrails</h3>
-            <p>PII, видео, аудит, человек-в-контуре, kill‑switch</p>
+    </div>
+
+    <div style="background: var(--rwb-dark); border-radius: var(--radius-md); padding: 12px 20px; display: flex; flex-direction: column; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+        <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: 8px;">
+            <h3 style="color: var(--rwb-white) !important; margin: 0; font-size: 20px !important;">🛡️ Guardrails</h3>
+            <span style="color: var(--rwb-white); opacity: 0.7; font-size: 14px;">(часть дизайна, а не "потом")</span>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span class="pill" style="background: rgba(255,255,255,0.15); color: var(--rwb-white); border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 12px; padding: 4px 10px;">PII / Privacy</span>
+            <span class="pill" style="background: rgba(255,255,255,0.15); color: var(--rwb-white); border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 12px; padding: 4px 10px;">Human-in-the-loop</span>
+            <span class="pill" style="background: rgba(255,255,255,0.15); color: var(--rwb-white); border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 12px; padding: 4px 10px;">Audit Logs</span>
+            <span class="pill" style="background: rgba(255,255,255,0.15); color: var(--rwb-white); border: 1px solid rgba(255,255,255,0.1); font-weight: 500; font-size: 12px; padding: 4px 10px;">Kill-switch</span>
         </div>
     </div>
 </div>
@@ -213,23 +230,19 @@
     </div>
     <div class="slide-body">
         <h2>Экономика решения: Net Value</h2>
-        <div style="font-size: 2rem; text-align: center; margin: 2rem 0; background: #f0f4f8; padding: 1rem; border-radius: 8px;">
-            \[ \text{NetValue} = \Delta \text{Business} - \text{TCO} - \text{RiskCost} \]
+        <div class="formula-box">
+            <div class="formula">\[ \text{NetValue} = \Delta \text{Business} - \text{TCO} - \text{RiskCost} \]</div>
         </div>
         <div class="merged-grid cols-2">
-            <div class="merged-item">
+            <div class="merged-item compact">
                 <h3>TCO</h3>
-                <div style="text-align: center; font-size: 0.9em;">
-                    \[ \text{CAPEX}_{\text{dev}} + \text{OPEX}_{\text{run}} \]
-                </div>
-                <p style="font-size: 0.8em; text-align: center; margin-top: 0.5em;">(разработка/данные + инференс)</p>
+                <div class="formula">\[ \text{CAPEX}_{\text{dev}} + \text{OPEX}_{\text{run}} \]</div>
+                <p class="text-meta centered">(разработка/данные + инференс)</p>
             </div>
-            <div class="merged-item">
+            <div class="merged-item compact">
                 <h3>RiskCost</h3>
-                 <div style="text-align: center; font-size: 0.9em;">
-                    \[ E(\text{Loss}) \times P(\text{Event}) + \text{Friction} \]
-                </div>
-                <p style="font-size: 0.8em; text-align: center; margin-top: 0.5em;">(ущерб &times; вероятность + комплаенс)</p>
+                 <div class="formula">\[ E(\text{Loss}) \times P(\text{Event}) + \text{Friction} \]</div>
+                <p class="text-meta centered">(ущерб &times; вероятность + комплаенс)</p>
             </div>
         </div>
     </div>
@@ -260,40 +273,32 @@
 <div class="slide-body">
     <h2>Процесс и боль</h2>
     <div class="merged-grid cols-2">
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>Поток (AS IS)</h3>
-            <div style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem; align-items: center;">
-                <div style="background: #fff; padding: 12px 20px; border-radius: 8px; border: 1px solid #E2E8F0; width: 80%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    📄 Документы (Паспорт + ВУ)
-                </div>
-                <div style="color: var(--rwb-primary); font-size: 1.2rem;">↓</div>
-                <div style="background: #fff; padding: 12px 20px; border-radius: 8px; border: 1px solid #E2E8F0; width: 80%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    ⌨️ Ручной ввод данных
-                </div>
-                <div style="color: var(--rwb-primary); font-size: 1.2rem;">↓</div>
-                <div style="background: #fff; padding: 12px 20px; border-radius: 8px; border: 1px solid #E2E8F0; width: 80%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    👀 Визуальная проверка
-                </div>
-                <div style="color: var(--rwb-primary); font-size: 1.2rem;">↓</div>
-                <div style="background: #fff; padding: 12px 20px; border-radius: 8px; border: 1px solid #E2E8F0; width: 80%; text-align: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
-                    ✅ Оформление
-                </div>
+            <div class="process-flow centered mt-lg">
+                <div class="process-step">📄 Документы</div>
+                <span class="process-arrow">↓</span>
+                <div class="process-step">⌨️ Ручной ввод</div>
+                <span class="process-arrow">↓</span>
+                <div class="process-step">👀 Сверка</div>
+                <span class="process-arrow">↓</span>
+                <div class="process-step">✅ Оформление</div>
             </div>
         </div>
-        <div class="merged-item">
+        <div class="merged-item compact">
             <h3>Проблемы</h3>
-            <ul style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1.5rem;">
+            <ul class="list-compact">
                 <li>
-                    <strong>Рутина и медлительность</strong><br>
-                    100% ручной ввод и сверка сканов. Очереди на оформление.
+                    <strong>Медлительность</strong><br>
+                    <span class="text-secondary">Очереди на оформление</span>
                 </li>
                 <li>
-                    <strong>Человеческий фактор</strong><br>
-                    Опечатки в критичных полях (ФИО, серия/номер) → юридические риски и переделки.
+                    <strong>Ошибки</strong><br>
+                    <span class="text-secondary">Опечатки в ФИО, № паспорта</span>
                 </li>
                 <li>
-                    <strong>Конфликт интересов</strong><br>
-                    Нужно быстрее (бизнес), но ускоряться страшно (цена ошибки).
+                    <strong>Риски</strong><br>
+                    <span class="text-secondary">Юридические последствия</span>
                 </li>
             </ul>
         </div>
@@ -326,8 +331,7 @@
             </ul>
         </div>
     </div>
-    <p style="margin-top: 2rem; text-align: center; font-weight: bold; font-size: 1.5rem;">Нельзя максимизировать всё
-        одним движком</p>
+    <p class="conclusion">Нельзя максимизировать всё одним движком</p>
 </div>
 </section>
 <!-- #endregion -->
@@ -339,23 +343,24 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Стратегия: “вертикально” вместо “горизонтально”</h2>
+    <h2>Стратегия: "вертикально" вместо "горизонтально"</h2>
     <div class="steps-split-layout">
         <div class="steps-left">
             <h2>Вертикальный MVP</h2>
+            <p class="text-meta">Начинаем с малого, быстро получаем эффект</p>
         </div>
         <div class="steps-right">
             <div class="step-card level-1">
                 <div class="step-number">1</div>
-                <div class="step-text">1 документ &rarr; 10–15 ключевых полей &rarr; понятная проверка</div>
+                <div class="step-text"><strong>1 документ</strong> → 10–15 ключевых полей</div>
             </div>
             <div class="step-card level-2">
                 <div class="step-number">2</div>
-                <div class="step-text">Паспорт (основные поля) &rarr; Паспорт (прописка/коды)</div>
+                <div class="step-text"><strong>Паспорт</strong> → расширение полей (прописка)</div>
             </div>
             <div class="step-card level-3">
                 <div class="step-number">3</div>
-                <div class="step-text">Водительское (категории/сроки)</div>
+                <div class="step-text"><strong>ВУ</strong> → категории и сроки</div>
             </div>
         </div>
     </div>
@@ -371,24 +376,58 @@
 </div>
 <div class="slide-body">
     <h2>Метрики (разделяем скорость и качество)</h2>
-    <div class="merged-grid cols-3">
-        <div class="merged-item">
-            <h3>Tech</h3>
-            <p>field-level accuracy</p>
-            <p>doc-type accuracy</p>
-            <p>confidence calibration</p>
-            <p>latency</p>
+    
+    <div class="metrics-tech-bar">
+        <div class="header">
+            <h3>📊 Tech (гигиена команды)</h3>
+            <span class="note">нужны для разработки, но эффект ими не защитить</span>
         </div>
-        <div class="merged-item">
-            <h3>Proxy (Скорость)</h3>
-            <p>Straight-through rate (% без ручной правки)</p>
-            <p>Time-to-verify (P50/P90)</p>
+        <div class="badges">
+            <div class="badge">Field-level Accuracy</div>
+            <div class="badge">Doc-type Accuracy</div>
+            <div class="badge">Confidence Calibration</div>
+            <div class="badge">Latency</div>
         </div>
-        <div class="merged-item">
-            <h3>Proxy (Качество)</h3>
-            <p>Rework rate</p>
-            <p>Critical field error rate (ошибки в “дорогих” полях)</p>
+    </div>
+
+    <div class="metrics-arrow">↓</div>
+
+    <div class="merged-grid cols-2">
+        <div class="merged-item compact">
+            <h3>🚀 Скорость <span style="font-size: 0.65em; font-weight: 400; color: var(--rwb-text-muted);">(Proxy → экономия)</span></h3>
+            <div class="metric-section">
+                <div class="metric-card">
+                    <div class="metric-name">STR</div>
+                    <div class="metric-desc">Straight-through rate</div>
+                    <div class="metric-value">% документов без ручного касания</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">Time-to-verify</div>
+                    <div class="metric-desc">P50 / P90</div>
+                    <div class="metric-value">Время обработки оператором</div>
+                </div>
+            </div>
         </div>
+
+        <div class="merged-item compact">
+            <h3>🎯 Качество <span style="font-size: 0.65em; font-weight: 400; color: var(--rwb-text-muted);">(Proxy → стоимость ошибок)</span></h3>
+            <div class="metric-section">
+                <div class="metric-card">
+                    <div class="metric-name">Critical Error Rate</div>
+                    <div class="metric-desc">Ошибки в "дорогих" полях</div>
+                    <div class="metric-value">ФИО, № паспорта > средняя accuracy</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">Rework Rate</div>
+                    <div class="metric-desc">% возвратов на переоформление</div>
+                    <div class="metric-value">Итоговый показатель качества</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-bottom-note">
+        <strong>→ Business:</strong> Эти Proxy-метрики переводятся в ₽ через формулу экономии времени и стоимости ошибок (следующий слайд)
     </div>
 </div>
 </section>
@@ -401,25 +440,37 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Как считать эффект (без “магии”)</h2>
+    <h2>Как считать эффект (без "магии")</h2>
     <div class="merged-grid cols-2">
         <div class="merged-item">
-            <h3>Базовая модель</h3>
-            <p><strong>Экономия времени</strong> = объем &times; (время до &minus; время после) &times; ставка</p>
-            <div class="divider"></div>
-            <p><strong>Стоимость ошибок</strong> = кол-во ошибок &times; цена ошибки</p>
-            <div class="divider"></div>
-            <p><strong>Итог</strong> = экономия &minus; ошибки &minus; TCO</p>
-        </div>
-        <div class="merged-item">
-            <h3>Шаблон данных</h3>
+            <h3>💰 Экономия времени</h3>
+            <div class="formula-box">
+                <div class="formula">\[ \text{Savings} = N \times (t_{\text{manual}} - t_{\text{assist}}) \times c_{\text{ops}} \]</div>
+            </div>
+            <p><strong>Входные данные:</strong></p>
             <ul>
-                <li>\(N\) документов/мес</li>
-                <li>\(t_{manual}\), \(t_{assist}\)</li>
-                <li>\(c_{ops}\) (ставка)</li>
-                <li>\(err_{crit}\), \(Cost_{crit}\)</li>
+                <li>\(N\) — объём документов/мес</li>
+                <li>\(t_{\text{manual}}\) — время вручную</li>
+                <li>\(t_{\text{assist}}\) — время с AI</li>
+                <li>\(c_{\text{ops}}\) — ставка оператора (₽/час)</li>
             </ul>
         </div>
+        <div class="merged-item">
+            <h3>⚠️ Стоимость ошибок</h3>
+            <div class="formula-box">
+                <div class="formula">\[ \text{ErrorCost} = N \times \text{err}_{\text{crit}} \times \text{Cost}_{\text{crit}} \]</div>
+            </div>
+            <p><strong>Входные данные:</strong></p>
+            <ul>
+                <li>\(N\) — объём документов/мес</li>
+                <li>\(\text{err}_{\text{crit}}\) — доля критичных ошибок</li>
+                <li>\(\text{Cost}_{\text{crit}}\) — цена ошибки (переоформление, штрафы)</li>
+            </ul>
+        </div>
+    </div>
+    <div class="text-block">
+        <p><strong>Итоговая формула:</strong> Net Value = Экономия − Ошибки − TCO</p>
+        <p><em>TCO включает: разработку, инференс, поддержку, разметку, инциденты. Тогда это инвестпроект, а не "модель понравилась"</em></p>
     </div>
 </div>
 </section>
@@ -433,20 +484,30 @@
 </div>
 <div class="slide-body">
     <h2>Контуры комплаенса (PII)</h2>
+    <div class="callout">
+        <strong>Контекст:</strong> PII максимальный — паспорта и ВУ. Комплаенс — не "потом", а часть дизайна системы.
+    </div>
     <div class="merged-grid cols-3">
         <div class="merged-item">
-            <h3>Данные</h3>
-            <p>Минимизация данных и ретенция</p>
-            <p>Шифрование хранения и передачи</p>
+            <h3>🔐 Данные</h3>
+            <ul>
+                <li><strong>Минимизация и ретенция</strong><br><span class="text-secondary">Храним только необходимое, удаляем после обработки</span></li>
+                <li><strong>Шифрование</strong><br><span class="text-secondary">Хранение и передача данных</span></li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Процесс</h3>
-            <p>Роли/доступы, аудит</p>
-            <p>Kill-switch на ручной режим</p>
+            <h3>🛡️ Процесс</h3>
+            <ul>
+                <li><strong>Роли и доступы</strong><br><span class="text-secondary">Принцип минимальных привилегий</span></li>
+                <li><strong>Аудит</strong><br><span class="text-secondary">Логирование всех операций</span></li>
+                <li><strong>Kill-switch</strong><br><span class="text-secondary">Возврат на ручной режим без остановки бизнеса</span></li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Контроль</h3>
-            <p>Human-in-the-loop по low confidence</p>
+            <h3>👁️ Контроль</h3>
+            <ul>
+                <li><strong>Human-in-the-loop</strong><br><span class="text-secondary">Обязательная проверка при low confidence</span></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -472,19 +533,51 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Процесс и “золотой исход”</h2>
-    <div class="merged-grid cols-2">
-        <div class="merged-item">
-            <h3>Процесс</h3>
-            <p>Доупаковка/переупаковка &rarr; материалы &rarr; проверка товара &rarr; отгрузка</p>
+    <h2>Процесс и "золотой исход"</h2>
+    
+    <!-- Process Flow -->
+    <div class="merged-grid cols-4">
+        <div class="merged-item compact centered">
+            <div class="process-icon">📦</div>
+            <div class="process-text">Доупаковка</div>
+            <p class="text-meta">Сборка заказа</p>
         </div>
-        <div class="merged-item">
-            <h3>Золотой исход: снижение потерь</h3>
-            <ul>
-                <li>Брак/повреждения</li>
-                <li>Возвраты/претензии</li>
-                <li>Пересборка/переупаковка</li>
-            </ul>
+        <div class="merged-item compact centered">
+            <div class="process-icon">🍱</div>
+            <div class="process-text">Материалы</div>
+            <p class="text-meta">Выбор тары</p>
+        </div>
+        <div class="merged-item compact centered">
+            <div class="process-icon">🔍</div>
+            <div class="process-text">Проверка</div>
+            <p class="text-meta">Контроль AI</p>
+        </div>
+        <div class="merged-item compact centered">
+            <div class="process-icon">🚚</div>
+            <div class="process-text">Отгрузка</div>
+            <p class="text-meta">Уход в доставку</p>
+        </div>
+    </div>
+
+    <!-- Connector Arrow -->
+    <div class="process-arrow" style="text-align: center; margin: var(--space-xs) 0;">↓</div>
+
+    <!-- Golden Outcome -->
+    <div class="golden-outcome">
+        <div class="golden-outcome-title">Золотой исход: снижение потерь</div>
+        <div class="golden-outcome-desc">
+            Все остальные метрики — прокси, которые должны вести именно к снижению потерь
+        </div>
+        <div class="golden-outcome-items">
+            <div class="golden-outcome-item">
+                <strong>Брак/повреждения</strong>
+            </div>
+            <div class="golden-outcome-item">
+                <strong>Возвраты/претензии</strong>
+            </div>
+            <div class="golden-outcome-item">
+                <strong>Пересборка/переупаковка</strong>
+            </div>
         </div>
     </div>
 </div>
@@ -499,18 +592,49 @@
 </div>
 <div class="slide-body">
     <h2>Почему это сложнее кейса 1</h2>
-    <div class="merged-grid cols-3">
+    
+    <div class="callout">
+        <strong>Ключевое отличие:</strong> Эффект не "внутри системы", а <strong>"в поле"</strong>. Много факторов меняются по сменам и складам. Нельзя просто сказать "F1 вырос" и ожидать денег.
+    </div>
+
+    <div class="merged-grid cols-2">
         <div class="merged-item">
-            <h3>Полевые условия</h3>
-            <p>Эффект не “внутри системы”, а <strong>в поле</strong></p>
+            <h3>🌍 Полевые условия</h3>
+            <ul>
+                <li>Смена</li>
+                <li>Склад</li>
+                <li>Сезонность</li>
+                <li>Регламенты</li>
+                <li>Ассортимент</li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Факторы</h3>
-            <p>Смена, склад, сезонность, регламенты, ассортимент</p>
+            <h3>🔄 Контур реакции</h3>
+            <p class="text-secondary" style="margin-bottom: 0;">Модель ≠ результат. Нужен полный контур:</p>
         </div>
-        <div class="merged-item">
-            <h3>Контур реакции</h3>
-            <p>Модель ≠ результат: нужен контур реакции (алерт → действие)</p>
+    </div>
+
+    <!-- Reaction Loop Visualization -->
+    <div class="reaction-loop">
+        <div class="reaction-step">
+            <div class="reaction-step-number">1</div>
+            <div class="reaction-step-title">Детекция</div>
+            <div class="reaction-step-desc">Модель обнаруживает нарушение</div>
+        </div>
+        <div class="reaction-step">
+            <div class="reaction-step-number">2</div>
+            <div class="reaction-step-title">Алерт</div>
+            <div class="reaction-step-desc">Сигнал оператору</div>
+        </div>
+        <div class="reaction-step">
+            <div class="reaction-step-number">3</div>
+            <div class="reaction-step-title">Действие</div>
+            <div class="reaction-step-desc">Оператор исправляет</div>
+        </div>
+        <div class="reaction-step">
+            <div class="reaction-step-number">4</div>
+            <div class="reaction-step-title">Контроль</div>
+            <div class="reaction-step-desc">Проверка исполнения</div>
         </div>
     </div>
 </div>
@@ -527,22 +651,28 @@
     <h2>Метрики (три уровня)</h2>
     <div class="merged-grid cols-3">
         <div class="merged-item">
-            <h3>Tech</h3>
-            <p>precision/recall по событиям</p>
-            <p>устойчивость по складам</p>
-            <p>latency</p>
+            <h3>📊 Tech</h3>
+            <ul>
+                <li><strong>Precision/Recall</strong> по событиям</li>
+                <li><strong>Устойчивость</strong> по складам</li>
+                <li><strong>Latency</strong> (задержка)</li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Proxy</h3>
-            <p>% нарушений регламента</p>
-            <p>% проверок, время реакции</p>
-            <p>FP/hour (критично!)</p>
+            <h3>🔄 Proxy</h3>
+            <ul>
+                <li><strong>% нарушений</strong> регламента</li>
+                <li><strong>Время реакции</strong>, % проверок</li>
+                <li><strong>FP/hour</strong> <span class="pill" style="background: var(--rwb-primary); color: var(--rwb-white); font-size: 0.75em; padding: 2px 8px;">критично!</span><br><span class="text-secondary">Иначе операторов "зальёт" ложными сигналами</span></li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Business</h3>
-            <p>Потери (₽)</p>
-            <p>Damage rate по хрупким SKU</p>
-            <p>Стоимость возвратов</p>
+            <h3>💰 Business</h3>
+            <ul>
+                <li><strong>Потери (₽)</strong></li>
+                <li><strong>Damage rate</strong> по хрупким SKU</li>
+                <li><strong>Стоимость возвратов</strong></li>
+            </ul>
         </div>
     </div>
 </div>
@@ -557,21 +687,47 @@
 </div>
 <div class="slide-body">
     <h2>Модель эффекта: потери как функция нарушения</h2>
-    <div class="text-block">
-        <h3>Простая логика</h3>
-        <p>1) Нарушение упаковки &rarr; растёт вероятность повреждения</p>
-        <p>2) Система снижает нарушения &rarr; падают потери</p>
-    </div>
-    <div class="merged-grid cols-2" style="margin-top: 2rem;">
+    
+    <!-- Logic Flow -->
+    <div class="merged-grid cols-3 mb-lg">
         <div class="merged-item">
-            <h3>Шаблон</h3>
-            <p>\(N\) операций упаковки</p>
-            <p>\(p_{damage|bad}\), \(p_{damage|good}\)</p>
+            <h3>1️⃣ Нарушение</h3>
+            <p><strong>Нарушение упаковки</strong></p>
+            <p class="text-secondary">Несоблюдение регламента</p>
         </div>
         <div class="merged-item">
-            <h3>&nbsp;</h3>
-            <p>Доля “bad” до/после</p>
-            <p>Cost_damage (₽)</p>
+            <h3>2️⃣ Риск</h3>
+            <p><strong>Вероятность повреждения</strong></p>
+            <p class="text-secondary">\(p_{damage|bad} > p_{damage|good}\)</p>
+        </div>
+        <div class="merged-item">
+            <h3>3️⃣ Эффект</h3>
+            <p><strong>Система снижает нарушения</strong></p>
+            <p class="text-secondary">→ Падают потери</p>
+        </div>
+    </div>
+
+    <!-- Formula Template -->
+    <div class="callout-primary">
+        <strong>Формула расчёта:</strong> Эффект = \(N \times \Delta p_{bad} \times (p_{damage|bad} - p_{damage|good}) \times Cost_{damage}\)
+    </div>
+
+    <!-- Input Variables -->
+    <div class="merged-grid cols-2 mt-lg">
+        <div class="merged-item">
+            <h3>Входные данные</h3>
+            <ul>
+                <li><strong>\(N\)</strong> — объём операций упаковки</li>
+                <li><strong>\(p_{damage|bad}\)</strong> — вероятность повреждения при нарушении</li>
+                <li><strong>\(p_{damage|good}\)</strong> — вероятность повреждения при соблюдении</li>
+            </ul>
+        </div>
+        <div class="merged-item">
+            <h3>Измеряем</h3>
+            <ul>
+                <li><strong>\(\Delta p_{bad}\)</strong> — изменение доли нарушений (до/после)</li>
+                <li><strong>\(Cost_{damage}\)</strong> — стоимость одного повреждения (₽)</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -585,20 +741,60 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Как измерять в проде (без самообмана)</h2>
-    <div class="merged-grid cols-3">
+    <h2>A/B тестирование в "поле": сложности и решения</h2>
+    
+    <div class="merged-grid cols-2" style="margin-bottom: var(--space-sm);">
         <div class="merged-item">
-            <h3>Stepped-wedge</h3>
-            <p>Поэтапное включение по складам/линиям</p>
+            <h3>⛔️ Почему простой A/B не работает?</h3>
+            <ul class="list-compact">
+                <li><strong>Внешние факторы:</strong> Погода, акции, смена бригад влияют сильнее, чем модель.</li>
+                <li><strong>"Загрязнение" (Spillover):</strong> Операторы общаются, меняются сменами — эффект "перетекает".</li>
+                <li><strong>Разные базы:</strong> Склад А всегда лучше Склада Б (разное оборудование).</li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Контроль</h3>
-            <p>Учет сезонности и пиков нагрузки</p>
+            <h3>✅ Решение: Дизайн эксперимента</h3>
+            <ul class="list-compact">
+                <li><strong>Switch-back:</strong> Переключаем модель вкл/выкл по часам или дням (для одного склада).</li>
+                <li><strong>Stepped-wedge:</strong> Поэтапная раскатка по складам (для сети).</li>
+                <li><strong>DiD:</strong> Сравниваем <em>разницу изменений</em>, а не абсолютные значения.</li>
+            </ul>
         </div>
-        <div class="merged-item">
-            <h3>DiD</h3>
-            <p>Сравнение изменений “до/после” относительно контрольных групп</p>
+    </div>
+
+    <!-- Visualization of Stepped-Wedge -->
+    <div class="callout-primary" style="margin-bottom: 0; padding: 15px;">
+        <h4 style="margin: 0 0 10px 0; font-size: 1rem; color: var(--rwb-primary);">Визуализация: Stepped-wedge раскатка (Поэтапное включение)</h4>
+        
+        <div class="experiment-timeline">
+            <div class="experiment-label">Склад 1</div>
+            <div class="experiment-bar-container">
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+            </div>
         </div>
+        <div class="experiment-timeline">
+            <div class="experiment-label">Склад 2</div>
+            <div class="experiment-bar-container">
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+            </div>
+        </div>
+        <div class="experiment-timeline">
+            <div class="experiment-label">Склад 3</div>
+            <div class="experiment-bar-container">
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-control">Control</div>
+                <div class="experiment-segment segment-treatment">Treatment (AI)</div>
+            </div>
+        </div>
+        
+        <div style="text-align: right; margin-top: 5px; font-size: 0.75em; color: var(--rwb-text-muted);">Время →</div>
     </div>
 </div>
 </section>
@@ -607,21 +803,53 @@
 <!-- #region Кейс 2: Видео и люди -->
 <section class="slide-standard">
 <div class="slide-header">
-    <span class="label">Кейс 2: Video</span>
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
     <h2>Видео и люди: комплаенс и этика</h2>
+    
+    <div class="callout">
+        <strong>Контекст:</strong> Видео — это не только про безопасность, но и про приватность и репутационные риски. Принципиально: никаких авто-наказаний — только сигнал и подтверждение человеком, иначе риски доминируют выгоду.
+    </div>
+
+    <!-- Human-in-the-loop Visualization -->
+    <div class="human-loop">
+        <div class="human-loop-box">
+            <div class="human-icon">📹</div>
+            <div class="human-label">Система детекции</div>
+            <p class="text-meta">Обнаруживает нарушение</p>
+        </div>
+        <span class="process-arrow">→</span>
+        <div class="human-loop-box">
+            <div class="human-icon">👤</div>
+            <div class="human-label">Human-in-the-loop</div>
+            <p class="text-meta">Человек подтверждает решение</p>
+        </div>
+        <span class="process-arrow">→</span>
+        <div class="human-loop-box">
+            <div class="human-icon">✅</div>
+            <div class="human-label">Действие</div>
+            <p class="text-meta">Только после подтверждения</p>
+        </div>
+    </div>
+
     <div class="merged-grid cols-2">
         <div class="merged-item">
-            <h3>Приватность</h3>
-            <p>Ограничение доступа к видео, ретенция</p>
-            <p>Анонимизация/маскирование где возможно</p>
+            <h3>🔒 Приватность</h3>
+            <ul>
+                <li><strong>Ограничение доступа</strong> к видео</li>
+                <li><strong>Минимальная ретенция</strong> данных</li>
+                <li><strong>Анонимизация/маскирование</strong> чувствительных зон где возможно</li>
+            </ul>
         </div>
         <div class="merged-item">
-            <h3>Справедливость</h3>
-            <p><strong>Никаких авто-наказаний</strong> без подтверждения человеком</p>
-            <p>Политики использования и прозрачность</p>
+            <h3>⚖️ Справедливость</h3>
+            <ul>
+                <li><strong>Никаких авто-наказаний</strong> без подтверждения человеком</li>
+                <li><strong>Политики использования</strong> и прозрачность</li>
+                <li><strong>Репутационные риски</strong> могут доминировать выгоду</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -648,21 +876,28 @@
 </div>
 <div class="slide-body">
     <h2>Почему “агенты” — хайп, но и реальная ценность</h2>
+    
+    <div class="callout">
+        <strong>Суть:</strong> Ценность там, где много правил, исключений и документов. Агент — не "авто-юрист", а ассистент в жёстких рамках.
+    </div>
+
     <div class="merged-grid cols-2">
-        <div class="merged-item">
-            <h3>Польза</h3>
-            <ul>
-                <li>Процесс сложный и “документный”</li>
-                <li>Много правил/исключений</li>
-                <li>Людям нужен <strong>быстрый разбор</strong> и ссылки на основания</li>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">✅ Реальная ценность</h3>
+            <ul class="list-compact">
+                <li>Сложные "документные" процессы</li>
+                <li>Множество правил и исключений</li>
+                <li>Нужен <strong>быстрый разбор</strong> с пруфами</li>
+                <li>Сокращение рутины экспертов</li>
             </ul>
         </div>
-        <div class="merged-item">
-            <h3>Риски</h3>
-            <ul>
-                <li>Галлюцинации</li>
-                <li>Неверная интерпретация норм</li>
-                <li>Утечки/PII</li>
+        <div class="merged-item compact">
+            <h3 style="color: #E53E3E !important;">⚠️ Типовые риски</h3>
+            <ul class="list-compact">
+                <li>Галлюцинации (выдуманные нормы)</li>
+                <li>Неверная интерпретация контекста</li>
+                <li>Утечки чувствительных данных (PII)</li>
+                <li>Потеря контроля над логикой ответа</li>
             </ul>
         </div>
     </div>
@@ -678,48 +913,53 @@
 </div>
 <div class="slide-body">
     <h2>Архитектура: Safe RAG Pipeline (3 уровня защиты)</h2>
-    <div class="merged-grid cols-3">
-        <div class="merged-item">
-            <h3 style="margin-bottom: 1rem; color: var(--rwb-dark);">1️⃣ Grounding</h3>
-            <p style="font-size: 0.85em; margin-bottom: 1rem; color: var(--rwb-text-muted); font-weight: 600;">Ограничение источников знаний</p>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">📚 White-list документов</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Только НПА, политики, регламенты из загруженной базы</p>
+    
+    <div class="tiered-layout">
+        <!-- Level 1 -->
+        <div class="tier-block">
+            <div class="tier-title">1. Grounding</div>
+            <div class="tier-subtitle">База знаний</div>
+            <div class="feature-card">
+                <div class="feature-title">📚 White-list</div>
+                <div class="feature-desc">Только проверенные НПА и политики</div>
             </div>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">🚫 Запрет "фантазий"</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Промпт: "Используй только контекст, не выдумывай"</p>
-            </div>
-        </div>
-        <div class="merged-item">
-            <h3 style="margin-bottom: 1rem; color: var(--rwb-dark);">2️⃣ Guardrails</h3>
-            <p style="font-size: 0.85em; margin-bottom: 1rem; color: var(--rwb-text-muted); font-weight: 600;">Фильтры и правила</p>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">🛡️ Hard Rules до LLM</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Детекция запретных тем и PII <strong>до</strong> генерации</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">🔍 Citation Check</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Проверка: ссылка действительно есть в базе?</p>
+            <div class="feature-card">
+                <div class="feature-title">🚫 No Fantasy</div>
+                <div class="feature-desc">Жёсткий системный промпт на запрет выдумок</div>
             </div>
         </div>
-        <div class="merged-item">
-            <h3 style="margin-bottom: 1rem; color: var(--rwb-dark);">3️⃣ Output Protocol</h3>
-            <p style="font-size: 0.85em; margin-bottom: 1rem; color: var(--rwb-text-muted); font-weight: 600;">Структура ответа</p>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; margin-bottom: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">🔗 No link = No answer</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Ответ без ссылки на документ блокируется UI</p>
-                </div>
-            <div style="background: rgba(255,255,255,0.7); padding: 14px; border-radius: 10px; border-left: 3px solid var(--rwb-primary);">
-                <div style="font-weight: 600; margin-bottom: 4px; font-size: 0.95em;">⚠️ Escalation Trigger</div>
-                <p style="font-size: 0.75em; margin: 0; line-height: 1.4; color: var(--rwb-text-muted);">Low confidence → "Обратитесь к юристу"</p>
+
+        <!-- Level 2 -->
+        <div class="tier-block">
+            <div class="tier-title">2. Guardrails</div>
+            <div class="tier-subtitle">Фильтры</div>
+            <div class="feature-card">
+                <div class="feature-title">🛡️ Hard Rules</div>
+                <div class="feature-desc">Проверка PII и запретных тем до LLM</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">🔍 Citation Check</div>
+                <div class="feature-desc">Валидация ссылок: есть ли они в базе?</div>
+            </div>
+        </div>
+
+        <!-- Level 3 -->
+        <div class="tier-block">
+            <div class="tier-title">3. Protocol</div>
+            <div class="tier-subtitle">Ответ</div>
+            <div class="feature-card">
+                <div class="feature-title">🔗 No Link = No Answer</div>
+                <div class="feature-desc">Блокировка ответов без пруфов</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-title">⚠️ Escalation</div>
+                <div class="feature-desc">Low confidence → перевод на юриста</div>
             </div>
         </div>
     </div>
-    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(107, 66, 251, 0.05); border-radius: 8px; border-left: 4px solid var(--rwb-primary);">
-        <p style="margin: 0; font-size: 0.85em; line-height: 1.5; color: var(--rwb-dark);">
-            <strong>Принцип:</strong> каждый уровень — это отдельный фильтр. Если хотя бы один сработал → ответ не проходит или эскалируется.
-        </p>
+
+    <div class="callout-primary" style="margin-top: 10px;">
+        <strong>Принцип:</strong> Если хотя бы один фильтр сработал — ответ блокируется или эскалируется.
     </div>
 </div>
 </section>
@@ -734,21 +974,23 @@
 <div class="slide-body">
     <h2>Метрики агента: качество + безопасность</h2>
     <div class="merged-grid cols-2">
-        <div class="merged-item">
-            <h3>Качество</h3>
-            <p>% корректных рекомендаций по чеклисту</p>
-            <div class="divider"></div>
-            <p>% ответов с валидными ссылками на источник</p>
-            <div class="divider"></div>
-            <p>Время до решения / deflection (сколько сняли вопросов)</p>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">📊 Качество (Value)</h3>
+            <ul class="list-compact">
+                <li><strong>Корректность:</strong> % ответов по чеклисту</li>
+                <li><strong>Достоверность:</strong> % ответов с валидными ссылками</li>
+                <li><strong>Скорость:</strong> Время до решения</li>
+                <li><strong>Deflection:</strong> Доля снятых вопросов</li>
+            </ul>
         </div>
-        <div class="merged-item">
-            <h3>Безопасность/риск</h3>
-            <p>Policy compliance rate</p>
-            <div class="divider"></div>
-            <p>Hallucination rate (по выборочной проверке)</p>
-            <div class="divider"></div>
-            <p>Escalation correctness (когда надо — отправил)</p>
+        <div class="merged-item compact">
+            <h3 style="color: #E53E3E !important;">🛡️ Безопасность (Safety)</h3>
+            <ul class="list-compact">
+                <li><strong>Compliance:</strong> Policy compliance rate</li>
+                <li><strong>Hallucinations:</strong> Rate (выборочная проверка)</li>
+                <li><strong>Escalation:</strong> Доля верных переводов на юриста</li>
+                <li><strong>Policy:</strong> Соблюдение правил Guardrails</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -763,24 +1005,28 @@
 </div>
 <div class="slide-body">
     <h2>Risk-adjusted ROI: когда агент окупается</h2>
-    <div class="text-block">
-        <p><strong>Экономия времени</strong> &minus; <strong>Инфраструктура</strong> &minus;
-            <strong>Цена ошибки</strong></p>
-        <p>Цена ошибки в юридических темах может быть доминирующей.</p>
+    
+    <div class="formula-box">
+        <div class="formula">\[ ROI = (\text{Экономия времени} - \text{TCO}) - \text{Цена ошибки} \]</div>
     </div>
-    <div class="merged-grid cols-3" style="margin-top: 1rem;">
-        <div class="merged-item">
-            <h3>Ограничиваем</h3>
-            <p>Ограничиваем домен</p>
+
+    <div class="merged-grid cols-3">
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">🧱 Ограничение</h3>
+            <p class="text-meta">Ограничиваем домен знаний до узкой темы</p>
         </div>
-        <div class="merged-item">
-            <h3>Эскалируем</h3>
-            <p>Вводим обязательную эскалацию для опасных тем</p>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">🚨 Эскалация</h3>
+            <p class="text-meta">Обязательный перевод на юриста для опасных тем</p>
         </div>
-        <div class="merged-item">
-            <h3>Ассистируем</h3>
-            <p>Начинаем с “черновика” для человека</p>
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">✍️ Ассистент</h3>
+            <p class="text-meta">Режим "черновика" для проверки человеком</p>
         </div>
+    </div>
+    
+    <div class="callout">
+        <strong>Важно:</strong> В юридических темах цена ошибки может "съесть" любую экономию. Не гонимся за полной автономностью.
     </div>
 </div>
 </section>
@@ -793,28 +1039,32 @@
         <img src="assets/logo-blue.png" alt="Logo" class="logo">
     </div>
     <div class="slide-body">
-        <h2>One‑pager DS Lead (шаблон принятия решения)</h2>
+        <h2>One‑pager DS Lead (Checklist)</h2>
         <div class="merged-grid cols-2">
-            <div class="merged-item">
-                <ol>
-                    <li>Problem + baseline</li>
-                    <li>Tech &rarr; Proxy &rarr; Business</li>
-                    <li>Как измеряем эффект (calc/эксперимент/оффлайн)</li>
-                    <li>TCO</li>
+            <div class="merged-item compact">
+                <ol class="list-compact">
+                    <li><strong>Problem + Baseline</strong> (что лечим?)</li>
+                    <li><strong>Metrics:</strong> Tech &rarr; Proxy &rarr; Business</li>
+                    <li><strong>Measurement:</strong> Как измеряем эффект?</li>
+                    <li><strong>TCO:</strong> CAPEX + OPEX</li>
                 </ol>
             </div>
-             <div class="merged-item">
-                <ol start="5">
-                    <li>Risk/Compliance controls</li>
-                    <li>Go/No-Go критерии</li>
-                    <li>Мониторинг + kill‑switch</li>
+             <div class="merged-item compact">
+                <ol class="list-compact" start="5">
+                    <li><strong>Risk Controls:</strong> Guardrails & Compliance</li>
+                    <li><strong>Go/No-Go:</strong> Критерии запуска</li>
+                    <li><strong>Monitoring:</strong> Что смотрим в проде?</li>
+                    <li><strong>Kill-switch:</strong> Как выключить?</li>
                 </ol>
             </div>
         </div>
+        <div class="conclusion">Нет One-pager — вы не готовы в прод</div>
     </div>
     <aside class="notes">
         “Если этого нет на одной странице — вы не готовы в прод”.
     </aside>
+</section>
+<!-- #endregion -->
 </section>
 <!-- #endregion -->
 

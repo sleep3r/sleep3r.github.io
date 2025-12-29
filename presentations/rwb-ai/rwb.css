@@ -83,7 +83,7 @@
 	font-size: 36px !important;
 	line-height: 1.2;
 	color: var(--rwb-dark) !important;
-	margin-bottom: var(--space-md);
+	margin-bottom: var(--space-sm) !important;
 }
 
 .reveal h3 {
@@ -104,7 +104,7 @@
 }
 
 .reveal p, .reveal li {
-	font-size: 15px;
+	font-size: 16px;
 	line-height: 1.5;
 	color: var(--rwb-text);
 	margin-bottom: var(--space-xs);
@@ -227,6 +227,7 @@
 	flex-direction: column;
 	overflow: visible;
 	min-height: 0;
+	gap: var(--space-sm) !important;
 }
 
 /* ============================================
@@ -239,6 +240,7 @@
 	flex: 1;
 	border-radius: var(--radius-lg);
 	overflow: visible; /* Allow child rounding to show */
+	margin-bottom: var(--space-sm) !important;
 }
 
 /* For 3+ columns, use container rounding */
@@ -258,6 +260,48 @@
 	display: flex;
 	flex-direction: column;
 	box-sizing: border-box;
+}
+
+.merged-item h3 {
+	margin-bottom: var(--space-sm) !important;
+	font-size: 20px !important;
+}
+
+/* Compact variant for metrics slides */
+.merged-item.compact {
+	padding: 12px !important;
+}
+
+.merged-item.compact h3 {
+	margin-bottom: 6px !important;
+}
+
+/* Compact variant for metrics slides */
+.merged-item.compact {
+	padding: 12px !important;
+}
+
+.merged-item.compact h3 {
+	margin-bottom: 6px !important;
+}
+
+.merged-item ul {
+	margin-left: 1.2em !important;
+	margin-top: 0.5rem !important;
+	margin-bottom: 0 !important;
+	padding: 0 !important;
+}
+
+.merged-item li {
+	font-size: 16px !important;
+	line-height: 1.5 !important;
+	margin-bottom: 0.5rem !important;
+}
+
+.merged-item p {
+	font-size: 16px !important;
+	line-height: 1.5 !important;
+	margin-bottom: var(--space-xs) !important;
 }
 
 /* Auto-gradient for 2 columns - with center overlap effect */
@@ -661,7 +705,7 @@
 .text-block {
 	background: var(--level-1);
 	border-radius: var(--radius-lg);
-	padding: var(--space-xl);
+	padding: var(--space-md);
 	flex: 1;
 }
 
@@ -670,6 +714,535 @@
 }
 
 .text-block p {
-	font-size: 17px;
-	line-height: 1.6;
+	font-size: 15px;
+	line-height: 1.5;
+	margin-bottom: var(--space-xs) !important;
 }
+
+/* ============================================
+   COMPONENT: METRICS LAYOUT
+   Tech → Proxy split with visual hierarchy
+   ============================================ */
+.metrics-tech-bar {
+	background: var(--level-1) !important;
+	border-radius: var(--radius-lg) !important;
+	padding: 10px !important;
+	margin-bottom: 2px !important;
+}
+
+.metrics-tech-bar .header {
+	display: flex !important;
+	justify-content: space-between !important;
+	align-items: center !important;
+	margin-bottom: 4px !important;
+}
+
+.metrics-tech-bar .header h3 {
+	margin: 0 !important;
+	font-size: 16px !important;
+	color: var(--rwb-dark) !important;
+}
+
+.metrics-tech-bar .header .note {
+	font-size: 0.65em !important;
+	color: var(--rwb-text-muted) !important;
+	font-style: italic !important;
+}
+
+.metrics-tech-bar .badges {
+	display: grid !important;
+	grid-template-columns: repeat(4, 1fr) !important;
+	gap: 8px !important;
+	font-size: 0.75em !important;
+}
+
+.metrics-tech-bar .badge {
+	background: var(--rwb-white) !important;
+	padding: 4px 8px !important;
+	border-radius: var(--radius-sm) !important;
+	text-align: center !important;
+	color: var(--rwb-dark) !important;
+	font-weight: 500 !important;
+}
+
+.metrics-arrow {
+	text-align: center !important;
+	color: var(--rwb-primary) !important;
+	font-size: 1.2rem !important;
+	margin: 0 !important;
+	line-height: 1 !important;
+}
+
+/* Enhanced merged-item for metrics */
+.merged-item .metric-section {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 6px !important;
+}
+
+.merged-item .metric-card {
+	background: rgba(255,255,255,0.7) !important;
+	padding: 8px 10px !important;
+	border-radius: 6px !important;
+	border-left: 2px solid var(--rwb-primary) !important;
+	flex: 1 !important;
+}
+
+.merged-item .metric-card .metric-name {
+	font-weight: 600 !important;
+	color: var(--rwb-dark) !important;
+	font-size: 0.85em !important;
+	margin-bottom: 2px !important;
+	line-height: 1.2 !important;
+}
+
+.merged-item .metric-card .metric-desc {
+	font-size: 0.7em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.25 !important;
+	margin-bottom: 2px !important;
+}
+
+.merged-item .metric-card .metric-value {
+	font-size: 0.7em !important;
+	color: var(--rwb-dark) !important;
+	margin-top: 0 !important;
+	line-height: 1.25 !important;
+}
+
+/* ============================================
+   COMPONENT: FORMULA BOX
+   For displaying business formulas
+   ============================================ */
+.formula-box {
+	background: var(--rwb-white) !important;
+	border: 2px solid var(--rwb-primary) !important;
+	border-radius: var(--radius-md) !important;
+	padding: var(--space-sm) var(--space-md) !important;
+	margin: var(--space-sm) 0 !important;
+	text-align: center !important;
+	overflow: visible !important;
+	box-sizing: border-box !important;
+}
+
+.formula-box .formula {
+	font-size: 0.95em !important;
+	color: var(--rwb-dark) !important;
+	margin: 0 !important;
+	line-height: 1.4 !important;
+	overflow-wrap: break-word !important;
+	display: flex !important;
+	justify-content: center !important;
+	align-items: center !important;
+}
+
+.formula-box .formula-desc {
+	font-size: 0.85em !important;
+	color: var(--rwb-text-muted) !important;
+	margin-top: var(--space-xs) !important;
+}
+
+/* Bottom note for slides */
+.slide-bottom-note {
+	margin-top: 8px !important;
+	padding: 8px 15px !important;
+	background: rgba(107, 66, 251, 0.05) !important;
+	border-radius: var(--radius-sm) !important;
+	border-left: 4px solid var(--rwb-primary) !important;
+	font-size: 0.8em !important;
+	line-height: 1.3 !important;
+}
+
+/* ============================================
+   COMPONENT: CALLOUT / HIGHLIGHT BOX
+   Universal box for contextual information, notes, highlights
+   ============================================ */
+.callout {
+	background: rgba(30, 23, 83, 0.05) !important;
+	border-radius: var(--radius-md) !important;
+	padding: 10px var(--space-md) !important;
+	margin-bottom: var(--space-sm) !important;
+	font-size: 0.9em !important;
+	border-left: 4px solid var(--rwb-primary) !important;
+	line-height: 1.4 !important;
+}
+
+.callout-primary {
+	background: rgba(107, 66, 251, 0.05) !important;
+	border-radius: var(--radius-md) !important;
+	padding: 10px var(--space-md) !important;
+	margin-bottom: var(--space-sm) !important;
+	font-size: 0.85em !important;
+	border-left: 4px solid var(--rwb-primary) !important;
+	line-height: 1.4 !important;
+}
+
+/* ============================================
+   TYPOGRAPHY: TEXT HIERARCHY
+   Universal text modifiers for any content
+   ============================================ */
+.text-secondary {
+	font-size: 1em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.4 !important;
+}
+
+.text-meta {
+	font-size: 0.85em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.4 !important;
+}
+
+.text-small {
+	font-size: 0.8em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.3 !important;
+}
+
+/* ============================================
+   UTILITY CLASSES
+   Universal utility classes for common patterns
+   ============================================ */
+
+/* Layout utilities */
+.centered {
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: center !important;
+	align-items: center !important;
+	text-align: center !important;
+}
+
+/* Spacing utilities */
+.mt-lg {
+	margin-top: var(--space-md) !important;
+}
+
+.mb-lg {
+	margin-bottom: var(--space-sm) !important;
+}
+
+/* Typography utilities */
+.text-large {
+	font-size: 5rem !important;
+	font-weight: 800 !important;
+	color: var(--rwb-primary) !important;
+	line-height: 1 !important;
+}
+
+.text-uppercase-subtitle {
+	font-size: 1.2rem !important;
+	color: var(--rwb-text-muted) !important;
+	text-transform: uppercase !important;
+	letter-spacing: 2px !important;
+}
+
+.text-italic {
+	font-style: italic !important;
+	color: var(--rwb-text-muted) !important;
+}
+
+/* List utilities */
+.list-compact {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 0.7rem !important;
+}
+
+.list-spaced {
+	margin-top: 1rem !important;
+}
+
+/* ============================================
+   COMPONENT: CONCLUSION STATEMENT
+   For final statements, takeaways, key messages
+   ============================================ */
+.conclusion {
+	margin-top: var(--space-lg) !important;
+	text-align: center !important;
+	font-weight: 600 !important;
+	font-size: 1.3rem !important;
+	color: var(--rwb-dark) !important;
+	line-height: 1.4 !important;
+	padding: var(--space-md) !important;
+	background: var(--level-1) !important;
+	border-radius: var(--radius-md) !important;
+}
+
+/* ============================================
+   COMPONENT: PROCESS FLOW
+   Visual flow for processes with arrows
+   ============================================ */
+.process-flow {
+	display: flex !important;
+	align-items: center !important;
+	gap: var(--space-sm) !important;
+	flex-wrap: wrap !important;
+	margin: var(--space-md) 0 !important;
+}
+
+.process-step {
+	background: var(--rwb-white) !important;
+	padding: var(--space-sm) var(--space-md) !important;
+	border-radius: var(--radius-md) !important;
+	border: 1px solid var(--rwb-border) !important;
+	font-size: 0.9em !important;
+	font-weight: 500 !important;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+.process-arrow {
+	color: var(--rwb-primary) !important;
+	font-size: 1.2rem !important;
+	font-weight: bold !important;
+}
+
+/* ============================================
+   COMPONENT: REACTION LOOP
+   Visual representation of detection → alert → action → control
+   ============================================ */
+.reaction-loop {
+	display: grid !important;
+	grid-template-columns: repeat(4, 1fr) !important;
+	gap: 8px !important;
+	margin: var(--space-sm) 0 !important;
+}
+
+.reaction-step {
+	background: var(--level-2) !important;
+	padding: 10px !important;
+	border-radius: var(--radius-sm) !important;
+	text-align: center !important;
+	border: 2px solid var(--rwb-primary) !important;
+	position: relative !important;
+}
+
+.reaction-step::after {
+	content: '→' !important;
+	position: absolute !important;
+	right: -16px !important;
+	top: 50% !important;
+	transform: translateY(-50%) !important;
+	color: var(--rwb-primary) !important;
+	font-size: 1.2rem !important;
+	font-weight: bold !important;
+}
+
+.reaction-step:last-child::after {
+	display: none !important;
+}
+
+.reaction-step-number {
+	font-size: 1.2rem !important;
+	font-weight: 700 !important;
+	color: var(--rwb-primary) !important;
+	margin-bottom: 0.3rem !important;
+}
+
+.reaction-step-title {
+	font-weight: 600 !important;
+	font-size: 0.9em !important;
+	color: var(--rwb-dark) !important;
+	margin-bottom: 0.2rem !important;
+}
+
+.reaction-step-desc {
+	font-size: 0.75em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.2 !important;
+}
+
+/* ============================================
+   COMPONENT: HUMAN IN THE LOOP
+   Visual representation of human decision point
+   ============================================ */
+.human-loop {
+	display: flex !important;
+	align-items: center !important;
+	gap: var(--space-sm) !important;
+	margin: var(--space-sm) 0 !important;
+}
+
+.human-loop-box {
+	background: var(--level-2) !important;
+	padding: 12px !important;
+	border-radius: var(--radius-sm) !important;
+	border: 2px dashed var(--rwb-primary) !important;
+	flex: 1 !important;
+	text-align: center !important;
+}
+
+.human-icon {
+	font-size: 1.5rem !important;
+	margin-bottom: 0.3rem !important;
+}
+
+.human-label {
+	font-weight: 600 !important;
+	color: var(--rwb-primary) !important;
+	font-size: 0.85em !important;
+}
+
+.human-loop-box .text-meta {
+	margin-top: 0.5rem !important;
+}
+
+/* ============================================
+   COMPONENT: GOLDEN OUTCOME
+   Highlight for key business outcomes
+   ============================================ */
+.golden-outcome {
+	background: var(--level-2) !important;
+	border-radius: var(--radius-lg) !important;
+	padding: var(--space-md) !important;
+	border: 2px solid var(--rwb-primary) !important;
+	text-align: center !important;
+	margin: var(--space-sm) 0 !important;
+}
+
+.golden-outcome-icon {
+	font-size: 2rem !important;
+	margin-bottom: var(--space-xs) !important;
+}
+
+.golden-outcome-title {
+	font-size: 1.3rem !important;
+	font-weight: 700 !important;
+	color: var(--rwb-primary) !important;
+	margin-bottom: var(--space-xs) !important;
+}
+
+.golden-outcome-desc {
+	font-size: 0.9em !important;
+	color: var(--rwb-dark) !important;
+	line-height: 1.4 !important;
+	margin-bottom: var(--space-sm) !important;
+}
+
+.golden-outcome-items {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr) !important;
+	gap: var(--space-sm) !important;
+	margin-top: var(--space-sm) !important;
+}
+
+.golden-outcome-item {
+	background: var(--rwb-white) !important;
+	padding: var(--space-sm) !important;
+	border-radius: var(--radius-md) !important;
+	text-align: center !important;
+	border: 1px solid var(--rwb-border) !important;
+}
+
+/* ============================================
+   COMPONENT: EXPERIMENT VISUALIZATION
+   Visualizing A/B tests and rollouts
+   ============================================ */
+.experiment-timeline {
+	display: grid !important;
+	grid-template-columns: 1fr 4fr !important;
+	gap: var(--space-sm) !important;
+	align-items: center !important;
+	margin-top: 8px !important;
+}
+
+.experiment-label {
+	font-weight: 600 !important;
+	font-size: 0.85em !important;
+	color: var(--rwb-dark) !important;
+	text-align: right !important;
+}
+
+.experiment-bar-container {
+	display: flex !important;
+	gap: 2px !important;
+	width: 100% !important;
+}
+
+.experiment-segment {
+	height: 30px !important;
+	border-radius: 4px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	font-size: 0.75em !important;
+	color: var(--rwb-dark) !important;
+	font-weight: 500 !important;
+}
+
+.segment-control {
+	background: #E2E8F0 !important;
+	flex: 1 !important;
+}
+
+.segment-treatment {
+	background: var(--rwb-primary) !important;
+	color: var(--rwb-white) !important;
+	flex: 1 !important;
+}
+
+.segment-treatment-light {
+	background: var(--rwb-primary-light) !important;
+	color: var(--rwb-dark) !important;
+	flex: 1 !important;
+}
+
+/* ============================================
+   COMPONENT: TIERED LAYOUT (Multi-level sections)
+   Reusable component for displaying hierarchical content
+   ============================================ */
+.tiered-layout {
+	display: grid !important;
+	grid-template-columns: repeat(3, 1fr) !important;
+	gap: var(--space-md) !important;
+	margin-top: var(--space-sm) !important;
+}
+
+.tier-block {
+	background: var(--level-1) !important;
+	border-radius: var(--radius-lg) !important;
+	padding: var(--space-md) !important;
+	display: flex !important;
+	flex-direction: column !important;
+	gap: var(--space-sm) !important;
+	border: 2px solid var(--rwb-border) !important;
+}
+
+.tier-title {
+	font-weight: 700 !important;
+	color: var(--rwb-primary) !important;
+	font-size: 1.1em !important;
+	margin-bottom: 0 !important;
+}
+
+.tier-subtitle {
+	font-size: 0.8em !important;
+	color: var(--rwb-text-muted) !important;
+	font-weight: 600 !important;
+	text-transform: uppercase !important;
+	letter-spacing: 0.5px !important;
+}
+
+.feature-card {
+	background: var(--rwb-white) !important;
+	padding: 10px 12px !important;
+	border-radius: var(--radius-sm) !important;
+	border-left: 3px solid var(--rwb-primary) !important;
+	box-shadow: 0 2px 4px rgba(0,0,0,0.05) !important;
+}
+
+.feature-title {
+	font-weight: 600 !important;
+	font-size: 0.85em !important;
+	color: var(--rwb-dark) !important;
+	margin-bottom: 2px !important;
+}
+
+.feature-desc {
+	font-size: 0.75em !important;
+	color: var(--rwb-text-muted) !important;
+	line-height: 1.3 !important;
+}
+
+/* Note: .callout and .callout-primary are defined above in COMPONENT section */
+/* Note: .slide-bottom-note is defined above in COMPONENT section */

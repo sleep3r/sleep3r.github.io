@@ -78,23 +78,23 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>История героя (путешествие DS Lead)</h2>
+    <h2>Эволюция подхода: от хайпа к конвейеру решений</h2>
     <div class="steps-split-layout">
         <div class="steps-left">
-            <h2>Путь к<br>бизнес-ценности</h2>
+            <h2>Путь к<br>бизнес-результату</h2>
         </div>
         <div class="steps-right">
             <div class="step-card level-1">
-                <div class="step-text">Мир: «хотим AI везде»</div>
+                <div class="step-text"><strong>Запрос:</strong> «Давайте внедрим AI везде, это модно»</div>
             </div>
             <div class="step-card level-2">
-                <div class="step-text">Вызов: «покажите эффект»</div>
+                <div class="step-text"><strong>Столкновение с реальностью:</strong> «А какой будет эффект в рублях?»</div>
             </div>
             <div class="step-card level-3">
-                <div class="step-text">Испытания: 3 кейса, растёт неопределённость</div>
+                <div class="step-text"><strong>Набор опыта:</strong> Испытание на реальных кейсах и работа с рисками</div>
             </div>
             <div class="step-card level-4">
-                <div class="step-text">Возвращение: “конвейер” принятия решений</div>
+                <div class="step-text"><strong>Системный уровень:</strong> Промышленный конвейер принятия решений</div>
             </div>
         </div>
     </div>
@@ -109,23 +109,28 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Вечная проблема: бизнес хочет “всё сразу”</h2>
+    <h2>Вечная проблема: бизнес хочет «всё сразу»</h2>
     <div class="merged-grid cols-2">
         <div class="merged-item">
-            <h3>Чего хотят</h3>
-            <ul>
-                <li>Ускорить процесс</li>
-                <li>Уменьшить ошибки</li>
-                <li>Снизить стоимость</li>
-                <li>Повысить контроль/качество</li>
+            <h3>Wishlist (хотелки)</h3>
+            <ul style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.7rem;">
+                <li>🚀 <strong>Ускорить</strong> процесс в разы</li>
+                <li>🎯 <strong>Убрать</strong> ошибки (Zero-error)</li>
+                <li>📉 <strong>Снизить</strong> стоимость владения</li>
+                <li>🛡️ <strong>Повысить</strong> контроль и прозрачность</li>
             </ul>
         </div>
-        <div class="merged-item">
-            <h3>Сроки</h3>
-            <p style="font-size: 2rem; font-weight: bold; margin-top: 2rem;">И желательно вчера</p>
+        <div class="merged-item" style="display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+            <div style="font-size: 1.2rem; color: var(--rwb-text-muted); text-transform: uppercase; letter-spacing: 2px;">Сроки реализации</div>
+            <div style="font-size: 5rem; font-weight: 800; color: var(--rwb-primary); margin: 1rem 0; line-height: 1;">ВЧЕРА</div>
+            <div style="font-size: 1rem; font-style: italic; color: var(--rwb-text-muted);">...или даже позавчера</div>
         </div>
     </div>
-</div>
+    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(30, 23, 83, 0.05); border-radius: 8px; border-left: 4px solid var(--rwb-primary);">
+        <p style="margin: 0; font-size: 0.9em; line-height: 1.5;">
+            <strong>Главный вызов:</strong> без четких приоритетов команда начинает пытаться оптимизировать всё одновременно и не достигает ни одной цели.
+        </p>
+    </div>
 </section>
 <!-- #endregion -->
 
@@ -136,15 +141,35 @@
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
 <div class="slide-body">
-    <h2>Правило DS Lead: разнести цели и метрики</h2>
-    <div class="text-block">
-        <h3>Одна инициатива ≠ одна метрика</h3>
-        <p>Разделяем и фиксируем приоритет (что “must”, что “nice to have”):</p>
-        <ul>
-            <li>Метрики <strong>скорости</strong></li>
-            <li>Метрики <strong>качества/ошибок</strong></li>
-            <li>Метрики <strong>рисков/комплаенса</strong></li>
-        </ul>
+    <h2>Цели vs Метрики: Баланс DS Lead</h2>
+    <p style="margin-bottom: 1.5rem;">Бизнес ставит <strong>бизнес-цель</strong>, но DS Lead декомпозирует её в систему метрик, фиксируя приоритеты:</p>
+
+    <div class="merged-grid cols-3">
+        <div class="merged-item">
+            <div class="number">01</div>
+            <h3>🚀 Скорость (SLA)</h3>
+            <p><strong>Цель:</strong> Ускорить процесс, убрать бутылочное горлышко.</p>
+            <div class="divider"></div>
+            <p><strong>Метрики:</strong> % авто-принятия (STR), Latency, Time-to-decision.</p>
+        </div>
+        <div class="merged-item">
+            <div class="number">02</div>
+            <h3>🎯 Качество (Trust)</h3>
+            <p><strong>Цель:</strong> Снизить потери от ошибок, повысить доверие.</p>
+            <div class="divider"></div>
+            <p><strong>Метрики:</strong> Precision/Recall, Error rate в критичных полях, Rework rate.</p>
+        </div>
+        <div class="merged-item">
+            <div class="number">03</div>
+            <h3>🛡️ Риски (Safety)</h3>
+            <p><strong>Цель:</strong> Не навредить бизнесу и соблюсти комплаенс.</p>
+            <div class="divider"></div>
+            <p><strong>Метрики:</strong> Compliance score, Hallucination rate, Kill-switch activation.</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(107, 66, 251, 0.05); border-radius: 12px; border-left: 4px solid var(--rwb-primary); font-size: 0.9em;">
+        <strong>Принцип:</strong> Метрики часто конфликтуют (например, Скорость vs Качество). Задача Lead — явно зафиксировать <em>trade-off</em> до начала разработки.
     </div>
 </div>
 </section>

@@ -160,7 +160,7 @@
 
 /* ============================================
    LAYOUT: DISCLAIMER SLIDE
-   Black background, white text, centered
+   Black background, white text, centered (South Park style)
    ============================================ */
 .slide-disclaimer {
 	background: #000000 !important;
@@ -169,22 +169,23 @@
 	align-items: center !important;
 	justify-content: center !important;
 	text-align: center !important;
-	padding: var(--space-xl) !important;
+	padding: 60px !important;
 }
 
 .slide-disclaimer .disclaimer-content {
-	font-family: 'Inter', -apple-system, sans-serif !important;
-	font-size: 30px !important;
-	line-height: 1.1 !important;
-	font-weight: 700 !important;
+	font-family: 'Courier New', Courier, monospace !important;
+	font-size: 32px !important;
+	line-height: 1.2 !important;
+	font-weight: 400 !important; /* Normal */
 	color: #FFFFFF !important;
-	max-width: none !important;
+	max-width: 1100px !important;
 	width: 100% !important;
-	letter-spacing: -0.5px !important;
+	letter-spacing: 0 !important;
+	text-transform: uppercase !important;
 }
 
 .slide-disclaimer .disclaimer-content p {
-	margin: 0.6em 0 !important;
+	margin: 1em 0 !important;
 	color: #FFFFFF !important;
 	font-size: inherit !important;
 }

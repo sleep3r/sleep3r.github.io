@@ -314,28 +314,32 @@
 </div>
 <div class="slide-body">
     <h2>Алгоритм принятия решения (один экран)</h2>
-    <div class="merged-grid cols-2">
-        <div class="merged-item compact">
-            <h3>1–4: Подготовка</h3>
-            <ol class="list-compact">
+    <div class="merged-grid cols-2" style="margin-bottom: 10px !important;">
+        <div class="merged-item compact" style="padding: 16px 20px !important;">
+            <h3 style="margin-bottom: 8px !important; font-size: 21px !important; color: var(--rwb-primary) !important;">1–4: Подготовка</h3>
+            <ol class="list-compact" style="gap: 0.45rem !important; font-size: 15px !important; line-height: 1.5 !important;">
                 <li>Problem + Baseline</li>
                 <li>Tech → Proxy → Business метрики</li>
                 <li>Дизайн измерения эффекта</li>
                 <li>TCO (CAPEX + OPEX)</li>
             </ol>
         </div>
-        <div class="merged-item compact">
-            <h3>5–8: Решение</h3>
-            <ol class="list-compact" start="5">
+        <div class="merged-item compact" style="padding: 16px 20px !important;">
+            <h3 style="margin-bottom: 8px !important; font-size: 21px !important; color: var(--rwb-primary) !important;">5–8: Решение</h3>
+            <ol class="list-compact" style="gap: 0.45rem !important; font-size: 15px !important; line-height: 1.5 !important;" start="5">
                 <li>RiskCost + Guardrails</li>
                 <li>Сценарии (best/base/worst)</li>
-                <li>Go/No‑Go критерии</li>
+                <li><strong>Go/No‑Go (2 контура)</strong></li>
                 <li>Мониторинг + Kill‑switch</li>
             </ol>
         </div>
     </div>
-    <div class="slide-bottom-note">
-        <strong>Владельцы допущений:</strong> бизнес + финансы + риск/комплаенс + DS
+    <div style="background: linear-gradient(135deg, rgba(107, 66, 251, 0.08) 0%, rgba(239, 213, 255, 0.25) 100%); border-radius: 10px; padding: 14px 20px; border-left: 4px solid var(--rwb-primary); box-shadow: 0 2px 8px rgba(107, 66, 251, 0.1);">
+        <strong style="color: var(--rwb-primary); font-size: 16px;">Go/No-Go (двухконтурный критерий):</strong>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; font-size: 14px; line-height: 1.5;">
+            <div style="padding: 10px; background: rgba(255,255,255,0.6); border-radius: 6px;">✅ <strong>Go:</strong> Net Value &gt; 0 <em>и</em> guardrails/SLA закрыты <em>и</em> worst-сценарий приемлем</div>
+            <div style="padding: 10px; background: rgba(255,255,255,0.6); border-radius: 6px;">⚠️ <strong>Pilot/Limit:</strong> Net Value &gt; 0, но Safety не закрыт → ограничить домен, HITL, режем авто-действия</div>
+        </div>
     </div>
 </div>
 </section>
@@ -349,24 +353,31 @@
     </div>
     <div class="slide-body">
         <h2>Экономика решения: Net Value</h2>
-        <div class="formula-box">
+        <div class="formula-box" style="margin-bottom: 8px !important;">
             <div class="formula">\[ \text{NetValue} = \Delta \text{Business} - \text{TCO} - \text{RiskCost} \]</div>
         </div>
-        <div class="merged-grid cols-2">
-            <div class="merged-item compact">
-                <h3>TCO</h3>
-                <div class="formula">\[ \text{CAPEX}_{\text{dev}} + \text{OPEX}_{\text{run}} \]</div>
-                <p class="text-meta centered">(разработка/данные + инференс)</p>
+        <div class="merged-grid cols-2" style="margin-bottom: 8px !important;">
+            <div class="merged-item compact" style="padding: 10px !important;">
+                <h3 style="margin-bottom: 4px !important;">TCO (типовые статьи)</h3>
+                <ul class="list-compact" style="gap: 0.3rem !important; font-size: 14px !important;">
+                    <li><strong>CAPEX:</strong> данные, разметка, интеграции, QA</li>
+                    <li><strong>OPEX:</strong> инференс, мониторинг, поддержка, инциденты, вендоры</li>
+                </ul>
             </div>
-            <div class="merged-item compact">
-                <h3>RiskCost</h3>
-                 <div class="formula">\[ E(\text{Loss}) \times P(\text{Event}) + \text{Friction} \]</div>
-                <p class="text-meta centered">(ущерб &times; вероятность + комплаенс)</p>
+            <div class="merged-item compact" style="padding: 10px !important;">
+                <h3 style="margin-bottom: 4px !important;">RiskCost (типовые события)</h3>
+                <ul class="list-compact" style="gap: 0.3rem !important; font-size: 14px !important;">
+                    <li><strong>События:</strong> утечка PII, юр. ошибка, остановка процесса</li>
+                    <li><strong>Friction:</strong> HITL, аудит, ретенция, согласования</li>
+                </ul>
             </div>
+        </div>
+        <div class="callout" style="padding: 6px 12px !important; font-size: 0.85em !important;">
+            <strong>Принцип:</strong> комплаенс — не "тормоз", а часть стоимости и дизайна
         </div>
     </div>
     <aside class="notes">
-        Проговорить: «комплаенс — не “тормоз”, это часть стоимости и дизайна».
+        Проговорить: «комплаенс — не "тормоз", это часть стоимости и дизайна».
     </aside>
 </section>
 <!-- #endregion -->
@@ -476,22 +487,22 @@
 <div class="slide-body">
     <h2>Стратегия: "вертикально" вместо "горизонтально"</h2>
     <div class="steps-split-layout">
-        <div class="steps-left">
-            <h2>Вертикальный MVP</h2>
-            <p class="text-meta">Начинаем с малого, быстро получаем эффект</p>
+        <div class="steps-left" style="padding: 40px 32px !important;">
+            <h2 style="font-size: 42px !important; margin-bottom: 16px !important; line-height: 1.15 !important;">Вертикальный<br>MVP</h2>
+            <p class="text-meta" style="font-size: 16px !important; line-height: 1.5 !important; color: var(--rwb-text-muted) !important;">Начинаем с малого, быстро получаем эффект</p>
         </div>
         <div class="steps-right">
-            <div class="step-card level-1">
-                <div class="step-number">1</div>
-                <div class="step-text"><strong>1 документ</strong> → 10–15 ключевых полей</div>
+            <div class="step-card level-1" style="padding: 20px 32px !important;">
+                <div class="step-number" style="font-size: 56px !important; color: var(--rwb-primary) !important; opacity: 0.9 !important;">1</div>
+                <div class="step-text" style="font-size: 18px !important; line-height: 1.45 !important;"><strong>1 документ</strong> → 10–15 ключевых полей</div>
             </div>
-            <div class="step-card level-2">
-                <div class="step-number">2</div>
-                <div class="step-text"><strong>Паспорт</strong> → расширение полей (прописка)</div>
+            <div class="step-card level-2" style="padding: 20px 32px !important;">
+                <div class="step-number" style="font-size: 56px !important; color: var(--rwb-primary) !important; opacity: 0.9 !important;">2</div>
+                <div class="step-text" style="font-size: 18px !important; line-height: 1.45 !important;"><strong>Паспорт</strong> → расширение полей (прописка)</div>
             </div>
-            <div class="step-card level-3">
-                <div class="step-number">3</div>
-                <div class="step-text"><strong>ВУ</strong> → категории и сроки</div>
+            <div class="step-card level-3" style="padding: 20px 32px !important;">
+                <div class="step-number" style="font-size: 56px !important; color: var(--rwb-primary) !important; opacity: 0.9 !important;">3</div>
+                <div class="step-text" style="font-size: 18px !important; line-height: 1.45 !important;"><strong>ВУ</strong> → категории и сроки</div>
             </div>
         </div>
     </div>
@@ -647,32 +658,38 @@
 </div>
 <div class="slide-body">
     <h2>Числовой пример (toy‑numbers)</h2>
-    <div class="merged-grid cols-2">
-        <div class="merged-item compact">
-            <h3>Входные допущения</h3>
-            <ul class="list-compact">
-                <li><strong>N:</strong> 50 000 документов/мес</li>
-                <li><strong>t_manual:</strong> 6 мин → <strong>t_assist:</strong> 2 мин</li>
-                <li><strong>c_ops:</strong> 600 ₽/час</li>
-                <li><strong>err_crit:</strong> 0.3%</li>
-                <li><strong>Cost_crit:</strong> 4 000 ₽</li>
-                <li><strong>TCO:</strong> 900 000 ₽/мес</li>
-                <li><strong>RiskCost:</strong> 300 000 ₽/мес</li>
+    <div class="merged-grid cols-2" style="margin-bottom: 8px !important;">
+        <div class="merged-item compact" style="padding: 14px !important;">
+            <h3 style="margin-bottom: 6px !important; font-size: 19px !important;">Входные допущения <span style="font-size: 0.65em; font-weight: 400; opacity: 0.75;">(диапазоны)</span></h3>
+            <ul class="list-compact" style="gap: 0.35rem !important; font-size: 14px !important; line-height: 1.4 !important;">
+                <li><strong>\(N\):</strong> 30–50–80 тыс. док/мес <span class="text-meta" style="font-size: 0.85em;">(операции)</span></li>
+                <li><strong>\(t_{\text{manual}}\):</strong> 5–6–8 мин <span class="text-meta" style="font-size: 0.85em;">(тайм-стади)</span></li>
+                <li><strong>\(t_{\text{assist}}\):</strong> 1.5–2–3 мин <span class="text-meta" style="font-size: 0.85em;">(пилот)</span></li>
+                <li><strong>\(c_{\text{ops}}\):</strong> 500–600–700 ₽/ч <span class="text-meta" style="font-size: 0.85em;">(HR/фин)</span></li>
+                <li><strong>\(\text{err}_{\text{crit}}\):</strong> 0.2–0.3–0.5% <span class="text-meta" style="font-size: 0.85em;">(пилот)</span></li>
+                <li><strong>\(\text{Cost}_{\text{crit}}\):</strong> 3–4–6 тыс ₽ <span class="text-meta" style="font-size: 0.85em;">(юр/риск)</span></li>
+                <li><strong>TCO:</strong> 700–900–1200 тыс ₽/мес <span class="text-meta" style="font-size: 0.85em;">(фин)</span></li>
             </ul>
         </div>
-        <div class="merged-item compact">
-            <h3>Расчёт</h3>
-            <ul class="list-compact">
-                <li><strong>Savings:</strong> 2 000 000 ₽</li>
-                <li><strong>ErrorCost:</strong> 600 000 ₽</li>
-                <li><strong>Net Value:</strong> 200 000 ₽</li>
-                <li><strong>Решение:</strong> Go при Net Value &gt; 0</li>
+        <div class="merged-item compact" style="padding: 14px !important;">
+            <h3 style="margin-bottom: 6px !important; font-size: 19px !important;">Расчёт <span style="font-size: 0.65em; font-weight: 400; opacity: 0.75;">(base-сценарий)</span></h3>
+            <ul class="list-compact" style="gap: 0.35rem !important; font-size: 14px !important; line-height: 1.4 !important;">
+                <li><strong>Savings:</strong> ≈2 000 000 ₽/мес</li>
+                <li><strong>ErrorCost:</strong> ≈600 000 ₽/мес</li>
+                <li><strong>RiskCost:</strong> ≈300 000 ₽/мес</li>
+                <li style="border-top: 1px solid rgba(30,23,83,0.15); padding-top: 0.35rem; margin-top: 0.35rem;"><strong>Net Value:</strong> ≈200 000 ₽/мес</li>
             </ul>
-            <p class="text-meta">Числа иллюстративны, логика — обязательна</p>
+            <div style="margin-top: 10px; padding: 8px 12px; background: linear-gradient(135deg, rgba(107, 66, 251, 0.08) 0%, rgba(239, 213, 255, 0.25) 100%); border-radius: 8px; border-left: 3px solid var(--rwb-primary); font-size: 13px; line-height: 1.5;">
+                <strong style="color: var(--rwb-primary);">Go/No-Go (2 контура):</strong><br>
+                <div style="margin-top: 4px;">
+                    ✅ <strong>Go:</strong> Net Value &gt; 0 <em>и</em> guardrails закрыты <em>и</em> worst-сценарий приемлем<br>
+                    ⚠️ <strong>Pilot:</strong> Net Value &gt; 0, но Safety не закрыт → ограничить домен, HITL
+                </div>
+            </div>
         </div>
     </div>
-    <div class="slide-bottom-note">
-        <strong>Владельцы допущений:</strong> бизнес (ценность), финансы (ставки/TCO), риск/юристы (Cost_crit)
+    <div class="slide-bottom-note" style="padding: 6px 14px !important; font-size: 0.8em !important;">
+        <strong>Числа иллюстративны.</strong> Подставляйте свои диапазоны. Владельцы источников указаны в скобках.
     </div>
 </div>
 </section>

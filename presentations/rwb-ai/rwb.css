@@ -160,7 +160,7 @@
 
 /* ============================================
    LAYOUT: DISCLAIMER SLIDE
-   Black background, white text, centered (South Park style)
+   TV-style legal disclaimer
    ============================================ */
 .slide-disclaimer {
 	background: #000000 !important;
@@ -173,21 +173,49 @@
 }
 
 .slide-disclaimer .disclaimer-content {
-	font-family: 'Courier New', Courier, monospace !important;
-	font-size: 32px !important;
-	line-height: 1.2 !important;
-	font-weight: 400 !important; /* Normal */
+	font-family: 'Montserrat', 'Inter', sans-serif !important;
+	font-size: 28px !important;
+	line-height: 1.35 !important;
+	font-weight: 500 !important;
 	color: #FFFFFF !important;
-	max-width: 1100px !important;
+	max-width: 980px !important;
 	width: 100% !important;
-	letter-spacing: 0 !important;
-	text-transform: uppercase !important;
+	letter-spacing: 0.2px !important;
+	text-transform: none !important;
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 18px !important;
+	padding: 24px 32px !important;
+	border: 2px solid rgba(255,255,255,0.35) !important;
+	box-shadow: 0 0 0 2px rgba(0,0,0,0.2) inset !important;
 }
 
 .slide-disclaimer .disclaimer-content p {
-	margin: 1em 0 !important;
+	margin: 0 !important;
 	color: #FFFFFF !important;
 	font-size: inherit !important;
+}
+
+.slide-disclaimer .disclaimer-title {
+	font-size: 26px !important;
+	letter-spacing: 4px !important;
+	text-transform: uppercase !important;
+	font-weight: 700 !important;
+	opacity: 0.9 !important;
+}
+
+.slide-disclaimer .disclaimer-lines {
+	display: flex !important;
+	flex-direction: column !important;
+	gap: 10px !important;
+	font-size: 26px !important;
+}
+
+.slide-disclaimer .disclaimer-meta {
+	font-size: 14px !important;
+	letter-spacing: 1px !important;
+	text-transform: uppercase !important;
+	opacity: 0.7 !important;
 }
 
 /* ============================================

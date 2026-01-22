@@ -1585,6 +1585,125 @@
 }
 
 /* ============================================
+   COMPONENT: CRITERIA CYCLE COMPACT
+   Specific adjustments for Case 3 criteria slides
+   ============================================ */
+.criteria-cycle-compact .step-timeline {
+	margin-top: 8px !important;
+	margin-bottom: 8px !important;
+	gap: 6px !important;
+}
+
+.criteria-cycle-compact .step-timeline-item {
+	padding: 6px 8px !important;
+	min-height: 110px !important;
+}
+
+.criteria-cycle-compact .step-timeline-number {
+	font-size: 1.8rem !important;
+	margin-bottom: 4px !important;
+}
+
+.criteria-cycle-compact .step-timeline-desc {
+	font-size: 12px !important;
+	line-height: 1.15 !important;
+}
+
+.criteria-cycle-compact .merged-item.compact {
+	padding: 10px 14px !important;
+	margin-top: 8px !important;
+}
+
+.criteria-cycle-compact .merged-item h3 {
+	font-size: 18px !important;
+	margin-bottom: 6px !important;
+}
+
+.criteria-cycle-compact li {
+	font-size: 14px !important;
+	line-height: 1.3 !important;
+	margin-bottom: 4px !important;
+}
+
+.criteria-cycle-compact .slide-bottom-note {
+	margin-top: 8px !important;
+	padding: 6px 12px !important;
+}
+
+/* ============================================
+   COMPONENT: GO-NOGO COMPACT
+   Ultra-compact 4-column decision matrix
+   ============================================ */
+.go-nogo-compact h2 {
+	font-size: 34px !important;
+	margin-bottom: 8px !important;
+}
+
+.go-nogo-compact .callout {
+	padding: 8px 14px !important;
+	margin-bottom: 8px !important;
+	font-size: 14px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 {
+	gap: 8px !important;
+	margin-top: 8px !important;
+	margin-bottom: 8px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 .merged-item {
+	padding: 8px 10px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 h3 {
+	font-size: 18px !important;
+	margin-bottom: 3px !important;
+	margin-top: 0 !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 p {
+	font-size: 11px !important;
+	line-height: 1.2 !important;
+	margin: 3px 0 !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 ul {
+	margin: 4px 0 !important;
+	padding-left: 14px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-4 li {
+	font-size: 11px !important;
+	line-height: 1.25 !important;
+	margin-bottom: 2px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-2 {
+	margin-top: 8px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-2 .merged-item {
+	padding: 10px 12px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-2 h3 {
+	font-size: 16px !important;
+	margin-bottom: 6px !important;
+}
+
+.go-nogo-compact .merged-grid.cols-2 li {
+	font-size: 13px !important;
+	line-height: 1.3 !important;
+	margin-bottom: 3px !important;
+}
+
+.go-nogo-compact .slide-bottom-note {
+	margin-top: 8px !important;
+	padding: 6px 12px !important;
+	font-size: 13px !important;
+}
+
+/* ============================================
    COMPONENT: DESIGN MATRIX COMPACT
    Moderately compact layout for design matrix table
    ============================================ */

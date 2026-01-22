@@ -1195,7 +1195,7 @@
                 <li><strong>Особенности:</strong> Высокая автоматизация</li>
                 <li><strong>Дизайн:</strong> DiD с FE или switch-back</li>
             </ul>
-        </div>
+    </div>
         <div class="merged-item compact">
             <h3>🏢 Unique</h3>
             <p class="text-meta">Мегасклады (outliers)</p>
@@ -1352,7 +1352,7 @@
     
     <div class="callout">
         <strong>Критично:</strong> DiD работает только если до treatment склады (внутри страты) менялись параллельно. Если нет — оценка эффекта неверна
-    </div>
+        </div>
 
     <div class="merged-grid cols-2">
         <div class="merged-item compact">
@@ -2083,21 +2083,21 @@
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body">
+<div class="slide-body criteria-cycle-compact">
     <h2>Итеративный цикл создания критериев качества</h2>
     
     <div class="callout">
         <strong>Принцип:</strong> Критерии не придумываются заранее — они "выстрадываются" через итеративный процесс разметки и обсуждения расхождений
     </div>
 
-    <div class="step-timeline" style="margin-top: 16px; margin-bottom: 16px;">
+    <div class="step-timeline">
         <div class="step-timeline-item">
             <div class="step-timeline-number">1</div>
-            <div class="step-timeline-desc"><strong>Критерии v1</strong><br>Первичные критерии от экспертов</div>
+            <div class="step-timeline-desc"><strong>Критерии v1</strong><br>Первичные идеи экспертов</div>
         </div>
         <div class="step-timeline-item">
             <div class="step-timeline-number">2</div>
-            <div class="step-timeline-desc"><strong>Разметка</strong><br>Команда юристов размечает примеры</div>
+            <div class="step-timeline-desc"><strong>Разметка</strong><br>Юристы размечают примеры</div>
         </div>
         <div class="step-timeline-item">
             <div class="step-timeline-number">3</div>
@@ -2105,27 +2105,27 @@
         </div>
         <div class="step-timeline-item">
             <div class="step-timeline-number">4</div>
-            <div class="step-timeline-desc"><strong>Обсуждение</strong><br>Юристы разбирают конфликты</div>
+            <div class="step-timeline-desc"><strong>Обсуждение</strong><br>Разбор конфликтов командой</div>
         </div>
         <div class="step-timeline-item">
             <div class="step-timeline-number">5</div>
-            <div class="step-timeline-desc"><strong>Критерии v2</strong><br>Уточнённые критерии</div>
+            <div class="step-timeline-desc"><strong>Критерии v2</strong><br>Уточнённый стандарт</div>
         </div>
     </div>
 
-    <div class="merged-item compact" style="margin-top: 14px; background: rgba(107, 66, 251, 0.06); padding: 16px;">
+    <div class="merged-item compact" style="background: rgba(107, 66, 251, 0.06);">
         <h3 style="color: var(--rwb-primary) !important;">Примеры критериев для юридического агента</h3>
         <ul class="list-compact">
-            <li><strong>Ссылка на НПА:</strong> Ответ должен ссылаться на действующий НПА (не утративший силу)</li>
-            <li><strong>Противоречия:</strong> Если есть противоречие между нормами — указать оба варианта + контекст</li>
-            <li><strong>Вне домена:</strong> Если вопрос вне домена знаний — явно отказать (не выдумывать)</li>
-            <li><strong>Корректность цитат:</strong> Цитаты из НПА должны быть точными, без искажений</li>
+            <li><strong>Ссылка на НПА:</strong> Ответ должен ссылаться на действующий НПА</li>
+            <li><strong>Противоречия:</strong> Указать оба варианта при коллизии норм</li>
+            <li><strong>Вне домена:</strong> Если вопрос вне базы — явно отказать</li>
+            <li><strong>Корректность цитат:</strong> Цитаты должны быть точными, без искажений</li>
             <li><strong>Актуальность:</strong> НПА должен быть актуальным на момент ответа</li>
         </ul>
     </div>
 
     <div class="slide-bottom-note">
-        <strong>Важно:</strong> Критерии создаются командой юристов-экспертов, а не DS-командой. DS отвечает за процесс, юристы — за содержание
+        <strong>Важно:</strong> Юристы-эксперты отвечают за содержание критериев, а DS-команда — за процесс и итерации
     </div>
 </div>
 </section>
@@ -2325,20 +2325,20 @@
 </section>
 <!-- #endregion -->
 
-<!-- #region Кейс 3: Диагностика проблем -->
+<!-- #region Кейс 3: Диагностика проблем (часть 1) -->
 <section class="slide-standard">
 <div class="slide-header">
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body">
+<div class="slide-body design-matrix-compact">
     <h2>Диагностика: проблема агента vs проблема adoption</h2>
     
     <div class="callout">
         <strong>Ключевой вопрос:</strong> Если эффект низкий — это проблема модели/качества или проблема adoption/доверия?
     </div>
 
-    <table class="design-matrix-table" style="margin-top: 12px;">
+    <table class="design-matrix-table">
         <thead>
             <tr>
                 <th style="width: 30%;">Симптом</th>
@@ -2375,29 +2375,130 @@
         </tbody>
     </table>
 
-    <div class="merged-grid cols-2" style="margin-top: 14px;">
-        <div class="merged-item compact">
+    <div class="slide-bottom-note">
+        <strong>Главный инструмент:</strong> Корреляция между качеством (Correctness) и Adoption. Если качество растёт, а Adoption — нет → проблема не в модели
+    </div>
+</div>
+</section>
+<!-- #endregion -->
+
+<!-- #region Кейс 3: Диагностика проблем (часть 2) -->
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body">
+    <h2>Как решать проблемы: план действий</h2>
+    
+    <div class="callout">
+        <strong>После диагностики:</strong> Определили тип проблемы → выбираем стратегию улучшения
+    </div>
+
+    <div class="merged-grid cols-2" style="margin-top: 18px;">
+        <div class="merged-item compact" style="background: rgba(229, 62, 62, 0.06); border-left: 3px solid #E53E3E;">
             <h3 style="color: #E53E3E !important;">Если проблема в агенте</h3>
+            <p class="text-secondary" style="margin-bottom: 8px;">Фокус на качество модели и ответов</p>
             <ul class="list-compact">
                 <li><strong>Анализ ошибок:</strong> Какие типы вопросов ломают модель?</li>
                 <li><strong>Улучшение базы знаний:</strong> Добавить недостающие НПА</li>
                 <li><strong>Тюнинг промптов:</strong> Ужесточить системные инструкции</li>
                 <li><strong>Guardrails:</strong> Добавить фильтры для сложных кейсов</li>
             </ul>
+            <p class="text-secondary" style="margin-top: 10px; font-size: 14px;">
+                <strong>Пример:</strong> Hallucination 8% → добавили 200 НПА → 2% за месяц
+            </p>
         </div>
-        <div class="merged-item compact">
+        <div class="merged-item compact" style="background: rgba(214, 158, 46, 0.06); border-left: 3px solid #D69E2E;">
             <h3 style="color: #D69E2E !important;">Если проблема в Adoption</h3>
+            <p class="text-secondary" style="margin-bottom: 8px;">Фокус на UX, доверие и культуру</p>
             <ul class="list-compact">
                 <li><strong>UX-аудит:</strong> Где юристы отваливаются в процессе?</li>
                 <li><strong>Интервью:</strong> Почему не пользуются? Что мешает?</li>
-                <li><strong>Обучение:</strong> Воркшопы, best practices</li>
-                <li><strong>Культура:</strong> Демо успешных кейсов, амбассадоры</li>
+                <li><strong>Обучение:</strong> Воркшопы, best practices, демо</li>
+                <li><strong>Культура:</strong> Амбассадоры, успешные кейсы</li>
+            </ul>
+            <p class="text-secondary" style="margin-top: 10px; font-size: 14px;">
+                <strong>Пример:</strong> Adoption 25% → воркшопы + CRM → 65% за 2 месяца
+            </p>
+        </div>
+    </div>
+
+    <div class="slide-bottom-note">
+        <strong>Важно:</strong> Не смешивать действия. Если проблема в агенте — фикс модели. Если в Adoption — фикс UX/культуры
+    </div>
+</div>
+</section>
+<!-- #endregion -->
+
+<!-- #region Кейс 3: Диагностика проблем (часть 3) -->
+<section class="slide-standard">
+<div class="slide-header">
+    <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
+    <img src="assets/logo-blue.png" alt="Logo" class="logo">
+</div>
+<div class="slide-body criteria-cycle-compact">
+    <h2>Итеративный цикл улучшения агента</h2>
+    
+    <div class="callout">
+        <strong>Принцип:</strong> Диагностика + действие + измерение = цикл. Повторяем каждые 2-4 недели до целей
+    </div>
+
+    <div class="step-timeline" style="margin-top: 10px; margin-bottom: 10px;">
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">1</div>
+            <div class="step-timeline-desc"><strong>Диагностика</strong><br>Проблема агента или Adoption?</div>
+        </div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">2</div>
+            <div class="step-timeline-desc"><strong>План</strong><br>Выбрать стратегию</div>
+        </div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">3</div>
+            <div class="step-timeline-desc"><strong>Исправление</strong><br>Внедрить изменения</div>
+        </div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">4</div>
+            <div class="step-timeline-desc"><strong>Измерение</strong><br>Проверить метрики</div>
+        </div>
+        <div class="step-timeline-item">
+            <div class="step-timeline-number">5</div>
+            <div class="step-timeline-desc"><strong>Оценка</strong><br>Решение: продолжить/стоп</div>
+        </div>
+    </div>
+
+    <div class="merged-grid cols-3" style="margin-top: 12px;">
+        <div class="merged-item compact">
+            <h3 style="color: var(--rwb-primary) !important;">Метрики для отслеживания</h3>
+            <ul class="list-compact">
+                <li><strong>Hallucination rate</strong> (еженедельно)</li>
+                <li><strong>Correctness</strong> (разметка 50+)</li>
+                <li><strong>Adoption rate</strong> (ежедневно)</li>
+                <li><strong>Trust rate</strong> (опросы)</li>
+            </ul>
+        </div>
+        <div class="merged-item compact">
+            <h3 style="color: #3182CE !important;">Критерии успеха</h3>
+            <ul class="list-compact">
+                <li>Hallucination < 1%</li>
+                <li>Correctness > 90%</li>
+                <li>Adoption > 70%</li>
+                <li>Trust > 60%</li>
+            </ul>
+        </div>
+        <div class="merged-item compact">
+            <h3 style="color: #E53E3E !important;">Когда остановиться (No-Go)</h3>
+            <ul class="list-compact">
+                <li>Adoption не растёт 3+ месяца</li>
+                <li>Качество не улучшается 3-5 итераций</li>
+                <li>TCO > ценности при успехе</li>
+                <li>Команда саботирует</li>
             </ul>
         </div>
     </div>
 
     <div class="slide-bottom-note">
-        <strong>Главный инструмент:</strong> Корреляция между качеством (Correctness) и Adoption. Если качество растёт, а Adoption — нет → проблема не в модели
+        <strong>Главное:</strong> Не гадаем, тестируем гипотезы с метриками. Итерация = 2-4 недели + измерения
     </div>
 </div>
 </section>
@@ -2409,83 +2510,78 @@
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body">
+<div class="slide-body go-nogo-compact">
     <h2>Go / Pilot / Limit / No-Go: принятие решений</h2>
     
     <div class="callout">
-        <strong>Принцип:</strong> Решение основано на качестве модели (Hallucination, Correctness), Adoption и бизнес-рисках. Явный чеклист для DS Lead и бизнеса
+        <strong>Принцип:</strong> Решение основано на качестве (Hallucination, Correctness), Adoption и рисках
     </div>
 
-    <div class="merged-grid cols-4" style="margin-top: 14px;">
-        <div class="merged-item compact" style="background: rgba(49, 130, 206, 0.08); border-left: 3px solid #3182CE;">
+    <div class="merged-grid cols-4">
+        <div class="merged-item" style="background: rgba(49, 130, 206, 0.08); border-left: 3px solid #3182CE;">
             <h3 style="color: #3182CE !important;">✅ Go</h3>
             <p class="text-secondary">Полная раскатка</p>
             <ul class="list-compact">
                 <li>Hallucination < 1%</li>
                 <li>Correctness > 90%</li>
                 <li>Adoption > 70%</li>
-                <li>Deflection > 50%</li>
                 <li>Trust > 60%</li>
             </ul>
-            <p class="text-meta" style="margin-top: 8px;"><strong>Действие:</strong> Раскатываем на всю команду, масштабируем на смежные темы</p>
+            <p><strong>→</strong> Раскатка на всю команду</p>
         </div>
-        <div class="merged-item compact" style="background: rgba(214, 158, 46, 0.08); border-left: 3px solid #D69E2E;">
+        <div class="merged-item" style="background: rgba(214, 158, 46, 0.08); border-left: 3px solid #D69E2E;">
             <h3 style="color: #D69E2E !important;">⚠️ Pilot</h3>
             <p class="text-secondary">Ограниченная раскатка</p>
             <ul class="list-compact">
                 <li>Hallucination < 3%</li>
                 <li>Correctness 80-90%</li>
                 <li>Adoption 40-70%</li>
-                <li>Deflection 30-50%</li>
             </ul>
-            <p class="text-meta" style="margin-top: 8px;"><strong>Действие:</strong> Ограничить домен до 1-2 тем, улучшать качество и UX</p>
+            <p><strong>→</strong> 1-2 темы, улучшение</p>
         </div>
-        <div class="merged-item compact" style="background: rgba(237, 137, 54, 0.08); border-left: 3px solid #ED8936;">
+        <div class="merged-item" style="background: rgba(237, 137, 54, 0.08); border-left: 3px solid #ED8936;">
             <h3 style="color: #ED8936 !important;">🔒 Limit</h3>
-            <p class="text-secondary">Режим "черновика"</p>
+            <p class="text-secondary">Режим черновика</p>
             <ul class="list-compact">
                 <li>Hallucination < 5%</li>
                 <li>Correctness 70-80%</li>
-                <li>Но ценность есть</li>
+                <li>Ценность есть</li>
             </ul>
-            <p class="text-meta" style="margin-top: 8px;"><strong>Действие:</strong> Обязательный review юристом, агент как ассистент (не финальный ответ)</p>
+            <p><strong>→</strong> Review юристом обязателен</p>
         </div>
-        <div class="merged-item compact" style="background: rgba(229, 62, 62, 0.08); border-left: 3px solid #E53E3E;">
+        <div class="merged-item" style="background: rgba(229, 62, 62, 0.08); border-left: 3px solid #E53E3E;">
             <h3 style="color: #E53E3E !important;">❌ No-Go</h3>
             <p class="text-secondary">Остановить проект</p>
             <ul class="list-compact">
                 <li>Hallucination > 5%</li>
                 <li>Correctness < 70%</li>
                 <li>Adoption не растёт</li>
-                <li>Юристы саботируют</li>
             </ul>
-            <p class="text-meta" style="margin-top: 8px;"><strong>Действие:</strong> Пересмотреть архитектуру или отказаться от агента</p>
+            <p><strong>→</strong> Пересмотр или отказ</p>
         </div>
     </div>
 
-    <div class="merged-grid cols-2" style="margin-top: 14px;">
+    <div class="merged-grid cols-2">
         <div class="merged-item compact">
             <h3>Когда переходить между режимами</h3>
             <ul class="list-compact">
-                <li><strong>Pilot → Go:</strong> Hallucination < 1% стабильно 4+ недели + Adoption растёт</li>
-                <li><strong>Limit → Pilot:</strong> Качество улучшилось, юристы начали доверять</li>
-                <li><strong>Pilot → Limit:</strong> Adoption не растёт, но ценность есть</li>
-                <li><strong>Любой → No-Go:</strong> Качество не улучшается, команда не пользуется</li>
+                <li><strong>Pilot → Go:</strong> Hallucination < 1% стабильно 4+ недели</li>
+                <li><strong>Limit → Pilot:</strong> Качество улучшилось, юристы доверяют</li>
+                <li><strong>Любой → No-Go:</strong> Качество не растёт, команда не использует</li>
             </ul>
         </div>
         <div class="merged-item compact">
             <h3>Риски и цена ошибки</h3>
             <ul class="list-compact">
-                <li><strong>Юридические темы:</strong> Цена ошибки может "съесть" любую экономию</li>
-                <li><strong>Репутация:</strong> Один публичный факап = конец проекту</li>
-                <li><strong>Compliance:</strong> Нарушение политик ИБ/юридических = No-Go</li>
-                <li><strong>TCO:</strong> Если OPEX > ценности даже при Go → пересмотреть</li>
+                <li><strong>Юридические темы:</strong> Цена ошибки > экономии</li>
+                <li><strong>Репутация:</strong> Один факап = конец проекту</li>
+                <li><strong>TCO:</strong> Если OPEX > ценности → пересмотр</li>
             </ul>
         </div>
     </div>
 
     <div class="slide-bottom-note">
-        <strong>Владельцы решения:</strong> DS Lead + юристы + бизнес. Без согласования со всеми тремя — нельзя переходить к Go
+        <strong>Владельцы решения:</strong> DS Lead + юристы + бизнес. Без согласования — нельзя переходить к Go
     </div>
 </div>
 </section>
@@ -2497,14 +2593,14 @@
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body">
+<div class="slide-body criteria-cycle-compact">
     <h2>Масштабирование: от темы к платформе</h2>
     
     <div class="callout">
-        <strong>Вопрос:</strong> Если агент показал успех на теме "Видеонаблюдение" — как масштабировать на "ПД", "Трудовое право", "Закупки"?
+        <strong>Вопрос:</strong> Агент успешен на "Видеонаблюдении" → как масштабировать на "ПД", "Трудовое право"?
     </div>
 
-    <div class="step-timeline" style="margin-top: 16px; margin-bottom: 16px;">
+    <div class="step-timeline" style="margin-top: 10px; margin-bottom: 10px;">
         <div class="step-timeline-item">
             <div class="step-timeline-number">1</div>
             <div class="step-timeline-desc"><strong>Тема 1</strong><br>Видеонаблюдение</div>
@@ -2519,65 +2615,63 @@
         </div>
         <div class="step-timeline-item">
             <div class="step-timeline-number">4</div>
-            <div class="step-timeline-desc"><strong>Платформа</strong><br>Универсальный юридический агент</div>
+            <div class="step-timeline-desc"><strong>Платформа</strong><br>Универсальный агент</div>
         </div>
     </div>
 
-    <div class="merged-grid cols-2" style="margin-top: 14px;">
+    <div class="merged-grid cols-2" style="margin-top: 10px;">
         <div class="merged-item compact" style="background: rgba(49, 130, 206, 0.08);">
             <h3 style="color: #3182CE !important;">Что переиспользуется (Platform)</h3>
             <ul class="list-compact">
-                <li><strong>RAG-пайплайн:</strong> Архитектура Safe RAG остаётся</li>
-                <li><strong>Guardrails:</strong> PII-фильтры, citation check, escalation</li>
-                <li><strong>UI:</strong> Интерфейс чата, интеграция в рабочий процесс</li>
-                <li><strong>Инфраструктура:</strong> Мониторинг, логирование, аналитика</li>
-                <li><strong>Процесс разметки:</strong> Методология итеративных критериев</li>
+                <li><strong>RAG-пайплайн:</strong> Архитектура Safe RAG</li>
+                <li><strong>Guardrails:</strong> PII, citation, escalation</li>
+                <li><strong>UI:</strong> Интерфейс, интеграция</li>
+                <li><strong>Инфраструктура:</strong> Мониторинг, логи</li>
             </ul>
         </div>
         <div class="merged-item compact" style="background: rgba(214, 158, 46, 0.08);">
             <h3 style="color: #D69E2E !important;">Что адаптируется (Per-topic)</h3>
             <ul class="list-compact">
-                <li><strong>База знаний:</strong> Новые НПА, политики, прецеденты</li>
-                <li><strong>Критерии качества:</strong> Специфичные для темы (новая разметка)</li>
-                <li><strong>Эскалации:</strong> Разные эксперты для разных тем</li>
-                <li><strong>Промпты:</strong> Инструкции под специфику домена</li>
-                <li><strong>Guardrails:</strong> Дополнительные правила для рисков темы</li>
+                <li><strong>База знаний:</strong> Новые НПА, прецеденты</li>
+                <li><strong>Критерии:</strong> Новая разметка под тему</li>
+                <li><strong>Эскалации:</strong> Разные эксперты</li>
+                <li><strong>Промпты:</strong> Под специфику домена</li>
             </ul>
         </div>
     </div>
 
-    <div class="merged-grid cols-3" style="margin-top: 14px;">
+    <div class="merged-grid cols-3" style="margin-top: 10px;">
         <div class="merged-item compact">
             <h3>Кто делает адаптацию</h3>
             <ul class="list-compact">
-                <li><strong>Юристы:</strong> Критерии, база знаний, эскалации</li>
-                <li><strong>Аналитики:</strong> Сбор НПА, структурирование</li>
-                <li><strong>DS:</strong> Тюнинг промптов, мониторинг</li>
+                <li><strong>Юристы:</strong> Критерии, база знаний</li>
+                <li><strong>Аналитики:</strong> Сбор НПА</li>
+                <li><strong>DS:</strong> Промпты, мониторинг</li>
             </ul>
-            <p class="text-meta" style="margin-top: 6px;"><strong>НЕ ML-инженеры</strong> — адаптация не требует дообучения моделей</p>
+            <p class="text-meta" style="margin-top: 4px;">НЕ ML-инженеры</p>
         </div>
         <div class="merged-item compact">
-            <h3>Сколько времени на новую тему</h3>
+            <h3>Время на новую тему</h3>
             <ul class="list-compact">
-                <li><strong>База знаний:</strong> 2-4 недели сбора НПА</li>
-                <li><strong>Критерии + разметка:</strong> 4-6 недель (3-5 итераций)</li>
-                <li><strong>Pilot:</strong> 2-4 недели на малой группе</li>
+                <li><strong>База:</strong> 2-4 недели</li>
+                <li><strong>Разметка:</strong> 4-6 недель</li>
+                <li><strong>Pilot:</strong> 2-4 недели</li>
             </ul>
-            <p class="text-meta" style="margin-top: 6px;"><strong>Итого:</strong> ~2-3 месяца на новую тему</p>
+            <p class="text-meta" style="margin-top: 4px;"><strong>Итого:</strong> 2-3 месяца</p>
         </div>
         <div class="merged-item compact">
             <h3>Риски масштабирования</h3>
             <ul class="list-compact">
-                <li><strong>Качество падает:</strong> Новые темы сложнее первой</li>
-                <li><strong>Команда не масштабируется:</strong> Юристы перегружены</li>
-                <li><strong>TCO растёт:</strong> Каждая тема = новые расходы</li>
+                <li>Качество падает</li>
+                <li>Команда перегружена</li>
+                <li>TCO растёт</li>
             </ul>
-            <p class="text-meta" style="margin-top: 6px;"><strong>Решение:</strong> Приоритизация тем по ROI</p>
+            <p class="text-meta" style="margin-top: 4px;"><strong>→</strong> Приоритизация по ROI</p>
         </div>
     </div>
 
     <div class="slide-bottom-note">
-        <strong>Главный вывод:</strong> Платформа переиспользует архитектуру, но каждая новая тема = новая разметка и критерии. Масштабирование не автоматическое
+        <strong>Вывод:</strong> Платформа переиспользует архитектуру, но каждая тема = новая разметка. Масштабирование не автоматическое
     </div>
 </div>
 </section>
@@ -2589,69 +2683,69 @@
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body">
+<div class="slide-body design-matrix-compact">
     <h2>Кейс 3: Итоговое резюме и практический чеклист</h2>
     
-    <div class="merged-grid cols-3" style="margin-top: 10px;">
+    <div class="merged-grid cols-3" style="margin-top: 8px;">
         <div class="merged-item compact" style="background: rgba(107, 66, 251, 0.06);">
-            <h3 style="color: var(--rwb-primary) !important;">До запуска измерения</h3>
+            <h3 style="color: var(--rwb-primary) !important;">До запуска</h3>
             <ul class="list-compact">
-                <li><strong>Класс задачи:</strong> Определить тип задачи (правильный ответ неясен → эксперт-разметка)</li>
-                <li><strong>Критерии:</strong> Итеративный цикл создания критериев с юристами (3-5 итераций)</li>
-                <li><strong>Разметчики:</strong> Практикующие юристы, 50-100 примеров на итерацию</li>
-                <li><strong>Guardrails:</strong> Safe RAG Pipeline (Grounding, Guardrails, Protocol)</li>
-                <li><strong>Pilot:</strong> Начать с узкой темы (видеонаблюдение), не сразу всё</li>
+                <li><strong>Класс задачи:</strong> Определить тип → эксперт-разметка</li>
+                <li><strong>Критерии:</strong> Итеративный цикл с юристами</li>
+                <li><strong>Разметчики:</strong> Юристы, 50-100 примеров</li>
+                <li><strong>Guardrails:</strong> Safe RAG Pipeline</li>
+                <li><strong>Pilot:</strong> Узкая тема</li>
             </ul>
         </div>
         <div class="merged-item compact" style="background: rgba(49, 130, 206, 0.06);">
             <h3 style="color: #3182CE !important;">Что измеряем</h3>
             <ul class="list-compact">
-                <li><strong>Tech:</strong> Hallucination rate, Citation accuracy, Latency</li>
-                <li><strong>Proxy (Quality):</strong> Correctness (юристы), Достоверность, Deflection</li>
-                <li><strong>Adoption/Trust:</strong> % юристов используют, % доверяют без проверки</li>
-                <li><strong>Business:</strong> Экономия времени, снижение эскалаций, ROI</li>
-                <li><strong>Формула:</strong> Эффект = Deflection × Adoption × Trust × Ценность</li>
+                <li><strong>Tech:</strong> Hallucination, Citation, Latency</li>
+                <li><strong>Quality:</strong> Correctness, Deflection</li>
+                <li><strong>Adoption/Trust:</strong> % используют, % доверяют</li>
+                <li><strong>Business:</strong> Экономия, эскалации, ROI</li>
+                <li><strong>Эффект:</strong> Deflection × Adoption × Trust × $</li>
             </ul>
         </div>
         <div class="merged-item compact" style="background: rgba(214, 158, 46, 0.06);">
             <h3 style="color: #D69E2E !important;">Принятие решения</h3>
             <ul class="list-compact">
-                <li><strong>Go:</strong> Hallucination < 1%, Adoption > 70%, Deflection > 50%</li>
-                <li><strong>Pilot:</strong> Hallucination < 3%, Adoption 40-70%, ограничить домен</li>
-                <li><strong>Limit:</strong> Режим "черновика", обязательный review юристом</li>
-                <li><strong>No-Go:</strong> Hallucination > 5%, Adoption не растёт, саботаж</li>
+                <li><strong>Go:</strong> Halluc < 1%, Adoption > 70%</li>
+                <li><strong>Pilot:</strong> Halluc < 3%, Adoption 40-70%</li>
+                <li><strong>Limit:</strong> Черновик + review</li>
+                <li><strong>No-Go:</strong> Halluc > 5%, саботаж</li>
             </ul>
         </div>
     </div>
 
-    <div class="merged-grid cols-2" style="margin-top: 12px;">
+    <div class="merged-grid cols-2" style="margin-top: 8px;">
         <div class="merged-item compact">
             <h3 style="color: #E53E3E !important;">Диагностика проблем</h3>
             <ul class="list-compact">
-                <li><strong>Hallucination высокий:</strong> Проблема модели → улучшать базу знаний, промпты, guardrails</li>
-                <li><strong>Correctness низкая:</strong> Проблема модели → разметка, анализ ошибок</li>
-                <li><strong>Adoption низкий при хорошем качестве:</strong> Проблема UX/доверия → интервью, обучение, воркшопы</li>
-                <li><strong>Корреляция:</strong> Качество растёт, Adoption — нет → проблема не в модели</li>
+                <li><strong>Hallucination высокий:</strong> Проблема модели → база знаний, промпты</li>
+                <li><strong>Correctness низкая:</strong> Проблема модели → разметка, анализ</li>
+                <li><strong>Adoption низкий:</strong> Проблема UX → интервью, воркшопы</li>
+                <li><strong>Корреляция:</strong> Качество ↑ Adoption → → проблема не в модели</li>
             </ul>
         </div>
         <div class="merged-item compact">
             <h3 style="color: var(--rwb-primary) !important;">Масштабирование</h3>
             <ul class="list-compact">
-                <li><strong>Платформа:</strong> RAG-пайплайн, Guardrails, UI — переиспользуются</li>
-                <li><strong>Per-topic:</strong> База знаний, критерии, эскалации — адаптируются</li>
-                <li><strong>Команда:</strong> Юристы + аналитики (не ML-инженеры)</li>
-                <li><strong>Время:</strong> ~2-3 месяца на новую тему (разметка, pilot)</li>
+                <li><strong>Платформа:</strong> RAG, Guardrails, UI</li>
+                <li><strong>Per-topic:</strong> База, критерии, эскалации</li>
+                <li><strong>Команда:</strong> Юристы + аналитики</li>
+                <li><strong>Время:</strong> 2-3 месяца/тема</li>
             </ul>
         </div>
     </div>
 
-    <div class="callout-primary" style="margin-top: 12px;">
-        <strong>Ключевые инсайты:</strong><br>
-        1️⃣ <strong>Класс задачи определяет методологию:</strong> "Правильный ответ неясен" → только эксперт-разметка, LLM-as-a-judge не подходит<br>
-        2️⃣ <strong>Adoption — не шум, а часть treatment:</strong> Если юристы не пользуются — эффект = 0, даже при идеальном качестве<br>
-        3️⃣ <strong>Критерии "выстрадываются":</strong> Итеративный процесс разметки и обсуждения расхождений (3-5 итераций)<br>
-        4️⃣ <strong>Go/Pilot/Limit/No-Go:</strong> Явный чеклист для принятия решений, согласованный с DS, юристами и бизнесом<br>
-        5️⃣ <strong>Масштабирование не автоматическое:</strong> Каждая новая тема = новая разметка, критерии, pilot
+    <div class="callout-primary" style="margin-top: 8px; padding: 8px 12px; font-size: 13px; line-height: 1.4;">
+        <strong>Ключевые инсайты:</strong>
+        <strong>1️⃣</strong> Класс задачи → методология (эксперт-разметка) •
+        <strong>2️⃣</strong> Adoption = часть treatment •
+        <strong>3️⃣</strong> Критерии через итерации (3-5) •
+        <strong>4️⃣</strong> Явный чеклист Go/Pilot/Limit/No-Go •
+        <strong>5️⃣</strong> Каждая тема = новая разметка
     </div>
 </div>
 </section>

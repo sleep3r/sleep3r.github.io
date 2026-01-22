@@ -1,1 +1,12 @@
 .DS_Store
+*.ipynb
+.python-version
+.venv
+*.lock
+*.toml
+
+# Qwen3-TTS cached models and generated audio
+.cache/
+huggingface/
+cloned_voice*.wav
+*_output.wav

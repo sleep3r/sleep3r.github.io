@@ -2679,69 +2679,69 @@
     <span class="label">Оценка эффекта: бизнес-кейс, экономическая модель, риски, комплаенс</span>
     <img src="assets/logo-blue.png" alt="Logo" class="logo">
 </div>
-<div class="slide-body design-matrix-compact">
+<div class="slide-body summary-ultra-compact">
     <h2>Кейс 3: Итоговое резюме и практический чеклист</h2>
     
-    <div class="merged-grid cols-3" style="margin-top: 8px;">
-        <div class="merged-item compact" style="background: rgba(107, 66, 251, 0.06);">
-            <h3 style="color: var(--rwb-primary) !important;">До запуска</h3>
-            <ul class="list-compact">
-                <li><strong>Класс задачи:</strong> Определить тип → эксперт-разметка</li>
-                <li><strong>Критерии:</strong> Итеративный цикл с юристами</li>
-                <li><strong>Разметчики:</strong> Юристы, 50-100 примеров</li>
+    <div class="merged-grid cols-3">
+        <div class="merged-item" style="background: rgba(107, 66, 251, 0.06);">
+            <h3 style="color: var(--rwb-primary) !important;">До запуска измерения</h3>
+            <ul>
+                <li><strong>Класс задачи:</strong> Определить тип задачи (неясен правильный ответ → эксперт-разметка)</li>
+                <li><strong>Критерии:</strong> Итеративный цикл с юристами (3-5 итераций)</li>
+                <li><strong>Разметчики:</strong> Практикующие юристы, 50-100 примеров</li>
                 <li><strong>Guardrails:</strong> Safe RAG Pipeline</li>
-                <li><strong>Pilot:</strong> Узкая тема</li>
+                <li><strong>Pilot:</strong> Начать с узкой темы</li>
             </ul>
         </div>
-        <div class="merged-item compact" style="background: rgba(49, 130, 206, 0.06);">
+        <div class="merged-item" style="background: rgba(49, 130, 206, 0.06);">
             <h3 style="color: #3182CE !important;">Что измеряем</h3>
-            <ul class="list-compact">
-                <li><strong>Tech:</strong> Hallucination, Citation, Latency</li>
-                <li><strong>Quality:</strong> Correctness, Deflection</li>
+            <ul>
+                <li><strong>Tech:</strong> Hallucination rate, Citation accuracy</li>
+                <li><strong>Proxy:</strong> Correctness (юристы), Deflection</li>
                 <li><strong>Adoption/Trust:</strong> % используют, % доверяют</li>
-                <li><strong>Business:</strong> Экономия, эскалации, ROI</li>
-                <li><strong>Эффект:</strong> Deflection × Adoption × Trust × $</li>
+                <li><strong>Business:</strong> Экономия времени, снижение эскалаций</li>
+                <li><strong>Формула:</strong> Deflection × Adoption × Trust × Ценность</li>
             </ul>
         </div>
-        <div class="merged-item compact" style="background: rgba(214, 158, 46, 0.06);">
+        <div class="merged-item" style="background: rgba(214, 158, 46, 0.06);">
             <h3 style="color: #D69E2E !important;">Принятие решения</h3>
-            <ul class="list-compact">
-                <li><strong>Go:</strong> Halluc < 1%, Adoption > 70%</li>
-                <li><strong>Pilot:</strong> Halluc < 3%, Adoption 40-70%</li>
-                <li><strong>Limit:</strong> Черновик + review</li>
-                <li><strong>No-Go:</strong> Halluc > 5%, саботаж</li>
+            <ul>
+                <li><strong>Go:</strong> Hallucination < 1%, Adoption > 70%, Deflection > 50%</li>
+                <li><strong>Pilot:</strong> Hallucination < 3%, Adoption 40-70%, ограничить домен</li>
+                <li><strong>Limit:</strong> Режим "черновика", обязательный review</li>
+                <li><strong>No-Go:</strong> Hallucination > 5%, Adoption не растёт, саботаж</li>
             </ul>
         </div>
     </div>
 
-    <div class="merged-grid cols-2" style="margin-top: 8px;">
-        <div class="merged-item compact">
+    <div class="merged-grid cols-2">
+        <div class="merged-item">
             <h3 style="color: #E53E3E !important;">Диагностика проблем</h3>
-            <ul class="list-compact">
-                <li><strong>Hallucination высокий:</strong> Проблема модели → база знаний, промпты</li>
-                <li><strong>Correctness низкая:</strong> Проблема модели → разметка, анализ</li>
-                <li><strong>Adoption низкий:</strong> Проблема UX → интервью, воркшопы</li>
-                <li><strong>Корреляция:</strong> Качество ↑ Adoption → → проблема не в модели</li>
+            <ul>
+                <li><strong>Hallucination высокий:</strong> Проблема модели → улучшать базу знаний, промпты</li>
+                <li><strong>Correctness низкая:</strong> Проблема модели → разметка, анализ ошибок</li>
+                <li><strong>Adoption низкий:</strong> Проблема UX/доверия → интервью, воркшопы</li>
+                <li><strong>Корреляция:</strong> Качество растёт, Adoption — нет → проблема не в модели</li>
             </ul>
         </div>
-        <div class="merged-item compact">
+        <div class="merged-item">
             <h3 style="color: var(--rwb-primary) !important;">Масштабирование</h3>
-            <ul class="list-compact">
-                <li><strong>Платформа:</strong> RAG, Guardrails, UI</li>
-                <li><strong>Per-topic:</strong> База, критерии, эскалации</li>
-                <li><strong>Команда:</strong> Юристы + аналитики</li>
-                <li><strong>Время:</strong> 2-3 месяца/тема</li>
+            <ul>
+                <li><strong>Платформа:</strong> RAG-пайплайн, Guardrails, UI — переиспользуются</li>
+                <li><strong>Per-topic:</strong> База знаний, критерии, эскалации — адаптируются</li>
+                <li><strong>Команда:</strong> Юристы + аналитики (не ML-инженеры)</li>
+                <li><strong>Время:</strong> ~2-3 месяца на новую тему (разметка, pilot)</li>
             </ul>
         </div>
     </div>
 
-    <div class="callout-primary" style="margin-top: 8px; padding: 8px 12px; font-size: 13px; line-height: 1.4;">
+    <div class="callout-primary">
         <strong>Ключевые инсайты:</strong>
-        <strong>1️⃣</strong> Класс задачи → методология (эксперт-разметка) •
-        <strong>2️⃣</strong> Adoption = часть treatment •
-        <strong>3️⃣</strong> Критерии через итерации (3-5) •
-        <strong>4️⃣</strong> Явный чеклист Go/Pilot/Limit/No-Go •
-        <strong>5️⃣</strong> Каждая тема = новая разметка
+        <strong>1️⃣</strong> Класс задачи определяет методологию (эксперт-разметка) •
+        <strong>2️⃣</strong> Adoption — не шум, а часть treatment •
+        <strong>3️⃣</strong> Критерии через итеративный процесс (3-5 итераций) •
+        <strong>4️⃣</strong> Явный чеклист Go/Pilot/Limit/No-Go для принятия решений •
+        <strong>5️⃣</strong> Масштабирование не автоматическое: каждая тема = новая разметка
     </div>
 </div>
 </section>

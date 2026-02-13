@@ -1,36 +1,37 @@
 /* ============================================
    Linear Algebra Presentation Styles
+   Classic LaTeX Style
    Based on Reveal.js
    ============================================ */
 
-/* Typography */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap&subset=cyrillic,latin');
+/* Typography - Classic LaTeX fonts */
+@import url('https://fonts.googleapis.com/css2?family=Computer+Modern+Serif:wght@400;700&family=Latin+Modern+Roman:wght@400;700&display=swap&subset=cyrillic,latin');
 
 /* ============================================
    DESIGN TOKENS (Variables)
    ============================================ */
 :root {
-	/* Primary Colors */
-	--la-dark: #1a1a2e;           /* Deep navy - main text */
-	--la-primary: #0f4c75;        /* Blue - accents */
-	--la-secondary: #3282b8;      /* Light blue */
-	--la-accent: #bbe1fa;         /* Lightest blue */
+	/* Classic LaTeX Colors */
+	--la-dark: #000000;           /* Pure black - main text */
+	--la-primary: #000000;        /* Black - no color accents */
+	--la-secondary: #333333;      /* Dark gray */
+	--la-accent: #666666;         /* Medium gray */
 	
 	/* Supporting Colors */
-	--la-white: #FFFFFF;
-	--la-border: #E2E8F0;
-	--la-text: #1a1a2e;
-	--la-text-muted: #64748B;
-	--la-success: #10b981;
-	--la-warning: #f59e0b;
-	--la-error: #ef4444;
+	--la-white: #F5F5DC;          /* Beige background */
+	--la-border: #CCCCCC;
+	--la-text: #000000;
+	--la-text-muted: #555555;
+	--la-success: #000000;
+	--la-warning: #000000;
+	--la-error: #000000;
 	
 	/* Background Levels */
-	--level-1: #FCFDFF;
-	--level-2: #F0F9FF;
-	--level-3: #E0F2FE;
-	--level-4: #BAE6FD;
-	--level-5: #7DD3FC;
+	--level-1: #FAFAFA;
+	--level-2: #F0F0F0;
+	--level-3: #E8E8E8;
+	--level-4: #DDDDDD;
+	--level-5: #CCCCCC;
 	
 	/* Spacing */
 	--space-xs: 8px;
@@ -39,61 +40,63 @@
 	--space-lg: 30px;
 	--space-xl: 40px;
 	
-	/* Radius */
-	--radius-sm: 8px;
-	--radius-md: 12px;
-	--radius-lg: 20px;
-	--radius-pill: 50px;
+	/* Radius - minimal for classic look */
+	--radius-sm: 0px;
+	--radius-md: 0px;
+	--radius-lg: 0px;
+	--radius-pill: 0px;
 }
 
 /* ============================================
-   BASE REVEAL OVERRIDES
+   BASE REVEAL OVERRIDES - Classic LaTeX Style
    ============================================ */
 .reveal {
-	font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+	font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'Times New Roman', 'Georgia', serif;
 	color: var(--la-text);
 	background: var(--la-white);
+	font-size: 18px;
 }
 
 .reveal h1,
 .reveal h2,
 .reveal h3,
 .reveal h4 {
-	font-family: 'Montserrat', sans-serif;
+	font-family: 'Computer Modern Serif', 'Latin Modern Roman', 'Times New Roman', 'Georgia', serif;
 	font-weight: 700;
 	color: var(--la-dark);
 	text-transform: none;
 	margin: 0 0 var(--space-md) 0;
 }
 
-.reveal h1 { font-size: 48px; line-height: 1.2; }
-.reveal h2 { font-size: 36px; line-height: 1.3; margin-bottom: var(--space-lg); }
-.reveal h3 { font-size: 24px; line-height: 1.4; margin-bottom: var(--space-md); }
-.reveal h4 { font-size: 20px; line-height: 1.5; font-weight: 600; }
+.reveal h1 { font-size: 42px; line-height: 1.2; }
+.reveal h2 { font-size: 32px; line-height: 1.3; margin-bottom: var(--space-lg); }
+.reveal h3 { font-size: 22px; line-height: 1.4; margin-bottom: var(--space-md); }
+.reveal h4 { font-size: 18px; line-height: 1.5; font-weight: 700; }
 
 .reveal p,
 .reveal li {
-	font-size: 18px;
-	line-height: 1.6;
+	font-size: 16px;
+	line-height: 1.8;
 	margin: 0 0 var(--space-sm) 0;
+	text-align: justify;
 }
 
 .reveal strong {
 	color: var(--la-primary);
-	font-weight: 600;
+	font-weight: 700;
 }
 
 .reveal code {
-	background: var(--level-2);
-	padding: 2px 8px;
-	border-radius: var(--radius-sm);
-	font-family: 'Monaco', 'Courier New', monospace;
+	background: transparent;
+	padding: 0;
+	border-radius: 0;
+	font-family: 'Courier New', 'Courier', monospace;
 	font-size: 0.9em;
 	color: var(--la-primary);
 }
 
 /* ============================================
-   SLIDE LAYOUTS
+   SLIDE LAYOUTS - Classic LaTeX Style
    ============================================ */
 .reveal .slides section {
 	height: 100vh;
@@ -102,36 +105,39 @@
 	box-sizing: border-box;
 }
 
-/* Title Slide */
+/* Title Slide - Classic LaTeX look */
 .slide-title {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(135deg, var(--la-dark) 0%, var(--la-primary) 100%);
-	color: var(--la-white);
+	background: var(--la-white);
+	color: var(--la-dark);
 	text-align: center;
 	padding: var(--space-xl);
+	border: 3px solid var(--la-dark);
 }
 
 .slide-title h1 {
-	color: var(--la-white);
-	font-size: 64px;
-	font-weight: 800;
+	color: var(--la-dark);
+	font-size: 48px;
+	font-weight: 700;
 	margin-bottom: var(--space-lg);
-	text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+	text-shadow: none;
+	font-variant: small-caps;
 }
 
 .slide-title .subtitle {
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 400;
-	opacity: 0.9;
+	opacity: 1;
 	margin-bottom: var(--space-xl);
+	font-style: italic;
 }
 
 .slide-title .author {
-	font-size: 18px;
-	opacity: 0.7;
+	font-size: 16px;
+	opacity: 1;
 	margin-top: var(--space-xl);
 }
 
@@ -149,15 +155,16 @@
 	align-items: center;
 	margin-bottom: var(--space-lg);
 	padding-bottom: var(--space-sm);
-	border-bottom: 2px solid var(--level-3);
+	border-bottom: 1px solid var(--la-dark);
 }
 
 .slide-header .label {
-	font-size: 14px;
-	font-weight: 500;
+	font-size: 12px;
+	font-weight: 400;
 	color: var(--la-text-muted);
-	text-transform: uppercase;
-	letter-spacing: 0.5px;
+	text-transform: none;
+	letter-spacing: 0px;
+	font-style: italic;
 }
 
 .slide-body {
@@ -167,7 +174,7 @@
 }
 
 /* ============================================
-   COMPONENTS
+   COMPONENTS - Classic LaTeX Style
    ============================================ */
 
 /* Grid Layouts */
@@ -185,33 +192,34 @@
 	margin: var(--space-md) 0;
 }
 
-/* Cards */
+/* Cards - Minimal boxes */
 .card {
-	background: var(--level-1);
-	border: 1px solid var(--la-border);
-	border-radius: var(--radius-md);
+	background: transparent;
+	border: 1px solid var(--la-dark);
+	border-radius: 0;
 	padding: var(--space-lg);
-	transition: all 0.3s ease;
+	transition: none;
 }
 
 .card:hover {
-	box-shadow: 0 4px 12px rgba(15, 76, 117, 0.1);
-	transform: translateY(-2px);
+	box-shadow: none;
+	transform: none;
 }
 
 .card h3 {
-	color: var(--la-primary);
+	color: var(--la-dark);
 	margin-bottom: var(--space-md);
+	font-weight: 700;
 }
 
-/* Matrix Display */
+/* Matrix Display - Classic LaTeX brackets */
 .matrix-container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: var(--space-lg) 0;
-	font-family: 'Monaco', monospace;
-	font-size: 20px;
+	font-family: 'Computer Modern Serif', 'Times New Roman', serif;
+	font-size: 18px;
 }
 
 .matrix {
@@ -225,18 +233,18 @@
 	position: absolute;
 	top: 0;
 	bottom: 0;
-	width: 4px;
-	background: var(--la-primary);
+	width: 2px;
+	background: var(--la-dark);
 }
 
 .matrix::before {
 	left: 0;
-	border-radius: 4px 0 0 4px;
+	border-radius: 0;
 }
 
 .matrix::after {
 	right: 0;
-	border-radius: 0 4px 4px 0;
+	border-radius: 0;
 }
 
 .matrix-row {
@@ -252,20 +260,20 @@
 	color: var(--la-dark);
 }
 
-/* Vector Display */
+/* Vector Display - Classic LaTeX style */
 .vector-container {
 	display: inline-flex;
 	flex-direction: column;
 	margin: var(--space-md);
-	font-family: 'Monaco', monospace;
-	font-size: 18px;
+	font-family: 'Computer Modern Serif', 'Times New Roman', serif;
+	font-size: 16px;
 }
 
 .vector {
 	position: relative;
 	padding: var(--space-md) var(--space-lg);
-	border-left: 3px solid var(--la-primary);
-	border-right: 3px solid var(--la-primary);
+	border-left: 2px solid var(--la-dark);
+	border-right: 2px solid var(--la-dark);
 }
 
 .vector-component {
@@ -273,154 +281,167 @@
 	margin: var(--space-xs) 0;
 }
 
-/* Formula Box */
+/* Formula Box - Classic LaTeX style */
 .formula {
-	background: var(--level-2);
-	border-left: 4px solid var(--la-primary);
-	border-radius: var(--radius-sm);
+	background: transparent;
+	border: none;
+	border-radius: 0;
 	padding: var(--space-lg);
 	margin: var(--space-md) 0;
-	font-size: 20px;
+	font-size: 18px;
 	text-align: center;
-	font-family: 'Times New Roman', serif;
+	font-family: 'Computer Modern Serif', 'Times New Roman', serif;
+	font-style: italic;
 }
 
 .formula-label {
 	font-size: 14px;
 	color: var(--la-text-muted);
 	margin-bottom: var(--space-sm);
-	font-family: 'Inter', sans-serif;
+	font-family: 'Computer Modern Serif', 'Times New Roman', serif;
+	font-style: normal;
 }
 
-/* Lists */
+/* Lists - Classic style */
 .reveal ul {
 	margin: 0;
-	padding-left: var(--space-lg);
+	padding-left: var(--space-xl);
 }
 
 .reveal ul li {
 	margin-bottom: var(--space-sm);
+	text-align: left;
 }
 
 .reveal ul li::marker {
-	color: var(--la-primary);
+	color: var(--la-dark);
 }
 
-/* Key Points */
+/* Key Points - Classic style */
 .key-point {
-	background: var(--level-2);
-	border-left: 4px solid var(--la-primary);
-	border-radius: var(--radius-sm);
+	background: transparent;
+	border: 1px solid var(--la-dark);
+	border-radius: 0;
 	padding: var(--space-md) var(--space-lg);
 	margin: var(--space-md) 0;
 }
 
 .key-point-icon {
-	font-size: 24px;
-	margin-right: var(--space-sm);
+	font-size: 0;
+	margin-right: 0;
+	display: none;
 }
 
-/* Example Box */
+/* Example Box - Classic style */
 .example {
-	background: var(--level-1);
-	border: 2px solid var(--level-4);
-	border-radius: var(--radius-md);
+	background: transparent;
+	border: 1px solid var(--la-dark);
+	border-radius: 0;
 	padding: var(--space-lg);
 	margin: var(--space-md) 0;
 }
 
 .example-title {
-	color: var(--la-primary);
-	font-weight: 600;
+	color: var(--la-dark);
+	font-weight: 700;
 	margin-bottom: var(--space-sm);
-	font-size: 18px;
+	font-size: 16px;
+	font-style: italic;
 }
 
-/* Definition Box */
+/* Definition Box - Classic style */
 .definition {
-	background: linear-gradient(to right, var(--level-3), var(--level-1));
-	border-radius: var(--radius-md);
+	background: transparent;
+	border: 2px solid var(--la-dark);
+	border-radius: 0;
 	padding: var(--space-lg);
 	margin: var(--space-md) 0;
 }
 
 .definition-term {
 	font-weight: 700;
-	color: var(--la-primary);
-	font-size: 20px;
+	color: var(--la-dark);
+	font-size: 18px;
 	margin-bottom: var(--space-sm);
+	text-decoration: underline;
 }
 
-/* Badge */
+/* Badge - Classic style */
 .badge {
 	display: inline-block;
-	background: var(--la-primary);
-	color: var(--la-white);
+	background: transparent;
+	color: var(--la-dark);
 	padding: var(--space-xs) var(--space-md);
-	border-radius: var(--radius-pill);
+	border: 1px solid var(--la-dark);
+	border-radius: 0;
 	font-size: 14px;
-	font-weight: 600;
+	font-weight: 400;
 	margin: var(--space-xs);
 }
 
 .badge.secondary {
-	background: var(--la-secondary);
-}
-
-.badge.light {
-	background: var(--level-4);
+	background: transparent;
 	color: var(--la-dark);
 }
 
-/* Footer Note */
+.badge.light {
+	background: transparent;
+	color: var(--la-dark);
+}
+
+/* Footer Note - Classic style */
 .footer-note {
 	margin-top: auto;
 	padding-top: var(--space-lg);
-	font-size: 16px;
+	font-size: 14px;
 	color: var(--la-text-muted);
-	border-top: 1px solid var(--la-border);
+	border-top: 1px solid var(--la-dark);
+	font-style: italic;
 }
 
-/* Application Cards */
+/* Application Cards - Classic style */
 .application-card {
-	background: var(--level-1);
-	border-radius: var(--radius-md);
+	background: transparent;
+	border: 1px solid var(--la-dark);
+	border-radius: 0;
 	padding: var(--space-lg);
 	text-align: center;
 }
 
 .application-icon {
-	font-size: 48px;
-	margin-bottom: var(--space-md);
+	font-size: 0;
+	margin-bottom: 0;
+	display: none;
 }
 
 .application-title {
-	color: var(--la-primary);
-	font-weight: 600;
+	color: var(--la-dark);
+	font-weight: 700;
 	margin-bottom: var(--space-sm);
-	font-size: 20px;
+	font-size: 18px;
 }
 
-/* Highlight */
+/* Highlight - Classic style */
 .highlight {
-	background: linear-gradient(to right, transparent, var(--level-3), transparent);
+	background: transparent;
+	border: 1px solid var(--la-dark);
 	padding: var(--space-md);
-	border-radius: var(--radius-sm);
+	border-radius: 0;
 	margin: var(--space-md) 0;
 }
 
 /* ============================================
-   UTILITIES
+   UTILITIES - Classic LaTeX Style
    ============================================ */
 .text-center { text-align: center; }
 .text-left { text-align: left; }
 .text-right { text-align: right; }
 
-.text-primary { color: var(--la-primary); }
+.text-primary { color: var(--la-dark); }
 .text-muted { color: var(--la-text-muted); }
-.text-success { color: var(--la-success); }
-.text-warning { color: var(--la-warning); }
-.text-error { color: var(--la-error); }
+.text-success { color: var(--la-dark); }
+.text-warning { color: var(--la-dark); }
+.text-error { color: var(--la-dark); }
 
 .mb-sm { margin-bottom: var(--space-sm); }
 .mb-md { margin-bottom: var(--space-md); }
@@ -431,3 +452,9 @@
 .mt-md { margin-top: var(--space-md); }
 .mt-lg { margin-top: var(--space-lg); }
 .mt-xl { margin-top: var(--space-xl); }
+
+/* Hide emoji icons in classic style */
+.application-icon,
+.key-point-icon {
+	display: none;
+}

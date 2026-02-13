@@ -115,7 +115,6 @@
 	color: var(--la-dark);
 	text-align: center;
 	padding: var(--space-xl);
-	border: 3px solid var(--la-dark);
 }
 
 .slide-title h1 {

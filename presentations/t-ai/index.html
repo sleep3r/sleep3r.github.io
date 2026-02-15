@@ -301,16 +301,13 @@
     const searchEl = document.getElementById("search");
 
     const state = {
-      owner: "sleep3r",
-      repo: "sleep3r.github.io",
       files: []
     };
 
     function decodeGitHubName(name) {
       try {
         return decodeURIComponent(name);
-      } catch (err) {
-        console.warn("Не удалось декодировать имя файла:", err);
+      } catch {
         return name;
       }
     }
@@ -325,8 +322,7 @@
         return "Дата неизвестна";
       }
       return new Intl.DateTimeFormat("ru-RU", {
-        dateStyle: "medium",
-        timeStyle: "short"
+        dateStyle: "medium"
       }).format(new Date(isoDate));
     }
 
@@ -403,19 +399,30 @@
         title.className = "title";
         title.textContent = file.baseName;
 
-        const subline = document.createElement("div");
-        subline.className = "subline";
+        const hasMetadata = file.lastCommitAt || (file.size && file.size > 0);
 
-        const dateChip = document.createElement("span");
-        dateChip.className = "chip";
-        dateChip.textContent = `Обновлено: ${formatDate(file.lastCommitAt)}`;
+        if (hasMetadata) {
+          const subline = document.createElement("div");
+          subline.className = "subline";
 
-        const sizeChip = document.createElement("span");
-        sizeChip.className = "chip";
-        sizeChip.textContent = formatSize(file.size);
+          if (file.lastCommitAt) {
+            const dateChip = document.createElement("span");
+            dateChip.className = "chip";
+            dateChip.textContent = `Обновлено: ${formatDate(file.lastCommitAt)}`;
+            subline.append(dateChip);
+          }
 
-        subline.append(dateChip, sizeChip);
-        left.append(title, subline);
+          if (file.size && file.size > 0) {
+            const sizeChip = document.createElement("span");
+            sizeChip.className = "chip";
+            sizeChip.textContent = formatSize(file.size);
+            subline.append(sizeChip);
+          }
+
+          left.append(title, subline);
+        } else {
+          left.append(title);
+        }
 
         const actions = document.createElement("div");
         actions.className = "actions";
@@ -446,54 +453,23 @@
       return `Показано ${visibleCount} из ${totalCount}`;
     }
 
-    async function enrichWithCommitDate(file) {
-      const commitUrl = `https://api.github.com/repos/${state.owner}/${state.repo}/commits?path=presentations/t-ai/pdf/${encodeURIComponent(file.name)}&per_page=1`;
-      try {
-        const response = await fetch(commitUrl);
-        if (!response.ok) {
-          return file;
-        }
-        const commits = await response.json();
-        const isoDate = commits[0]?.commit?.author?.date;
-        return { ...file, lastCommitAt: isoDate || null };
-      } catch (err) {
-        console.warn("Не удалось получить дату коммита:", err);
-        return file;
-      }
-    }
-
-    async function loadFromGitHubApi() {
-      const host = globalThis.location.hostname;
-      const ownerFromHost = host.endsWith(".github.io") ? host.split(".")[0] : null;
-      state.owner = ownerFromHost || "sleep3r";
-      state.repo = state.owner === "sleep3r" ? "sleep3r.github.io" : `${state.owner}.github.io`;
-      const apiUrl = `https://api.github.com/repos/${state.owner}/${state.repo}/contents/presentations/t-ai/pdf`;
-
-      const res = await fetch(`${apiUrl}?_=${Date.now()}`);
+    async function loadFromManifest() {
+      const res = await fetch(`./pdf/manifest.json?_=${Date.now()}`);
       if (!res.ok) {
-        throw new Error(`GitHub API error ${res.status}`);
+        throw new Error(`Manifest not found: ${res.status}`);
       }
 
-      const data = await res.json();
-      console.log("GitHub API ответ:", data);
-      const basic = data
-        .filter((item) => item.type === "file" && /\.pdf$/i.test(item.name))
-        .map((item) => {
-          const decodedName = decodeGitHubName(item.name);
-          const fileData = {
-            name: item.name,
-            baseName: decodedName.replace(/\.pdf$/i, ""),
-            href: `./pdf/${encodeURIComponent(item.name)}`,
-            size: (item.size && item.size > 0) ? item.size : null,
-            lastCommitAt: null
-          };
-          console.log("Обработан файл:", fileData);
-          return fileData;
-        });
-
-      const enriched = await Promise.all(basic.map(enrichWithCommitDate));
-      console.log("Финальные данные после обогащения:", enriched);
-      return enriched;
+      const manifest = await res.json();
+      return manifest.files.map((item) => {
+        const decodedName = decodeGitHubName(item.name);
+        return {
+          name: item.name,
+          baseName: decodedName.replace(/\.pdf$/i, ""),
+          href: `./pdf/${encodeURIComponent(item.name)}`,
+          size: item.size || null,
+          lastCommitAt: item.modified || null
+        };
+      });
     }
 
     async function loadLocalFallback() {
@@ -515,10 +491,10 @@
     async function init() {
       setupControls();
       try {
-        state.files = await loadFromGitHubApi();
+        state.files = await loadFromManifest();
       } catch (err) {
-        console.warn("GitHub API недоступен, использую fallback:", err);
-        statusEl.textContent = "Не удалось получить список через API. Включен локальный fallback.";
+        console.info("Манифест не найден. Используется fallback.", err);
+        statusEl.textContent = "";
         state.files = await loadLocalFallback();
       }
       applyFiltersAndRender();

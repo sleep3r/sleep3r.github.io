@@ -331,7 +331,7 @@
     }
 
     function formatSize(bytes) {
-      if (typeof bytes !== "number" || Number.isNaN(bytes)) {
+      if (typeof bytes !== "number" || Number.isNaN(bytes) || bytes <= 0) {
         return "Размер неизвестен";
       }
       const mb = bytes / (1024 * 1024);
@@ -475,20 +475,25 @@
       }
 
       const data = await res.json();
+      console.log("GitHub API ответ:", data);
       const basic = data
         .filter((item) => item.type === "file" && /\.pdf$/i.test(item.name))
         .map((item) => {
           const decodedName = decodeGitHubName(item.name);
-          return {
+          const fileData = {
             name: item.name,
             baseName: decodedName.replace(/\.pdf$/i, ""),
             href: `./pdf/${encodeURIComponent(item.name)}`,
-            size: item.size || 0,
+            size: (item.size && item.size > 0) ? item.size : null,
             lastCommitAt: null
           };
+          console.log("Обработан файл:", fileData);
+          return fileData;
         });
 
-      return Promise.all(basic.map(enrichWithCommitDate));
+      const enriched = await Promise.all(basic.map(enrichWithCommitDate));
+      console.log("Финальные данные после обогащения:", enriched);
+      return enriched;
     }
 
     async function loadLocalFallback() {

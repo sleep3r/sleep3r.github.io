@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ТАИ - Презентации</title>
+  <style>
+    :root {
+      --bg: #141414;
+      --panel: #1b1b1b;
+      --panel-strong: #111;
+      --text: #f2f2f2;
+      --muted: #9d9d9d;
+      --aqua: #56a6af;
+      --aqua-soft: #8ddfe6;
+      --gold: #b19503;
+      --gold-soft: #cead04;
+      --border: #2a2a2a;
+      --shadow: rgba(0, 0, 0, 0.55);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+      background:
+        radial-gradient(1000px 700px at -10% -20%, rgba(86, 166, 175, 0.22), transparent 62%),
+        radial-gradient(1000px 620px at 110% -20%, rgba(206, 173, 4, 0.2), transparent 64%),
+        repeating-linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.02) 0 2px,
+          rgba(255, 255, 255, 0) 2px 10px
+        ),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .page {
+      width: min(980px, 100%);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 28px 70px var(--shadow);
+      overflow: hidden;
+      backdrop-filter: blur(1px);
+    }
+
+    .hero {
+      position: relative;
+      display: grid;
+      gap: 16px;
+      grid-template-columns: 98px 1fr auto;
+      align-items: center;
+      background: linear-gradient(95deg, rgba(86, 166, 175, 0.12), rgba(206, 173, 4, 0.12));
+      border-bottom: 1px solid var(--border);
+      padding: 22px;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--aqua), var(--gold));
+      opacity: 0.7;
+      z-index: -1;
+    }
+
+    .logo-wrap {
+      width: 98px;
+      height: 98px;
+      border-radius: 16px;
+      padding: 2px;
+      background: linear-gradient(130deg, rgba(141, 223, 230, 0.9), rgba(206, 173, 4, 0.85));
+      box-shadow: 0 6px 22px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero img {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      object-fit: cover;
+      display: block;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(24px, 4.1vw, 36px);
+      letter-spacing: 0.02em;
+      text-wrap: balance;
+    }
+
+    .subtitle {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 60ch;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 12px;
+      color: var(--aqua-soft);
+      background: rgba(17, 17, 17, 0.66);
+      white-space: nowrap;
+    }
+
+    .content {
+      padding: 20px;
+    }
+
+    .toolbar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .search,
+    .sort {
+      width: 100%;
+      background: linear-gradient(180deg, #191919, #151515);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 12px;
+      padding: 11px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .search:focus,
+    .sort:focus {
+      border-color: var(--aqua);
+      box-shadow: 0 0 0 2px rgba(86, 166, 175, 0.2);
+    }
+
+    .meta {
+      margin: 0 0 14px;
+      color: var(--aqua-soft);
+      font-size: 14px;
+    }
+
+    .status {
+      margin: 0 0 10px;
+      color: var(--gold-soft);
+      font-size: 14px;
+      min-height: 20px;
+    }
+
+    .list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      padding: 15px 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent),
+        var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      transition: border-color 120ms ease, transform 120ms ease;
+    }
+
+    .card:hover {
+      border-color: rgba(141, 223, 230, 0.48);
+      transform: translateY(-1px);
+    }
+
+    .title {
+      font-size: 16px;
+      margin: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .subline {
+      margin-top: 7px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(0, 0, 0, 0.15);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+
+    .btn {
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      transition: transform 120ms ease, border-color 120ms ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: var(--aqua);
+    }
+
+    .btn.primary {
+      background: linear-gradient(100deg, var(--aqua), var(--gold));
+      border: none;
+      color: #111;
+      font-weight: 700;
+    }
+
+    .empty {
+      margin: 0;
+      border: 1px dashed rgba(157, 157, 157, 0.4);
+      border-radius: 12px;
+      padding: 16px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 780px) {
+      .hero {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .logo-wrap {
+        margin: 0 auto;
+      }
+
+      .pill {
+        width: fit-content;
+        margin: 0 auto;
+      }
+
+      .toolbar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .actions {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <div class="logo-wrap">
+        <img src="./logo.jpg" alt="Логотип ТАИ">
+      </div>
+      <div>
+        <h1>ТАИ: Библиотека презентаций</h1>
+        <p class="subtitle">Добавляйте новые PDF в папку — страница автоматически соберёт каталог для занятий.</p>
+      </div>
+      <div class="pill">TAI PDF Hub</div>
+    </header>
+
+    <section class="content">
+      <div class="toolbar">
+        <input id="search" class="search" type="search" placeholder="Поиск по названию презентации..." aria-label="Поиск по названию">
+        <select id="sort" class="sort" aria-label="Сортировка">
+          <option value="recent">Сначала новые</option>
+          <option value="alpha-asc">Название: А-Я</option>
+          <option value="alpha-desc">Название: Я-А</option>
+          <option value="number-asc">По номеру: 1-9</option>
+          <option value="number-desc">По номеру: 9-1</option>
+          <option value="size-desc">Размер: больше сначала</option>
+        </select>
+      </div>
+
+      <p id="status" class="status">Загружаю список презентаций...</p>
+      <p id="count" class="meta"></p>
+      <div id="list" class="list" aria-live="polite"></div>
+      <p class="note">
+        Папка: <code>presentations/t-ai/pdf</code>. После push в репозиторий всё обновится без ручной правки страницы.
+      </p>
+    </section>
+  </main>
+
+  <script type="module">
+    const listEl = document.getElementById("list");
+    const statusEl = document.getElementById("status");
+    const countEl = document.getElementById("count");
+    const sortEl = document.getElementById("sort");
+    const searchEl = document.getElementById("search");
+
+    const state = {
+      owner: "sleep3r",
+      repo: "sleep3r.github.io",
+      files: []
+    };
+
+    function decodeGitHubName(name) {
+      try {
+        return decodeURIComponent(name);
+      } catch (err) {
+        console.warn("Не удалось декодировать имя файла:", err);
+        return name;
+      }
+    }
+
+    function extractLeadingNumber(name) {
+      const match = name.match(/^(\d+)/);
+      return match ? Number(match[1]) : Number.POSITIVE_INFINITY;
+    }
+
+    function formatDate(isoDate) {
+      if (!isoDate) {
+        return "Дата неизвестна";
+      }
+      return new Intl.DateTimeFormat("ru-RU", {
+        dateStyle: "medium",
+        timeStyle: "short"
+      }).format(new Date(isoDate));
+    }
+
+    function formatSize(bytes) {
+      if (typeof bytes !== "number" || Number.isNaN(bytes)) {
+        return "Размер неизвестен";
+      }
+      const mb = bytes / (1024 * 1024);
+      if (mb >= 1) {
+        return `${mb.toFixed(2)} MB`;
+      }
+      return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+    }
+
+    function getSortedFiles(files, mode) {
+      const copy = [...files];
+      switch (mode) {
+        case "alpha-asc":
+          return copy.sort((a, b) => a.baseName.localeCompare(b.baseName, "ru"));
+        case "alpha-desc":
+          return copy.sort((a, b) => b.baseName.localeCompare(a.baseName, "ru"));
+        case "number-asc":
+          return copy.sort((a, b) => extractLeadingNumber(a.baseName) - extractLeadingNumber(b.baseName));
+        case "number-desc":
+          return copy.sort((a, b) => extractLeadingNumber(b.baseName) - extractLeadingNumber(a.baseName));
+        case "size-desc":
+          return copy.sort((a, b) => (b.size || 0) - (a.size || 0));
+        case "recent":
+        default:
+          return copy.sort((a, b) => {
+            const tA = a.lastCommitAt ? new Date(a.lastCommitAt).getTime() : 0;
+            const tB = b.lastCommitAt ? new Date(b.lastCommitAt).getTime() : 0;
+            return tB - tA;
+          });
+      }
+    }
+
+    function applyFiltersAndRender() {
+      const query = searchEl.value.trim().toLowerCase();
+      const mode = sortEl.value;
+
+      const filtered = state.files.filter((file) => file.baseName.toLowerCase().includes(query));
+      const sorted = getSortedFiles(filtered, mode);
+      renderFiles(sorted, filtered.length, state.files.length);
+    }
+
+    function renderFiles(files, visibleCount, totalCount) {
+      listEl.innerHTML = "";
+
+      if (!totalCount) {
+        statusEl.textContent = "PDF пока не найдены.";
+        countEl.textContent = "";
+        return;
+      }
+
+      statusEl.textContent = "";
+      countEl.textContent = queryInfo(visibleCount, totalCount);
+
+      if (!files.length) {
+        const empty = document.createElement("p");
+        empty.className = "empty";
+        empty.textContent = "По вашему запросу ничего не найдено.";
+        listEl.append(empty);
+        return;
+      }
+
+      files.forEach((file) => {
+        const card = document.createElement("article");
+        card.className = "card";
+
+        const left = document.createElement("div");
+
+        const title = document.createElement("h2");
+        title.className = "title";
+        title.textContent = file.baseName;
+
+        const subline = document.createElement("div");
+        subline.className = "subline";
+
+        const dateChip = document.createElement("span");
+        dateChip.className = "chip";
+        dateChip.textContent = `Обновлено: ${formatDate(file.lastCommitAt)}`;
+
+        const sizeChip = document.createElement("span");
+        sizeChip.className = "chip";
+        sizeChip.textContent = formatSize(file.size);
+
+        subline.append(dateChip, sizeChip);
+        left.append(title, subline);
+
+        const actions = document.createElement("div");
+        actions.className = "actions";
+
+        const view = document.createElement("a");
+        view.className = "btn primary";
+        view.href = file.href;
+        view.target = "_blank";
+        view.rel = "noopener noreferrer";
+        view.textContent = "Открыть";
+
+        const download = document.createElement("a");
+        download.className = "btn";
+        download.href = file.href;
+        download.download = file.name;
+        download.textContent = "Скачать";
+
+        actions.append(view, download);
+        card.append(left, actions);
+        listEl.append(card);
+      });
+    }
+
+    function queryInfo(visibleCount, totalCount) {
+      if (visibleCount === totalCount) {
+        return `Показано презентаций: ${totalCount}`;
+      }
+      return `Показано ${visibleCount} из ${totalCount}`;
+    }
+
+    async function enrichWithCommitDate(file) {
+      const commitUrl = `https://api.github.com/repos/${state.owner}/${state.repo}/commits?path=presentations/t-ai/pdf/${encodeURIComponent(file.name)}&per_page=1`;
+      try {
+        const response = await fetch(commitUrl);
+        if (!response.ok) {
+          return file;
+        }
+        const commits = await response.json();
+        const isoDate = commits[0]?.commit?.author?.date;
+        return { ...file, lastCommitAt: isoDate || null };
+      } catch (err) {
+        console.warn("Не удалось получить дату коммита:", err);
+        return file;
+      }
+    }
+
+    async function loadFromGitHubApi() {
+      const host = globalThis.location.hostname;
+      const ownerFromHost = host.endsWith(".github.io") ? host.split(".")[0] : null;
+      state.owner = ownerFromHost || "sleep3r";
+      state.repo = state.owner === "sleep3r" ? "sleep3r.github.io" : `${state.owner}.github.io`;
+      const apiUrl = `https://api.github.com/repos/${state.owner}/${state.repo}/contents/presentations/t-ai/pdf`;
+
+      const res = await fetch(`${apiUrl}?_=${Date.now()}`);
+      if (!res.ok) {
+        throw new Error(`GitHub API error ${res.status}`);
+      }
+
+      const data = await res.json();
+      const basic = data
+        .filter((item) => item.type === "file" && /\.pdf$/i.test(item.name))
+        .map((item) => {
+          const decodedName = decodeGitHubName(item.name);
+          return {
+            name: item.name,
+            baseName: decodedName.replace(/\.pdf$/i, ""),
+            href: `./pdf/${encodeURIComponent(item.name)}`,
+            size: item.size || 0,
+            lastCommitAt: null
+          };
+        });
+
+      return Promise.all(basic.map(enrichWithCommitDate));
+    }
+
+    async function loadLocalFallback() {
+      const known = ["1_Разбор_региона.pdf"];
+      return known.map((name) => ({
+        name,
+        baseName: decodeGitHubName(name.replace(/\.pdf$/i, "")),
+        href: `./pdf/${encodeURIComponent(name)}`,
+        size: null,
+        lastCommitAt: null
+      }));
+    }
+
+    function setupControls() {
+      sortEl.addEventListener("change", applyFiltersAndRender);
+      searchEl.addEventListener("input", applyFiltersAndRender);
+    }
+
+    async function init() {
+      setupControls();
+      try {
+        state.files = await loadFromGitHubApi();
+      } catch (err) {
+        console.warn("GitHub API недоступен, использую fallback:", err);
+        statusEl.textContent = "Не удалось получить список через API. Включен локальный fallback.";
+        state.files = await loadLocalFallback();
+      }
+      applyFiltersAndRender();
+    }
+
+    await init();
+  </script>
+</body>
+</html>

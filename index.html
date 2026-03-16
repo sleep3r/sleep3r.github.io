@@ -179,7 +179,8 @@ function cmd_help(){
     ['open &lt;target&gt;', 'open link in a new tab'],
     ['tg | gh | li', 'shortcut to open socials'],
     ['baneks', 'open random joke (category b)'],
-    ['projects', 'list projects & presentations'],
+    ['projects', 'list projects'],
+    ['presentations', 'list presentations'],
     ['sl', 'steam locomotive easter egg'],
     ['ls', 'list entries'],
     ['echo &lt;text&gt;', 'print text'],
@@ -202,9 +203,13 @@ function cmd_projects(){
   line(`<b>Projects</b>:`);
   line(`  ${cmdLink('open climbing', 'climbing')} — climbing tracker`);
   line('');
-  line(`<b>Presentations</b>:`);
-  line(`  ${cmdLink('open t-ai', 't-ai')} — ${link('presentations/t-ai/','Сборы по ИИ: олимпиадная математика, теорвер, линал, оптимизация')}`);
-  line(`  ${cmdLink('open rwb-ai', 'rwb-ai')} — ${link('presentations/rwb-ai/','Университет RWB: оценка эффекта AI')}`);
+  line(`See also: ${cmdLink('presentations')}`);
+}
+
+function cmd_presentations(){
+  line(`<b>Presentations</b> (${link('presentations/','общий лендинг')}):`);
+  line(`  ${cmdLink('open t-ai', 't-ai')} — Сборы по ИИ: математика, теорвер, линал, оптимизация`);
+  line(`  ${cmdLink('open rwb-ai', 'rwb-ai')} — Университет RWB: оценка эффекта AI`);
 }
 
 function cmd_ls(){
@@ -368,6 +373,7 @@ Object.assign(commands, {
   help: cmd_help,
   links: cmd_links,
   projects: cmd_projects,
+  presentations: cmd_presentations,
   ls: cmd_ls,
   clear: cmd_clear,
   echo: cmd_echo,
@@ -440,7 +446,7 @@ function init(){
   banner();
   cmd_links();
   line('');
-  line(`Try ${cmdLink('projects')}, ${cmdLink('links')}, ${cmdLink('help')}`,'muted');
+  line(`Try ${cmdLink('projects')}, ${cmdLink('presentations')}, ${cmdLink('help')}`,'muted');
   createInputLine('');
 }
 

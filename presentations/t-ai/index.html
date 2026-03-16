@@ -6,197 +6,188 @@
   <title>Сборы по ИИ</title>
   <style>
     :root {
-      --bg: #f5f7fb;
-      --panel: #ffffff;
-      --panel-strong: #ffffff;
-      --text: #181c24;
-      --muted: #6d7485;
-      --aqua: #56a6af;
-      --aqua-soft: #8ddfe6;
-      --gold: #b19503;
-      --gold-soft: #cead04;
-      --border: #e6ebf2;
-      --shadow: rgba(16, 24, 40, 0.12);
+      --bg: #272822;
+      --bg2: #3e3d32;
+      --ink: #f8f8f2;
+      --muted: #75715e;
+      --a1: #66d9ef;
+      --a2: #ae81ff;
+      --a3: #a6e22e;
+      --a4: #f92672;
+      --glass: rgba(62,61,50,0.82);
+      --edge: #49483e;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; margin: 0; }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(800px 500px at 15% -10%, rgba(86, 166, 175, 0.14), transparent 60%),
-        radial-gradient(680px 460px at 90% -10%, rgba(206, 173, 4, 0.12), transparent 65%),
-        var(--bg);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
 
+    a { color: inherit; text-decoration: none; }
+
     .page {
-      width: min(980px, 100%);
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow:
-        0 20px 45px var(--shadow),
-        0 4px 18px rgba(16, 24, 40, 0.08);
+      width: min(920px, 100%);
+      border: 1px solid var(--edge);
+      border-radius: 18px;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: var(--glass);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
       overflow: hidden;
     }
 
-    .hero {
-      position: relative;
-      display: grid;
-      gap: 16px;
-      grid-template-columns: 98px 1fr;
+    .top-bar {
+      display: flex;
       align-items: center;
-      background: linear-gradient(95deg, rgba(86, 166, 175, 0.09), rgba(206, 173, 4, 0.08));
-      border-bottom: 1px solid var(--border);
-      padding: 22px;
-      isolation: isolate;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(73,72,62,0.6);
     }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f56; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #27c93f; }
+    .top-bar .label { margin-left: 6px; font-size: 13px; color: var(--muted); }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--aqua), var(--gold));
-      opacity: 0.7;
-      z-index: -1;
+    .hero {
+      display: grid;
+      gap: 14px;
+      grid-template-columns: 90px 1fr;
+      align-items: center;
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--edge);
     }
 
     .logo-wrap {
-      width: 98px;
-      height: 98px;
-      border-radius: 16px;
+      width: 90px;
+      height: 90px;
+      border-radius: 14px;
       padding: 2px;
-      background: linear-gradient(130deg, rgba(141, 223, 230, 0.9), rgba(206, 173, 4, 0.85));
-      box-shadow: 0 10px 20px rgba(16, 24, 40, 0.18);
+      background: linear-gradient(135deg, rgba(102,217,239,0.6), rgba(174,129,255,0.5));
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
     }
 
     .hero img {
       width: 100%;
       height: 100%;
-      border-radius: 14px;
+      border-radius: 12px;
       object-fit: cover;
       display: block;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(24px, 4.1vw, 36px);
-      letter-spacing: 0.02em;
-      text-wrap: balance;
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
+      color: var(--a1);
     }
 
     .subtitle {
-      margin: 7px 0 0;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 15px;
-      max-width: 60ch;
+      font-size: 14px;
     }
 
-    .content {
-      padding: 20px;
-    }
+    .content { padding: 18px; }
 
     .toolbar {
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 10px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .search,
     .sort {
       width: 100%;
-      background: #fff;
-      border: 1px solid var(--border);
-      color: var(--text);
-      border-radius: 12px;
-      padding: 11px 12px;
+      background: rgba(39,40,34,0.6);
+      border: 1px solid var(--edge);
+      color: var(--ink);
+      border-radius: 10px;
+      padding: 10px 12px;
       font-size: 14px;
       outline: none;
+      transition: border-color 120ms ease;
     }
 
     .sort {
       appearance: none;
-      padding-right: 36px;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2356a6af' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      padding-right: 34px;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%2366d9ef' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
       background-position: right 12px center;
       cursor: pointer;
     }
 
+    .search::placeholder { color: var(--muted); }
     .search:focus,
     .sort:focus {
-      border-color: var(--aqua);
-      box-shadow: 0 0 0 2px rgba(86, 166, 175, 0.2);
+      border-color: var(--a1);
+      box-shadow: 0 0 0 2px rgba(102,217,239,0.15);
     }
 
     .meta {
-      margin: 0 0 14px;
-      color: #327f87;
-      font-size: 14px;
+      margin: 0 0 12px;
+      color: var(--a1);
+      font-size: 13px;
+      opacity: 0.8;
     }
 
     .status {
       margin: 0 0 10px;
-      color: #9c8105;
-      font-size: 14px;
-      min-height: 20px;
+      color: var(--a2);
+      font-size: 13px;
+      min-height: 18px;
     }
 
-    .list {
-      display: grid;
-      gap: 12px;
-    }
+    .list { display: grid; gap: 10px; }
 
     .card {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       align-items: center;
-      padding: 15px 16px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      box-shadow: 0 8px 20px rgba(16, 24, 40, 0.05);
-      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+      padding: 14px 16px;
+      background: rgba(39,40,34,0.6);
+      border: 1px solid var(--edge);
+      border-radius: 12px;
+      transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
     }
 
     .card:hover {
-      border-color: rgba(86, 166, 175, 0.45);
+      border-color: rgba(102,217,239,0.45);
       transform: translateY(-1px);
-      box-shadow: 0 10px 24px rgba(16, 24, 40, 0.1);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
     }
 
     .title {
-      font-size: 16px;
-      margin: 0;
+      font-size: 15px;
+      font-weight: 600;
       overflow-wrap: anywhere;
+      color: var(--ink);
     }
 
     .subline {
-      margin-top: 7px;
+      margin-top: 6px;
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 6px;
     }
 
     .chip {
-      border: 1px solid var(--border);
+      border: 1px solid var(--edge);
       border-radius: 999px;
-      padding: 4px 8px;
-      font-size: 12px;
+      padding: 2px 8px;
+      font-size: 11px;
       color: var(--muted);
-      background: #f4f7fb;
+      background: rgba(62,61,50,0.5);
     }
 
     .actions {
@@ -207,66 +198,72 @@
 
     .btn {
       text-decoration: none;
-      color: var(--text);
-      border: 1px solid var(--border);
-      background: #fff;
-      padding: 8px 12px;
+      color: var(--ink);
+      border: 1px solid var(--edge);
+      background: transparent;
+      padding: 7px 12px;
       border-radius: 999px;
-      font-size: 13px;
-      transition: transform 120ms ease, border-color 120ms ease;
+      font-size: 12px;
+      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
     }
 
     .btn:hover {
       transform: translateY(-1px);
-      border-color: var(--aqua);
-      background: #f9fcfd;
+      border-color: var(--a1);
+      background: rgba(102,217,239,0.08);
     }
 
     .btn.primary {
-      background: linear-gradient(100deg, var(--aqua), var(--gold));
+      background: linear-gradient(100deg, var(--a1), var(--a2));
       border: none;
       color: #111;
       font-weight: 700;
     }
 
+    .btn.primary:hover {
+      background: linear-gradient(100deg, var(--a1), var(--a2));
+      opacity: 0.9;
+    }
+
     .empty {
-      margin: 0;
-      border: 1px dashed #cfd6e3;
-      border-radius: 12px;
+      border: 1px dashed var(--edge);
+      border-radius: 10px;
       padding: 16px;
       color: var(--muted);
       text-align: center;
     }
 
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--muted);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      transition: color 120ms ease;
+    }
+    .back-link:hover { color: var(--a1); }
+
     @media (max-width: 780px) {
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .logo-wrap {
-        margin: 0 auto;
-      }
-
-      .toolbar {
-        grid-template-columns: 1fr;
-      }
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .logo-wrap { margin: 0 auto; }
+      .toolbar { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 640px) {
-      .card {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .actions {
-        width: 100%;
-      }
+      .card { align-items: flex-start; flex-direction: column; }
+      .actions { width: 100%; }
     }
   </style>
 </head>
 <body>
   <main class="page">
+    <div class="top-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="label">t-ai — сборы по ИИ</span>
+    </div>
+
     <header class="hero">
       <div class="logo-wrap">
         <img src="./logo.jpg" alt="Логотип ТАИ">
@@ -279,20 +276,22 @@
 
     <section class="content">
       <div class="toolbar">
-        <input id="search" class="search" type="search" placeholder="Поиск по названию презентации..." aria-label="Поиск по названию">
+        <input id="search" class="search" type="search" placeholder="Поиск по названию..." aria-label="Поиск по названию">
         <select id="sort" class="sort" aria-label="Сортировка">
           <option value="recent">Сначала новые</option>
           <option value="alpha-asc">Название: А-Я</option>
           <option value="alpha-desc">Название: Я-А</option>
           <option value="number-asc">По номеру: 1-9</option>
           <option value="number-desc">По номеру: 9-1</option>
-          <option value="size-desc">Размер: больше сначала</option>
+          <option value="size-desc">Размер: больше</option>
         </select>
       </div>
 
       <p id="status" class="status">Загружаю список презентаций...</p>
       <p id="count" class="meta"></p>
       <div id="list" class="list" aria-live="polite"></div>
+
+      <a href="../" class="back-link">← cd ..</a>
     </section>
   </main>
 
@@ -303,16 +302,10 @@
     const sortEl = document.getElementById("sort");
     const searchEl = document.getElementById("search");
 
-    const state = {
-      files: []
-    };
+    const state = { files: [] };
 
     function decodeGitHubName(name) {
-      try {
-        return decodeURIComponent(name);
-      } catch {
-        return name;
-      }
+      try { return decodeURIComponent(name); } catch { return name; }
     }
 
     function extractLeadingNumber(name) {
@@ -321,38 +314,24 @@
     }
 
     function formatDate(isoDate) {
-      if (!isoDate) {
-        return "Дата неизвестна";
-      }
-      return new Intl.DateTimeFormat("ru-RU", {
-        dateStyle: "medium"
-      }).format(new Date(isoDate));
+      if (!isoDate) return "Дата неизвестна";
+      return new Intl.DateTimeFormat("ru-RU", { dateStyle: "medium" }).format(new Date(isoDate));
     }
 
     function formatSize(bytes) {
-      if (typeof bytes !== "number" || Number.isNaN(bytes) || bytes <= 0) {
-        return "Размер неизвестен";
-      }
+      if (typeof bytes !== "number" || Number.isNaN(bytes) || bytes <= 0) return "—";
       const mb = bytes / (1024 * 1024);
-      if (mb >= 1) {
-        return `${mb.toFixed(2)} MB`;
-      }
-      return `${Math.max(1, Math.round(bytes / 1024))} KB`;
+      return mb >= 1 ? `${mb.toFixed(2)} MB` : `${Math.max(1, Math.round(bytes / 1024))} KB`;
     }
 
     function getSortedFiles(files, mode) {
       const copy = [...files];
       switch (mode) {
-        case "alpha-asc":
-          return copy.sort((a, b) => a.baseName.localeCompare(b.baseName, "ru"));
-        case "alpha-desc":
-          return copy.sort((a, b) => b.baseName.localeCompare(a.baseName, "ru"));
-        case "number-asc":
-          return copy.sort((a, b) => extractLeadingNumber(a.baseName) - extractLeadingNumber(b.baseName));
-        case "number-desc":
-          return copy.sort((a, b) => extractLeadingNumber(b.baseName) - extractLeadingNumber(a.baseName));
-        case "size-desc":
-          return copy.sort((a, b) => (b.size || 0) - (a.size || 0));
+        case "alpha-asc":  return copy.sort((a, b) => a.baseName.localeCompare(b.baseName, "ru"));
+        case "alpha-desc": return copy.sort((a, b) => b.baseName.localeCompare(a.baseName, "ru"));
+        case "number-asc": return copy.sort((a, b) => extractLeadingNumber(a.baseName) - extractLeadingNumber(b.baseName));
+        case "number-desc":return copy.sort((a, b) => extractLeadingNumber(b.baseName) - extractLeadingNumber(a.baseName));
+        case "size-desc":  return copy.sort((a, b) => (b.size || 0) - (a.size || 0));
         case "recent":
         default:
           return copy.sort((a, b) => {
@@ -366,62 +345,56 @@
     function applyFiltersAndRender() {
       const query = searchEl.value.trim().toLowerCase();
       const mode = sortEl.value;
-
-      const filtered = state.files.filter((file) => file.baseName.toLowerCase().includes(query));
+      const filtered = state.files.filter(f => f.baseName.toLowerCase().includes(query));
       const sorted = getSortedFiles(filtered, mode);
       renderFiles(sorted, filtered.length, state.files.length);
     }
 
     function renderFiles(files, visibleCount, totalCount) {
       listEl.innerHTML = "";
-
       if (!totalCount) {
         statusEl.textContent = "PDF пока не найдены.";
         countEl.textContent = "";
         return;
       }
-
       statusEl.textContent = "";
-      countEl.textContent = queryInfo(visibleCount, totalCount);
+      countEl.textContent = visibleCount === totalCount
+        ? `Показано презентаций: ${totalCount}`
+        : `Показано ${visibleCount} из ${totalCount}`;
 
       if (!files.length) {
         const empty = document.createElement("p");
         empty.className = "empty";
-        empty.textContent = "По вашему запросу ничего не найдено.";
+        empty.textContent = "По запросу ничего не найдено.";
         listEl.append(empty);
         return;
       }
 
-      files.forEach((file) => {
+      files.forEach(file => {
         const card = document.createElement("article");
         card.className = "card";
 
         const left = document.createElement("div");
-
         const title = document.createElement("h2");
         title.className = "title";
         title.textContent = file.baseName;
 
         const hasMetadata = file.lastCommitAt || (file.size && file.size > 0);
-
         if (hasMetadata) {
           const subline = document.createElement("div");
           subline.className = "subline";
-
           if (file.lastCommitAt) {
-            const dateChip = document.createElement("span");
-            dateChip.className = "chip";
-            dateChip.textContent = `Обновлено: ${formatDate(file.lastCommitAt)}`;
-            subline.append(dateChip);
+            const chip = document.createElement("span");
+            chip.className = "chip";
+            chip.textContent = `Обновлено: ${formatDate(file.lastCommitAt)}`;
+            subline.append(chip);
           }
-
           if (file.size && file.size > 0) {
-            const sizeChip = document.createElement("span");
-            sizeChip.className = "chip";
-            sizeChip.textContent = formatSize(file.size);
-            subline.append(sizeChip);
+            const chip = document.createElement("span");
+            chip.className = "chip";
+            chip.textContent = formatSize(file.size);
+            subline.append(chip);
           }
-
           left.append(title, subline);
         } else {
           left.append(title);
@@ -429,41 +402,28 @@
 
         const actions = document.createElement("div");
         actions.className = "actions";
-
         const view = document.createElement("a");
         view.className = "btn primary";
         view.href = file.href;
         view.target = "_blank";
         view.rel = "noopener noreferrer";
         view.textContent = "Открыть";
-
         const download = document.createElement("a");
         download.className = "btn";
         download.href = file.href;
         download.download = file.name;
         download.textContent = "Скачать";
-
         actions.append(view, download);
         card.append(left, actions);
         listEl.append(card);
       });
     }
 
-    function queryInfo(visibleCount, totalCount) {
-      if (visibleCount === totalCount) {
-        return `Показано презентаций: ${totalCount}`;
-      }
-      return `Показано ${visibleCount} из ${totalCount}`;
-    }
-
     async function loadFromManifest() {
       const res = await fetch(`./pdf/manifest.json?_=${Date.now()}`);
-      if (!res.ok) {
-        throw new Error(`Manifest not found: ${res.status}`);
-      }
-
+      if (!res.ok) throw new Error(`Manifest not found: ${res.status}`);
       const manifest = await res.json();
-      return manifest.files.map((item) => {
+      return manifest.files.map(item => {
         const decodedName = decodeGitHubName(item.name);
         return {
           name: item.name,
@@ -476,14 +436,7 @@
     }
 
     async function loadLocalFallback() {
-      const known = ["1_Разбор_региона.pdf"];
-      return known.map((name) => ({
-        name,
-        baseName: decodeGitHubName(name.replace(/\.pdf$/i, "")),
-        href: `./pdf/${encodeURIComponent(name)}`,
-        size: null,
-        lastCommitAt: null
-      }));
+      return [{ name: "1_Разбор_региона.pdf", baseName: "1_Разбор_региона", href: "./pdf/1_%D0%A0%D0%B0%D0%B7%D0%B1%D0%BE%D1%80_%D1%80%D0%B5%D0%B3%D0%B8%D0%BE%D0%BD%D0%B0.pdf", size: null, lastCommitAt: null }];
     }
 
     function setupControls() {

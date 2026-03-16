@@ -6,123 +6,124 @@
   <title>Презентации — sleep3r</title>
   <style>
     :root {
-      --bg: #f5f7fb;
-      --panel: #ffffff;
-      --text: #181c24;
-      --muted: #6d7485;
-      --accent1: #56a6af;
-      --accent2: #b19503;
-      --border: #e6ebf2;
-      --shadow: rgba(16, 24, 40, 0.12);
+      --bg: #272822;
+      --bg2: #3e3d32;
+      --ink: #f8f8f2;
+      --muted: #75715e;
+      --a1: #66d9ef;
+      --a2: #ae81ff;
+      --a3: #a6e22e;
+      --a4: #f92672;
+      --glass: rgba(62,61,50,0.82);
+      --edge: #49483e;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing: border-box; margin: 0; }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
-      background:
-        radial-gradient(800px 500px at 15% -10%, rgba(86,166,175,0.14), transparent 60%),
-        radial-gradient(680px 460px at 90% -10%, rgba(206,173,4,0.12), transparent 65%),
-        var(--bg);
-      color: var(--text);
+      background: var(--bg);
+      color: var(--ink);
+      font-family: -apple-system, system-ui, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.5;
       display: flex;
       align-items: center;
       justify-content: center;
       padding: 24px;
     }
 
+    a { color: inherit; text-decoration: none; }
+
     .page {
-      width: min(860px, 100%);
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      box-shadow: 0 20px 45px var(--shadow), 0 4px 18px rgba(16,24,40,0.08);
+      width: min(780px, 100%);
+      border: 1px solid var(--edge);
+      border-radius: 18px;
+      backdrop-filter: saturate(140%) blur(8px);
+      background: var(--glass);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.45);
       overflow: hidden;
     }
 
-    .hero {
-      position: relative;
-      padding: 32px 28px 24px;
-      background: linear-gradient(95deg, rgba(86,166,175,0.09), rgba(206,173,4,0.08));
-      border-bottom: 1px solid var(--border);
-      text-align: center;
+    .top-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-bottom: 1px solid rgba(73,72,62,0.6);
     }
+    .dot { width: 10px; height: 10px; border-radius: 50%; }
+    .dot.r { background: #ff5f56; }
+    .dot.y { background: #ffbd2e; }
+    .dot.g { background: #27c93f; }
+    .top-bar .label { margin-left: 6px; font-size: 13px; color: var(--muted); }
 
-    .hero::after {
-      content: "";
-      position: absolute;
-      inset: auto 0 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent1), var(--accent2));
-      opacity: 0.7;
+    .hero {
+      padding: 36px 28px 24px;
+      text-align: center;
+      border-bottom: 1px solid var(--edge);
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(24px, 4vw, 34px);
+      font-size: clamp(22px, 4vw, 32px);
+      font-weight: 700;
       letter-spacing: 0.02em;
+      color: var(--a1);
     }
 
     .subtitle {
-      margin: 8px 0 0;
+      margin-top: 6px;
       color: var(--muted);
-      font-size: 15px;
+      font-size: 14px;
     }
 
-    .content { padding: 24px; }
+    .content { padding: 20px; }
 
-    .grid {
-      display: grid;
-      gap: 16px;
-    }
+    .grid { display: grid; gap: 14px; }
 
     .card {
       display: flex;
-      gap: 18px;
+      gap: 16px;
       align-items: center;
-      padding: 20px 22px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(16,24,40,0.05);
+      padding: 18px 20px;
+      background: rgba(39,40,34,0.6);
+      border: 1px solid var(--edge);
+      border-radius: 14px;
       transition: border-color 140ms ease, transform 140ms ease, box-shadow 140ms ease;
-      text-decoration: none;
-      color: inherit;
+      cursor: pointer;
     }
 
     .card:hover {
-      border-color: rgba(86,166,175,0.5);
+      border-color: var(--a1);
       transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(16,24,40,0.1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
 
     .card-icon {
       flex-shrink: 0;
-      width: 56px;
-      height: 56px;
-      border-radius: 14px;
+      width: 50px;
+      height: 50px;
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
-      background: linear-gradient(135deg, rgba(86,166,175,0.15), rgba(206,173,4,0.12));
+      font-size: 24px;
+      background: rgba(102,217,239,0.1);
+      border: 1px solid rgba(102,217,239,0.2);
     }
 
     .card-body { flex: 1; min-width: 0; }
 
     .card-title {
-      margin: 0;
-      font-size: 18px;
+      font-size: 17px;
       font-weight: 700;
+      color: var(--ink);
       line-height: 1.3;
     }
 
     .card-desc {
-      margin: 5px 0 0;
+      margin-top: 4px;
       color: var(--muted);
-      font-size: 14px;
+      font-size: 13px;
       line-height: 1.45;
     }
 
@@ -134,20 +135,21 @@
     }
 
     .tag {
-      border: 1px solid var(--border);
+      border: 1px solid var(--edge);
       border-radius: 999px;
-      padding: 3px 9px;
+      padding: 2px 9px;
       font-size: 11px;
-      color: var(--muted);
-      background: #f4f7fb;
+      color: var(--a3);
+      background: rgba(166,226,46,0.06);
     }
 
     .card-arrow {
       flex-shrink: 0;
-      font-size: 20px;
-      color: var(--accent1);
-      opacity: 0.5;
+      font-size: 18px;
+      color: var(--a1);
+      opacity: 0.3;
       transition: opacity 140ms ease, transform 140ms ease;
+      font-family: ui-monospace, monospace;
     }
 
     .card:hover .card-arrow {
@@ -155,18 +157,17 @@
       transform: translateX(3px);
     }
 
-    .back {
+    .back-link {
       display: inline-flex;
       align-items: center;
       gap: 6px;
       margin-top: 18px;
-      font-size: 14px;
+      font-size: 13px;
       color: var(--muted);
-      text-decoration: none;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
       transition: color 120ms ease;
     }
-
-    .back:hover { color: var(--text); }
+    .back-link:hover { color: var(--a1); }
 
     @media (max-width: 640px) {
       .card { flex-direction: column; text-align: center; }
@@ -176,6 +177,11 @@
 </head>
 <body>
   <main class="page">
+    <div class="top-bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="label">presentations — sleep3r</span>
+    </div>
+
     <header class="hero">
       <h1>Презентации</h1>
       <p class="subtitle">Материалы лекций и докладов</p>
@@ -183,14 +189,13 @@
 
     <section class="content">
       <div class="grid" id="grid"></div>
-      <a href="/" class="back">← sleep3r.ru</a>
+      <a href="/" class="back-link">← cd ~</a>
     </section>
   </main>
 
   <script>
     const presentations = [
       {
-        id: 't-ai',
         icon: '📐',
         title: 'Сборы по ИИ',
         desc: 'Олимпиадная математика, теорвер, линал, оптимизация, марковские цепи, мартингалы, теория информации',
@@ -198,7 +203,6 @@
         href: './t-ai/'
       },
       {
-        id: 'rwb-ai',
         icon: '📊',
         title: 'Университет RWB — Оценка эффекта AI',
         desc: 'Бизнес-кейс, экономическая модель, риски, комплаенс. Распознавание документов, видеоаналитика, AI-саппорт',
@@ -208,12 +212,10 @@
     ];
 
     const grid = document.getElementById('grid');
-
     presentations.forEach(p => {
       const a = document.createElement('a');
       a.className = 'card';
       a.href = p.href;
-
       a.innerHTML = `
         <div class="card-icon">${p.icon}</div>
         <div class="card-body">
@@ -223,7 +225,6 @@
         </div>
         <span class="card-arrow">→</span>
       `;
-
       grid.appendChild(a);
     });
   </script>

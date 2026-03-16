@@ -176,10 +176,10 @@ function cmd_help(){
   const items = [
     ['help', 'show this help'],
     ['links', 'list social links'],
-    ['open &lt;tg|gh|li|climbing&gt;', 'open link in a new tab'],
+    ['open &lt;target&gt;', 'open link in a new tab'],
     ['tg | gh | li', 'shortcut to open socials'],
     ['baneks', 'open random joke (category b)'],
-    ['projects', 'list projects'],
+    ['projects', 'list projects & presentations'],
     ['sl', 'steam locomotive easter egg'],
     ['ls', 'list entries'],
     ['echo &lt;text&gt;', 'print text'],
@@ -200,11 +200,15 @@ function cmd_links(){
 
 function cmd_projects(){
   line(`<b>Projects</b>:`);
-  line(`  ${cmdLink('open climbing', 'climbing.html')} — ${link('climbing.html','page')}`);
+  line(`  ${cmdLink('open climbing', 'climbing')} — climbing tracker`);
+  line('');
+  line(`<b>Presentations</b>:`);
+  line(`  ${cmdLink('open t-ai', 't-ai')} — ${link('presentations/t-ai/','Сборы по ИИ: олимпиадная математика, теорвер, линал, оптимизация')}`);
+  line(`  ${cmdLink('open rwb-ai', 'rwb-ai')} — ${link('presentations/rwb-ai/','Университет RWB: оценка эффекта AI')}`);
 }
 
 function cmd_ls(){
-  line(`projects  links  readme`, 'muted');
+  line(`projects  presentations/  links  readme`, 'muted');
 }
 
 function cmd_clear(){ screen.innerHTML=''; }
@@ -224,10 +228,14 @@ function cmd_open(args){
     tg: `https://t.me/${socials.tg}`,
     gh: `https://github.com/${socials.gh}`,
     li: `https://www.linkedin.com/${socials.li}`,
-    climbing: `climbing.html`
+    climbing: `climbing.html`,
+    'presentations': `presentations/`,
+    't-ai': `presentations/t-ai/`,
+    'rwb-ai': `presentations/rwb-ai/`,
+    'rwb': `presentations/rwb-ai/`
   };
   const url = map[what] || (what.startsWith('http')? what : null);
-  if(url){ line(`Opening ${link(url)}`); openUrl(url) } else { line(`<span class="err">Unknown target:</span> ${escapeHtml(what)}`) }
+  if(url){ line(`Opening ${link(url)}`); openUrl(url) } else { line(`<span class="err">Unknown target:</span> ${escapeHtml(what)}. Try ${cmdLink('projects')}`) }
 }
 
 function cmd_baneks(){

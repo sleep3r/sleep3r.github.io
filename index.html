@@ -6,41 +6,18 @@
 <title>sleep3r</title>
 <meta name="theme-color" content="#272822">
 <style>
- :root{--bg:#272822; --bg2:#3e3d32; --ink:#f8f8f2; --muted:#75715e; --a1:#66d9ef; --a2:#ae81ff; --a3:#a6e22e; --a4:#f92672; --glass:rgba(62,61,50,0.8); --edge:#49483e}
+ :root{--bg:#272822;--bg2:#3e3d32;--ink:#f8f8f2;--muted:#75715e;--a1:#66d9ef;--a2:#ae81ff;--a3:#a6e22e;--a4:#f92672;--glass:rgba(62,61,50,0.8);--edge:#49483e}
+[data-theme="dracula"]{--bg:#282a36;--bg2:#44475a;--ink:#f8f8f2;--muted:#6272a4;--a1:#8be9fd;--a2:#bd93f9;--a3:#50fa7b;--a4:#ff79c6;--glass:rgba(40,42,54,0.82);--edge:#44475a}
+[data-theme="nord"]{--bg:#2e3440;--bg2:#3b4252;--ink:#eceff4;--muted:#4c566a;--a1:#88c0d0;--a2:#b48ead;--a3:#a3be8c;--a4:#bf616a;--glass:rgba(46,52,64,0.82);--edge:#3b4252}
+[data-theme="solarized"]{--bg:#002b36;--bg2:#073642;--ink:#839496;--muted:#586e75;--a1:#2aa198;--a2:#6c71c4;--a3:#859900;--a4:#dc322f;--glass:rgba(0,43,54,0.82);--edge:#073642}
+[data-theme="gruvbox"]{--bg:#282828;--bg2:#3c3836;--ink:#ebdbb2;--muted:#928374;--a1:#83a598;--a2:#d3869b;--a3:#b8bb26;--a4:#fb4934;--glass:rgba(40,40,40,0.82);--edge:#3c3836}
 *{box-sizing:border-box}
-html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.5}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);font-family:-apple-system, system-ui, Segoe UI, Roboto, Arial, sans-serif;line-height:1.5;transition:background .3s ease, color .3s ease}
 body{overflow:hidden}
 a{color:inherit;text-decoration:none}
-.stage{position:fixed;inset:0;display:block;overflow:hidden}
-.noise{display:none}
-@keyframes drift{0%{transform:translate3d(0,0,0)}100%{transform:translate3d(10%,10%,0)}}
-@keyframes flicker{0%{opacity:0.8}100%{opacity:0.6}}
-@keyframes colorShift{0%{filter:hue-rotate(0deg)}100%{filter:hue-rotate(360deg)}}
-.orb{display:none}
-.o1{width:44vmax;height:44vmax;background:radial-gradient(closest-side, var(--a1), transparent 70%);left:-10vmax;top:-8vmax;animation: float1 12s ease-in-out infinite alternate, pulse1 8s ease-in-out infinite}
-.o2{width:36vmax;height:36vmax;background:radial-gradient(closest-side, var(--a2), transparent 70%);right:-8vmax;bottom:-10vmax;animation: float2 15s ease-in-out infinite alternate, pulse2 6s ease-in-out infinite}
-.o3{width:28vmax;height:28vmax;background:radial-gradient(closest-side, var(--a3), transparent 70%);left:50%;top:60%;transform:translate(-50%,-50%);animation: float3 20s ease-in-out infinite alternate, pulse3 10s ease-in-out infinite}
-.o4{width:32vmax;height:32vmax;background:radial-gradient(closest-side, var(--a4), transparent 70%);left:20%;top:-12vmax;animation: float4 16s ease-in-out infinite alternate, pulse4 7s ease-in-out infinite}
-.o5{width:40vmax;height:40vmax;background:radial-gradient(closest-side, var(--a1), transparent 70%);right:15%;top:80%;animation: float5 22s ease-in-out infinite alternate, pulse5 9s ease-in-out infinite}
-.o6{width:35vmax;height:35vmax;background:radial-gradient(closest-side, var(--a3), transparent 70%);left:-5%;top:30%;animation: float6 18s ease-in-out infinite alternate, pulse6 11s ease-in-out infinite}
-.o7{width:25vmax;height:25vmax;background:radial-gradient(closest-side, var(--a4), transparent 70%);right:-10%;top:20%;animation: float7 25s ease-in-out infinite alternate, pulse7 8s ease-in-out infinite}
-@keyframes float1{to{transform:translate3d(4vmax,3vmax,0)}}
-@keyframes float2{to{transform:translate3d(-3vmax,-4vmax,0)}}
-@keyframes float3{to{transform:translate(-55%,-45%)}}
-@keyframes float4{to{transform:translate3d(6vmax,-2vmax,0)}}
-@keyframes float5{to{transform:translate3d(-5vmax,4vmax,0)}}
-@keyframes float6{to{transform:translate3d(8vmax,-3vmax,0)}}
-@keyframes float7{to{transform:translate3d(-4vmax,6vmax,0)}}
-@keyframes pulse1{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
-@keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.3)}}
-@keyframes pulse3{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-@keyframes pulse4{0%,100%{transform:scale(1)}50%{transform:scale(1.25)}}
-@keyframes pulse5{0%,100%{transform:scale(1)}50%{transform:scale(1.15)}}
-@keyframes pulse6{0%,100%{transform:scale(1)}50%{transform:scale(1.4)}}
-@keyframes pulse7{0%,100%{transform:scale(1)}50%{transform:scale(1.2)}}
 
 /* terminal */
-.terminal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);max-width:960px;width:92vw;z-index:10;border:1px solid var(--edge);border-radius:18px;backdrop-filter:saturate(140%) blur(8px);background:var(--glass);box-shadow:0 20px 60px rgba(0,0,0,0.45)}
+.terminal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);max-width:960px;width:92vw;z-index:10;border:1px solid var(--edge);border-radius:18px;backdrop-filter:saturate(140%) blur(8px);background:var(--glass);box-shadow:0 20px 60px rgba(0,0,0,0.45);transition:background .3s ease, border-color .3s ease}
 .term-top{display:flex;align-items:center;gap:10px;padding:10px 12px;border-bottom:1px solid rgba(73,72,62,0.6)}
 .dot{width:10px;height:10px;border-radius:50%;position:relative}
 .dot.r{background:#ff5f56}
@@ -52,20 +29,20 @@ a{color:inherit;text-decoration:none}
 .screen::-webkit-scrollbar-thumb{background:rgba(230,219,116,0.25);border-radius:8px}
 .line{white-space:pre-wrap;word-break:break-word}
 .muted{color:var(--muted)}
-.ok{color:#a6e22e}
+.ok{color:var(--a3)}
 .warn{color:#fd971f}
-.err{color:#f92672}
-.link{color:#66d9ef;text-decoration:underline}
-.cmd-link{color:#ae81ff;text-decoration:underline;cursor:pointer}
+.err{color:var(--a4)}
+.link{color:var(--a1);text-decoration:underline}
+.cmd-link{color:var(--a2);text-decoration:underline;cursor:pointer}
 .screen [contenteditable]{outline:0;border:0;box-shadow:none;-webkit-tap-highlight-color:transparent}
 .screen [contenteditable]:focus{outline:0;border:0;box-shadow:none}
 .screen [contenteditable]:focus-visible{outline:0}
 .input-line{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid rgba(113,195,255,0.18);font-family:ui-monospace, SFMono-Regular, Menlo, Consolas, monospace}
 .prompt{color:#9fb0d4}
 #cmd{flex:1;background:transparent;border:0;outline:none;color:var(--ink);font:inherit}
-.user{color:#6ae2ff}
-.host{color:#a86bff}
-.path{color:#00e4a8}
+.user{color:var(--a1)}
+.host{color:var(--a2)}
+.path{color:var(--a3)}
 .caret{display:inline-block;width:8px;height:1.2em;background:rgba(248,248,242,0.7);vertical-align:text-bottom;animation:blink 1s steps(1) infinite}
 @keyframes blink{50%{opacity:0}}
 @media (max-width:640px){ .terminal{left:50%;top:50%;transform:translate(-50%,-50%);width:93vw} .screen{height:56vh} }
@@ -83,16 +60,6 @@ a{color:inherit;text-decoration:none}
 </style>
 </head>
 <body>
-<div class="stage" id="stage">
-<div class="noise"></div>
-<div class="orb o1"></div>
-<div class="orb o2"></div>
-<div class="orb o3"></div>
-<div class="orb o4"></div>
-<div class="orb o5"></div>
-<div class="orb o6"></div>
-<div class="orb o7"></div>
-</div>
 
 <div class="terminal" id="terminal">
 <div class="term-top"><span class="dot r" id="term-close" role="button" tabindex="0" aria-label="Close"></span><span class="dot y"></span><span class="dot g"></span><span class="title">zsh — sleep3r</span></div>
@@ -166,9 +133,20 @@ function createInputLine(initial){
   scrollToBottom();
 }
 
+const ASCII_LOGO = [
+  ['a1', ' ░▒▓███████▓▒░▒▓█▓▒░      ░▒▓████████▓▒░▒▓████████▓▒░▒▓███████▓▒░▒▓███████▓▒░░▒▓███████▓▒░ '],
+  ['a1', '░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░'],
+  ['a3', '░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░     ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░'],
+  ['a3', ' ░▒▓██████▓▒░░▒▓█▓▒░      ░▒▓██████▓▒░ ░▒▓██████▓▒░ ░▒▓███████▓▒░▒▓███████▓▒░░▒▓███████▓▒░ '],
+  ['a2', '       ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░            ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░'],
+  ['a4', '       ░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░      ░▒▓█▓▒░            ░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░'],
+  ['a4', '░▒▓███████▓▒░░▒▓████████▓▒░▒▓████████▓▒░▒▓████████▓▒░▒▓█▓▒░     ░▒▓███████▓▒░░▒▓█▓▒░░▒▓█▓▒░'],
+];
+
 function banner(){
-  line(`<span class="ok">Welcome to</span> <b>sleep3r</b> <span class="muted">interactive zsh</span>`);
-  line(`Type ${cmdLink('help')} to discover commands. Click suggestions to autofill.`,'muted');
+  ASCII_LOGO.forEach(([cls, l]) => line(`<span style="color:var(--${cls})">${escapeHtml(l)}</span>`));
+  line('');
+  line(`Type ${cmdLink('help')} to discover commands. ${cmdLink('theme')} to switch palette.`,'muted');
 }
 
 function cmd_help(){
@@ -187,6 +165,7 @@ function cmd_help(){
     ['date', 'show date'],
     ['uname -a', 'system info'],
     ['whoami', 'current user'],
+    ['theme &lt;name&gt;', 'switch color palette'],
     ['clear', 'clear screen']
   ];
   items.forEach(([c,d])=> line(`  ${cmdLink(c)}  <span class="muted">${d}</span>`));
@@ -379,6 +358,23 @@ __/ =| o |=-O=====O=====O=====O \ ____Y___________|__|____________________|__
   requestAnimationFrame(step);
 }
 
+const THEMES = ['monokai','dracula','nord','solarized','gruvbox'];
+function cmd_theme(args){
+  const name = (args[0]||'').toLowerCase();
+  if(!name || !THEMES.includes(name)){
+    const current = document.documentElement.dataset.theme || 'monokai';
+    line(`<b>Current theme:</b> <span class="ok">${current}</span>`);
+    line(`<b>Available:</b> ${THEMES.map(t => t === current ? `<span class="ok">${t}</span>` : cmdLink('theme '+t, t)).join('  ')}`);
+    return;
+  }
+  if(name === 'monokai'){ delete document.documentElement.dataset.theme }
+  else { document.documentElement.dataset.theme = name }
+  try{ localStorage.setItem('sleep3r_theme', name) }catch(_){}
+  line(`Theme set to <span class="ok">${name}</span>`);
+}
+// restore saved theme
+try{ const t = localStorage.getItem('sleep3r_theme'); if(t && THEMES.includes(t) && t !== 'monokai') document.documentElement.dataset.theme = t }catch(_){}
+
 // registry
 Object.assign(commands, {
   help: cmd_help,
@@ -394,6 +390,7 @@ Object.assign(commands, {
   open: cmd_open,
   baneks: cmd_baneks,
   sl: cmd_sl,
+  theme: cmd_theme,
   tg: ()=>cmd_open(['tg']),
   gh: ()=>cmd_open(['gh']),
   li: ()=>cmd_open(['li'])

